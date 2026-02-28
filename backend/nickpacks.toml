@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ['python3', 'gcc'] # gcc is often needed for soccer analytics libraries
+
+[phases.install]
+cmds = ['pip install -r requirements.txt']
+
+[start]
+cmd = 'python run.py'
