@@ -78,3 +78,24 @@ def get_team_players(team_id):
         "team": team.to_dict(),
         "players": [p.to_dict() for p in team.players]
     })
+
+@api_bp.route("/seed-db", methods=["GET"])
+def seed_db():
+    import os
+    import subprocess
+    result1 = subprocess.run(
+        ["python", "fetch_players.py"],
+        cwd=os.path.dirname(os.path.abspath(__file__)) + "/../../..",
+        capture_output=True, text=True
+    )
+    result2 = subprocess.run(
+        ["python", "manual_ratings.py"],
+        cwd=os.path.dirname(os.path.abspath(__file__)) + "/../../..",
+        capture_output=True, text=True
+    )
+    return jsonify({
+        "message": "Seeding complete!",
+        "fetch_output": result1.stdout,
+        "ratings_output": result2.stdout,
+        "errors": result1.stderr + result2.stderr
+    })
