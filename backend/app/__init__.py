@@ -6,9 +6,7 @@ from app.extensions import db, migrate
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    
     CORS(app)
-    
     db.init_app(app)
     migrate.init_app(app, db)
 
@@ -16,5 +14,13 @@ def create_app():
     app.register_blueprint(api_bp, url_prefix="/api")
 
     from app.models import Team, Player, Match
+
+    with app.app_context():
+        from app.models.team import Team as TeamModel
+        if TeamModel.query.count() == 0:
+            print("🌱 No teams found, seeding database...")
+            from app.api.routes import seed_db
+            seed_db()
+            print("✅ Database seeded!")
 
     return app
