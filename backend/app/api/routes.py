@@ -68,3 +68,13 @@ def coach():
         "insight": insight,
         **simulation_result
     })
+
+@api_bp.route("/teams/<int:team_id>/players")
+def get_team_players(team_id):
+    team = Team.query.get(team_id)
+    if not team:
+        return jsonify({"error": "Team not found"}), 404
+    return jsonify({
+        "team": team.to_dict(),
+        "players": [p.to_dict() for p in team.players]
+    })

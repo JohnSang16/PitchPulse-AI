@@ -13,16 +13,15 @@ BASE_URL = "https://v3.football.api-sports.io"
 HEADERS = {"x-apisports-key": API_KEY}
 
 PL_TEAMS = {
-    "Arsenal": 42,
-    "Manchester City": 50,
-    "Liverpool": 40,
-    "Manchester United": 33,
-    "Chelsea": 49,
-    "Tottenham": 47,
-    "Newcastle": 34,
-    "Aston Villa": 66,
+    "Arsenal":          {"api_id": 42,  "attack": 2.1, "defense": 1.8},
+    "Manchester City":  {"api_id": 50,  "attack": 2.3, "defense": 1.9},
+    "Liverpool":        {"api_id": 40,  "attack": 2.2, "defense": 1.7},
+    "Manchester United":{"api_id": 33,  "attack": 1.8, "defense": 1.6},
+    "Chelsea":          {"api_id": 49,  "attack": 1.9, "defense": 1.7},
+    "Tottenham":        {"api_id": 47,  "attack": 1.8, "defense": 1.5},
+    "Newcastle":        {"api_id": 34,  "attack": 1.7, "defense": 1.6},
+    "Aston Villa":      {"api_id": 66,  "attack": 1.8, "defense": 1.6},
 }
-
 POSITION_MAP = {
     "Goalkeeper": "GK",
     "Defender": "CB",
@@ -68,19 +67,19 @@ with app.app_context():
     Team.query.delete()
     db.session.commit()
 
-    for team_name, team_api_id in PL_TEAMS.items():
+    for team_name, team_info in PL_TEAMS.items():
         print(f"Fetching {team_name}...")
 
         team = Team(
             name=team_name,
             short_name=team_name[:3].upper(),
-            attack_rating=1.8,
-            defense_rating=1.8
+            attack_rating=team_info["attack"],
+            defense_rating=team_info["defense"]
         )
         db.session.add(team)
         db.session.flush()
 
-        all_players = fetch_squad(team_api_id)
+        all_players = fetch_squad(team_info["api_id"])
         starting_11 = pick_starting_11(all_players)
 
         for p in starting_11:
