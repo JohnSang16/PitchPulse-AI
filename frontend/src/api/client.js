@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const client = axios.create({
-  baseURL: "http://localhost:5001/api",
+  baseURL: "pitchpulse-ai-production.up.railway.app",
   headers: { "Content-Type": "application/json" }
 })
 
