@@ -2,6 +2,7 @@ import { useState } from "react"
 import client from "./api/client"
 import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
+import SoccerPitch from "./components/pitch/SoccerPitch"
 
 export default function App() {
   const [homeTeamId, setHomeTeamId] = useState(null)
@@ -62,6 +63,8 @@ export default function App() {
         homeTeam={homeTeamName}
         awayTeam={awayTeamName}
       />
+      <SoccerPitch />
+
     </div>
   )
 }
