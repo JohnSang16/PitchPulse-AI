@@ -15,4 +15,6 @@ def create_app():
     from app.api.routes import api_bp
     app.register_blueprint(api_bp, url_prefix="/api")
 
+    from app.models import Team, Player, Match
+
     return app
