@@ -77,29 +77,28 @@ export default function SoccerPitch({
 
       {/* Pitch */}
       <svg
-        viewBox="0 0 600 400"
+        viewBox="0 0 600 440"
         className="w-full rounded-xl border-2 border-green-600"
         style={{ background: "#1a5c2a" }}
       >
         {/* Stripes */}
         {[...Array(7)].map((_, i) => (
-          <rect key={i} x={20 + i * 80} y="20" width="80" height="360"
+        <rect key={i} x={20 + i * 80} y="20" width="80" height="400"
             fill={i % 2 === 0 ? "rgba(255,255,255,0.03)" : "transparent"} />
         ))}
 
-        {/* Pitch markings */}
-        <rect x="20" y="20" width="560" height="360" fill="none" stroke="white" strokeWidth="2" />
-        <circle cx="300" cy="200" r="50" fill="none" stroke="white" strokeWidth="2" />
-        <circle cx="300" cy="200" r="3" fill="white" />
-        <line x1="300" y1="20" x2="300" y2="380" stroke="white" strokeWidth="2" />
-        <rect x="20" y="120" width="100" height="160" fill="none" stroke="white" strokeWidth="2" />
-        <rect x="20" y="160" width="40" height="80" fill="none" stroke="white" strokeWidth="2" />
-        <circle cx="90" cy="200" r="3" fill="white" />
-        <rect x="480" y="120" width="100" height="160" fill="none" stroke="white" strokeWidth="2" />
-        <rect x="540" y="160" width="40" height="80" fill="none" stroke="white" strokeWidth="2" />
-        <circle cx="510" cy="200" r="3" fill="white" />
-        <rect x="8" y="170" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
-        <rect x="580" y="170" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
+        <rect x="20" y="20" width="560" height="400" fill="none" stroke="white" strokeWidth="2" />
+        <circle cx="300" cy="220" r="50" fill="none" stroke="white" strokeWidth="2" />
+        <circle cx="300" cy="220" r="3" fill="white" />
+        <line x1="300" y1="20" x2="300" y2="420" stroke="white" strokeWidth="2" />
+        <rect x="20" y="140" width="100" height="160" fill="none" stroke="white" strokeWidth="2" />
+        <rect x="20" y="180" width="40" height="80" fill="none" stroke="white" strokeWidth="2" />
+        <circle cx="90" cy="220" r="3" fill="white" />
+        <rect x="480" y="140" width="100" height="160" fill="none" stroke="white" strokeWidth="2" />
+        <rect x="540" y="180" width="40" height="80" fill="none" stroke="white" strokeWidth="2" />
+        <circle cx="510" cy="220" r="3" fill="white" />
+        <rect x="8" y="190" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
+        <rect x="580" y="190" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
 
         {/* Home players */}
         {homeSlots.map((slot, i) => (

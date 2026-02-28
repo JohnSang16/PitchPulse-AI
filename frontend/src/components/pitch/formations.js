@@ -1,53 +1,41 @@
 export const formations = {
   "4-4-2": [
-    // Goalkeeper
-    { id: 1, name: "GK", x: 60, y: 200 },
-    // Defenders
+    { id: 1, name: "GK", x: 50, y: 220 },
     { id: 2, name: "RB", x: 150, y: 80 },
-    { id: 3, name: "CB", x: 150, y: 150 },
-    { id: 4, name: "CB", x: 150, y: 250 },
-    { id: 5, name: "LB", x: 150, y: 320 },
-    // Midfielders
-    { id: 6, name: "RM", x: 250, y: 80 },
-    { id: 7, name: "CM", x: 250, y: 150 },
-    { id: 8, name: "CM", x: 250, y: 250 },
-    { id: 9, name: "LM", x: 250, y: 320 },
-    // Forwards
-    { id: 10, name: "ST", x: 380, y: 160 },
-    { id: 11, name: "ST", x: 380, y: 240 },
+    { id: 3, name: "CB", x: 150, y: 160 },
+    { id: 4, name: "CB", x: 150, y: 280 },
+    { id: 5, name: "LB", x: 150, y: 360 },
+    { id: 6, name: "RM", x: 255, y: 80 },
+    { id: 7, name: "CM", x: 255, y: 173 },
+    { id: 8, name: "CM", x: 255, y: 267 },
+    { id: 9, name: "LM", x: 255, y: 360 },
+    { id: 10, name: "ST", x: 390, y: 173 },
+    { id: 11, name: "ST", x: 390, y: 267 },
   ],
   "4-3-3": [
-    // Goalkeeper
-    { id: 1, name: "GK", x: 60, y: 200 },
-    // Defenders
+    { id: 1, name: "GK", x: 50, y: 220 },
     { id: 2, name: "RB", x: 150, y: 80 },
-    { id: 3, name: "CB", x: 150, y: 150 },
-    { id: 4, name: "CB", x: 150, y: 250 },
-    { id: 5, name: "LB", x: 150, y: 320 },
-    // Midfielders
-    { id: 6, name: "CM", x: 260, y: 130 },
-    { id: 7, name: "CM", x: 260, y: 200 },
-    { id: 8, name: "CM", x: 260, y: 270 },
-    // Forwards
+    { id: 3, name: "CB", x: 150, y: 173 },
+    { id: 4, name: "CB", x: 150, y: 267 },
+    { id: 5, name: "LB", x: 150, y: 360 },
+    { id: 6, name: "CM", x: 265, y: 133 },
+    { id: 7, name: "CM", x: 265, y: 220 },
+    { id: 8, name: "CM", x: 265, y: 307 },
     { id: 9, name: "RW", x: 400, y: 100 },
-    { id: 10, name: "ST", x: 400, y: 200 },
-    { id: 11, name: "LW", x: 400, y: 300 },
+    { id: 10, name: "ST", x: 400, y: 220 },
+    { id: 11, name: "LW", x: 400, y: 340 },
   ],
   "3-5-2": [
-    // Goalkeeper
-    { id: 1, name: "GK", x: 60, y: 200 },
-    // Defenders
-    { id: 2, name: "CB", x: 150, y: 130 },
-    { id: 3, name: "CB", x: 150, y: 200 },
-    { id: 4, name: "CB", x: 150, y: 270 },
-    // Midfielders
-    { id: 5, name: "RM", x: 250, y: 60 },
-    { id: 6, name: "CM", x: 250, y: 140 },
-    { id: 7, name: "CM", x: 250, y: 200 },
-    { id: 8, name: "CM", x: 250, y: 260 },
-    { id: 9, name: "LM", x: 250, y: 340 },
-    // Forwards
-    { id: 10, name: "ST", x: 400, y: 160 },
-    { id: 11, name: "ST", x: 400, y: 240 },
+    { id: 1, name: "GK", x: 50, y: 220 },
+    { id: 2, name: "CB", x: 150, y: 133 },
+    { id: 3, name: "CB", x: 150, y: 220 },
+    { id: 4, name: "CB", x: 150, y: 307 },
+    { id: 5, name: "RM", x: 255, y: 60 },
+    { id: 6, name: "CM", x: 255, y: 153 },
+    { id: 7, name: "CM", x: 255, y: 220 },
+    { id: 8, name: "CM", x: 255, y: 287 },
+    { id: 9, name: "LM", x: 255, y: 380 },
+    { id: 10, name: "ST", x: 390, y: 173 },
+    { id: 11, name: "ST", x: 390, y: 267 },
   ]
 }
