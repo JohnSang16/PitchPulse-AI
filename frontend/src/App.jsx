@@ -16,6 +16,20 @@ export default function App() {
   const [aiLoading, setAiLoading] = useState(false)
   const [homeTeamName, setHomeTeamName] = useState("")
   const [awayTeamName, setAwayTeamName] = useState("")
+  const [homePlayers, setHomePlayers] = useState([])
+  const [awayPlayers, setAwayPlayers] = useState([])
+
+  const handleHomeTeamSelect = async (id) => {
+    setHomeTeamId(id)
+    const res = await client.get(`/teams/${id}/players`)
+    setHomePlayers(res.data.players)
+  }
+
+  const handleAwayTeamSelect = async (id) => {
+    setAwayTeamId(id)
+    const res = await client.get(`/teams/${id}/players`)
+    setAwayPlayers(res.data.players)
+  }
 
   const handleSimulate = async () => {
     if (!homeTeamId || !awayTeamId) return
@@ -27,7 +41,6 @@ export default function App() {
     setInsight(null)
 
     try {
-      // Run simulation first
       const simRes = await client.post("/simulate", {
         home_team_id: homeTeamId,
         away_team_id: awayTeamId
@@ -37,7 +50,6 @@ export default function App() {
       setAwayTeamName(simRes.data.away_team)
       setLoading(false)
 
-      // Then get AI coaching insight
       const coachRes = await client.post("/coach", {
         home_team_id: homeTeamId,
         away_team_id: awayTeamId,
@@ -62,10 +74,10 @@ export default function App() {
 
       <div className="flex gap-8 w-full max-w-lg">
         <div className="flex-1">
-          <TeamSelector label="Home Team" onSelect={setHomeTeamId} />
+          <TeamSelector label="Home Team" onSelect={handleHomeTeamSelect} />
         </div>
         <div className="flex-1">
-          <TeamSelector label="Away Team" onSelect={setAwayTeamId} />
+          <TeamSelector label="Away Team" onSelect={handleAwayTeamSelect} />
         </div>
       </div>
 
@@ -88,6 +100,8 @@ export default function App() {
       <SoccerPitch
         homeColor="#3b82f6"
         awayColor="#ef4444"
+        homePlayers={homePlayers}
+        awayPlayers={awayPlayers}
         onFormationChange={(home, away) => {
           setHomeFormation(home)
           setAwayFormation(away)

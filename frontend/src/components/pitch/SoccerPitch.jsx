@@ -1,8 +1,14 @@
 import { useState } from "react"
-import PlayerMarker from "./PlayerMarker"
+import FifaCard from "./FifaCard"
 import { formations } from "./formations"
 
-export default function SoccerPitch({ homeColor = "#3b82f6", awayColor = "#ef4444", onFormationChange }) {
+export default function SoccerPitch({ 
+  homeColor = "#3b82f6", 
+  awayColor = "#ef4444", 
+  onFormationChange,
+  homePlayers = [],
+  awayPlayers = []
+}) {
   const [homeFormation, setHomeFormation] = useState("4-4-2")
   const [awayFormation, setAwayFormation] = useState("4-3-3")
 
@@ -16,15 +22,27 @@ export default function SoccerPitch({ homeColor = "#3b82f6", awayColor = "#ef444
     if (onFormationChange) onFormationChange(homeFormation, e.target.value)
   }
 
-  const homePlayers = formations[homeFormation]
-  const awayPlayers = formations[awayFormation].map(p => ({
+  const homePositions = formations[homeFormation]
+  const awayPositions = formations[awayFormation].map(p => ({
     ...p,
     x: 600 - p.x,
     y: p.y
   }))
 
+  // Match players to positions
+  const matchPlayersToPositions = (players, positions) => {
+    return positions.map((pos, i) => ({
+      ...pos,
+      player: players[i] || null
+    }))
+  }
+
+  const homeSlots = matchPlayersToPositions(homePlayers, homePositions)
+  const awaySlots = matchPlayersToPositions(awayPlayers, awayPositions)
+
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col gap-4">
+    <div className="w-full max-w-5xl mx-auto flex flex-col gap-4">
+      {/* Formation Selectors */}
       <div className="flex justify-between gap-4">
         <div className="flex flex-col gap-1 flex-1">
           <label className="text-blue-300 text-xs uppercase tracking-widest font-semibold">
@@ -57,15 +75,19 @@ export default function SoccerPitch({ homeColor = "#3b82f6", awayColor = "#ef444
         </div>
       </div>
 
+      {/* Pitch */}
       <svg
         viewBox="0 0 600 400"
         className="w-full rounded-xl border-2 border-green-600"
         style={{ background: "#1a5c2a" }}
       >
+        {/* Stripes */}
         {[...Array(7)].map((_, i) => (
           <rect key={i} x={20 + i * 80} y="20" width="80" height="360"
             fill={i % 2 === 0 ? "rgba(255,255,255,0.03)" : "transparent"} />
         ))}
+
+        {/* Pitch markings */}
         <rect x="20" y="20" width="560" height="360" fill="none" stroke="white" strokeWidth="2" />
         <circle cx="300" cy="200" r="50" fill="none" stroke="white" strokeWidth="2" />
         <circle cx="300" cy="200" r="3" fill="white" />
@@ -79,11 +101,48 @@ export default function SoccerPitch({ homeColor = "#3b82f6", awayColor = "#ef444
         <rect x="8" y="170" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
         <rect x="580" y="170" width="12" height="60" fill="none" stroke="white" strokeWidth="2" />
 
-        {homePlayers.map(player => (
-          <PlayerMarker key={player.id} x={player.x} y={player.y} name={player.name} color={homeColor} />
+        {/* Home players */}
+        {homeSlots.map((slot, i) => (
+          slot.player ? (
+            <FifaCard
+              key={i}
+              x={slot.x}
+              y={slot.y}
+              player={slot.player}
+              isAway={false}
+            />
+          ) : (
+            <g key={i}>
+              <circle cx={slot.x} cy={slot.y} r="14"
+                fill={homeColor} stroke="white" strokeWidth="2" />
+              <text x={slot.x} y={slot.y + 5} textAnchor="middle"
+                fill="white" fontSize="9" fontWeight="bold">
+                {slot.name}
+              </text>
+            </g>
+          )
         ))}
-        {awayPlayers.map(player => (
-          <PlayerMarker key={player.id} x={player.x} y={player.y} name={player.name} color={awayColor} />
+
+        {/* Away players */}
+        {awaySlots.map((slot, i) => (
+          slot.player ? (
+            <FifaCard
+              key={i}
+              x={slot.x}
+              y={slot.y}
+              player={slot.player}
+              isAway={true}
+            />
+          ) : (
+            <g key={i}>
+              <circle cx={slot.x} cy={slot.y} r="14"
+                fill={awayColor} stroke="white" strokeWidth="2" />
+              <text x={slot.x} y={slot.y + 5} textAnchor="middle"
+                fill="white" fontSize="9" fontWeight="bold">
+                {slot.name}
+              </text>
+            </g>
+          )
         ))}
       </svg>
     </div>
