@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models.team import Team
 from app.services.monte_carlo import run_simulation
 from app.services.ai_coach import get_coaching_insight
+from app.extensions import db
 import os
 
 api_bp = Blueprint("api", __name__)
