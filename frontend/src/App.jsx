@@ -2,13 +2,18 @@ import { useState } from "react"
 import client from "./api/client"
 import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
+import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
 
 export default function App() {
   const [homeTeamId, setHomeTeamId] = useState(null)
   const [awayTeamId, setAwayTeamId] = useState(null)
+  const [homeFormation, setHomeFormation] = useState("4-4-2")
+  const [awayFormation, setAwayFormation] = useState("4-3-3")
   const [result, setResult] = useState(null)
+  const [insight, setInsight] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [aiLoading, setAiLoading] = useState(false)
   const [homeTeamName, setHomeTeamName] = useState("")
   const [awayTeamName, setAwayTeamName] = useState("")
 
@@ -17,20 +22,34 @@ export default function App() {
     if (homeTeamId === awayTeamId) return alert("Please select two different teams!")
 
     setLoading(true)
+    setAiLoading(true)
     setResult(null)
+    setInsight(null)
 
     try {
-      const res = await client.post("/simulate", {
+      // Run simulation first
+      const simRes = await client.post("/simulate", {
         home_team_id: homeTeamId,
         away_team_id: awayTeamId
       })
-      setResult(res.data)
-      setHomeTeamName(res.data.home_team)
-      setAwayTeamName(res.data.away_team)
+      setResult(simRes.data)
+      setHomeTeamName(simRes.data.home_team)
+      setAwayTeamName(simRes.data.away_team)
+      setLoading(false)
+
+      // Then get AI coaching insight
+      const coachRes = await client.post("/coach", {
+        home_team_id: homeTeamId,
+        away_team_id: awayTeamId,
+        home_formation: homeFormation,
+        away_formation: awayFormation
+      })
+      setInsight(coachRes.data.insight)
     } catch (err) {
-      console.error("Simulation failed", err)
+      console.error("Error", err)
     } finally {
       setLoading(false)
+      setAiLoading(false)
     }
   }
 
@@ -63,8 +82,17 @@ export default function App() {
         homeTeam={homeTeamName}
         awayTeam={awayTeamName}
       />
-      <SoccerPitch />
 
+      <AICoach insight={insight} loading={aiLoading} />
+
+      <SoccerPitch
+        homeColor="#3b82f6"
+        awayColor="#ef4444"
+        onFormationChange={(home, away) => {
+          setHomeFormation(home)
+          setAwayFormation(away)
+        }}
+      />
     </div>
   )
 }
