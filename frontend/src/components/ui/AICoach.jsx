@@ -9,7 +9,7 @@ const card = {
   padding: "28px",
   width: "100%",
   maxWidth: "640px",
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "'Plus Jakarta Sans', sans-serif",
   margin: "0 auto",
 }
 

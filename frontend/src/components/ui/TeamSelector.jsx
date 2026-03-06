@@ -38,9 +38,9 @@ export default function TeamSelector({ label, onSelect }) {
         fontWeight: "600",
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-        color: focused ? "#a78bfa" : "#475569",
+        color: focused ? "#a78bfa" : "#94a3b8",
         marginBottom: "10px",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
         transition: "color 0.2s",
       }}>
         {label}
@@ -56,13 +56,13 @@ export default function TeamSelector({ label, onSelect }) {
           style={{
             width: "100%",
             background: "rgba(15,23,42,0.8)",
-            color: hasValue ? "#e2e8f0" : "#475569",
+            color: hasValue ? "#e2e8f0" : "#94a3b8",
             border: "1px solid rgba(255,255,255,0.08)",
             borderRadius: "8px",
             padding: "10px 36px 10px 12px",
             fontSize: "13px",
             fontWeight: "500",
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
             cursor: "pointer",
             outline: "none",
             appearance: "none",
@@ -82,7 +82,7 @@ export default function TeamSelector({ label, onSelect }) {
         <motion.svg
           animate={{ rotate: focused ? 180 : 0 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          style={{ position: "absolute", right: "10px", top: "50%", marginTop: "-7px", pointerEvents: "none", color: focused ? "#a78bfa" : "#475569" }}
+          style={{ position: "absolute", right: "10px", top: "50%", marginTop: "-7px", pointerEvents: "none", color: focused ? "#a78bfa" : "#94a3b8" }}
           width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
         >
           <polyline points="6 9 12 15 18 9" />

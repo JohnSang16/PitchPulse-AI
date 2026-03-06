@@ -95,7 +95,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
         fill={colors.border}
         fontSize="11"
         fontWeight="800"
-        fontFamily="'Inter', Arial, sans-serif"
+        fontFamily="'Plus Jakarta Sans', Arial, sans-serif"
       >
         {overall}
       </text>
@@ -107,7 +107,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
         fill={colors.border}
         fontSize="7.5"
         fontWeight="700"
-        fontFamily="'Inter', Arial, sans-serif"
+        fontFamily="'Plus Jakarta Sans', Arial, sans-serif"
       >
         {player.position}
       </text>
@@ -141,7 +141,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
         fill={colors.text}
         fontSize="6.5"
         fontWeight="700"
-        fontFamily="'Inter', Arial, sans-serif"
+        fontFamily="'Plus Jakarta Sans', Arial, sans-serif"
       >
         {displayName}
       </text>
@@ -153,7 +153,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
         textAnchor="middle"
         fill={`${colors.text}bb`}
         fontSize="5.5"
-        fontFamily="'Inter', Arial, sans-serif"
+        fontFamily="'Plus Jakarta Sans', Arial, sans-serif"
       >
         ATK {attackOverall} · DEF {defenseOverall}
       </text>

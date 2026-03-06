@@ -29,7 +29,7 @@ export default function PlayerMarker({ x, y, name, color = "#3b82f6", isAway = f
         fill="white"
         fontSize="8"
         fontWeight="700"
-        fontFamily="'Inter', system-ui, sans-serif"
+        fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
         style={{ pointerEvents: "none" }}
       >
         {name.split(" ").pop().substring(0, 6)}

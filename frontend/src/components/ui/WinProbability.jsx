@@ -82,7 +82,7 @@ function BarSegment({ pct, gradient, glow, delay = 0, radius = "0" }) {
 export default function WinProbability({ result, homeTeam, awayTeam }) {
   if (!result) return null
 
-  const drawColor = "#475569"
+  const drawColor = "#94a3b8"
 
   return (
     <motion.div
@@ -97,10 +97,10 @@ export default function WinProbability({ result, homeTeam, awayTeam }) {
         borderRadius: "20px",
         padding: "28px",
         width: "100%",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
       }}
     >
-      <p style={{ textAlign: "center", fontSize: "10px", fontWeight: "600", letterSpacing: "0.18em", textTransform: "uppercase", color: "#334155", margin: "0 0 24px 0" }}>
+      <p style={{ textAlign: "center", fontSize: "10px", fontWeight: "600", letterSpacing: "0.18em", textTransform: "uppercase", color: "#64748b", margin: "0 0 24px 0" }}>
         Match Prediction
       </p>
 
@@ -155,7 +155,7 @@ export default function WinProbability({ result, homeTeam, awayTeam }) {
         <span style={{ fontSize: "11px", color: "#3b82f6", fontWeight: "600" }}>
           {result.home_expected_goals} xG
         </span>
-        <span style={{ fontSize: "11px", color: "#334155", fontWeight: "500" }}>
+        <span style={{ fontSize: "11px", color: "#64748b", fontWeight: "500" }}>
           {result.simulations?.toLocaleString()} sims
         </span>
         <span style={{ fontSize: "11px", color: "#ef4444", fontWeight: "600" }}>

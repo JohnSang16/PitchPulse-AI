@@ -11,7 +11,7 @@ const selectStyle = {
   padding: "9px 32px 9px 12px",
   fontSize: "12px",
   fontWeight: "500",
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "'Plus Jakarta Sans', sans-serif",
   cursor: "pointer",
   outline: "none",
   appearance: "none",
@@ -38,7 +38,7 @@ function FormationSelect({ label, value, onChange, accentColor }) {
         textTransform: "uppercase",
         color: accentColor,
         marginBottom: "8px",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
       }}>
         {label}
       </label>
@@ -60,7 +60,7 @@ function FormationSelect({ label, value, onChange, accentColor }) {
           ))}
         </select>
         <svg
-          style={{ position: "absolute", right: "9px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#64748b" }}
+          style={{ position: "absolute", right: "9px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#94a3b8" }}
           width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
         >
           <polyline points="6 9 12 15 18 9" />
@@ -108,7 +108,7 @@ export default function SoccerPitch({
   const awaySlots = matchPlayersToPositions(awayPlayers, awayPositions)
 
   return (
-    <div style={{ width: "100%", maxWidth: "900px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "12px", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ width: "100%", maxWidth: "900px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "12px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       {/* Formation Selectors */}
       <div style={{ display: "flex", gap: "12px" }}>
         <FormationSelect label="Home Formation" value={homeFormation} onChange={handleHomeFormationChange} accentColor="#3b82f6" />
@@ -216,7 +216,7 @@ export default function SoccerPitch({
                 <circle cx={slot.x} cy={slot.y} r="14" fill="url(#homeGrad)" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
                 {/* Badge shine */}
                 <circle cx={slot.x - 4} cy={slot.y - 4} r="4" fill="rgba(255,255,255,0.15)" />
-                <text x={slot.x} y={slot.y + 4} textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="'Inter', sans-serif">
+                <text x={slot.x} y={slot.y + 4} textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="'Plus Jakarta Sans', sans-serif">
                   {slot.name}
                 </text>
               </g>
@@ -235,7 +235,7 @@ export default function SoccerPitch({
                 <circle cx={slot.x} cy={slot.y} r="14" fill="url(#awayGrad)" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
                 {/* Badge shine */}
                 <circle cx={slot.x - 4} cy={slot.y - 4} r="4" fill="rgba(255,255,255,0.15)" />
-                <text x={slot.x} y={slot.y + 4} textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="'Inter', sans-serif">
+                <text x={slot.x} y={slot.y + 4} textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="'Plus Jakarta Sans', sans-serif">
                   {slot.name}
                 </text>
               </g>
