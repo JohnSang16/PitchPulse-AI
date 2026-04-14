@@ -266,12 +266,17 @@ _COACH_EXPECTED_KEYS = {
 
 
 def _mock_gemini():
-    """Return a context manager that patches the Gemini client."""
+    """Return a context manager that patches genai.Client at construction time.
+
+    Because the client is now lazy-initialized inside get_coaching_insight(),
+    we patch google.genai.Client so that when the function calls
+    genai.Client(api_key=...) it gets our mock back instead of a real client.
+    """
     mock_response = MagicMock()
     mock_response.text = _MOCK_INSIGHT
     mock_client = MagicMock()
     mock_client.models.generate_content.return_value = mock_response
-    return patch("app.services.ai_coach.client", mock_client)
+    return patch("google.genai.Client", return_value=mock_client)
 
 
 class TestCoach:
