@@ -17,8 +17,8 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 COPY . .
 
-# Make entrypoint executable
-RUN chmod +x entrypoint.sh
+# Strip Windows CRLF line endings and make executable
+RUN sed -i 's/\r//' entrypoint.sh && chmod +x entrypoint.sh
 
 # Non-root user
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
