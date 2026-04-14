@@ -2,3 +2,7 @@
 .env*.local
 .env
 backend/.env
+# Local artifacts
+pitchpulse_backup.dump
+*.dump
+backend/app/__pycache__/
