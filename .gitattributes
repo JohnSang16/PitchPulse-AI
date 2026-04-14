@@ -1,0 +1,8 @@
+# Always use LF in the repo regardless of OS
+* text=auto eol=lf
+
+# Explicitly enforce LF for files that break with CRLF
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
