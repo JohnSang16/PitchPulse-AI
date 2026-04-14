@@ -29,4 +29,4 @@ USER appuser
 ENV PORT=8000
 EXPOSE 8000
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
