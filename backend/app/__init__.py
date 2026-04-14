@@ -16,11 +16,12 @@ def create_app():
     from app.models import Team, Player, Match
 
     with app.app_context():
-        from app.models.team import Team as TeamModel
-        if TeamModel.query.count() == 0:
-            print("🌱 No teams found, seeding database...")
-            from app.api.routes import seed_db
-            seed_db()
-            print("✅ Database seeded!")
+        if not app.config.get("TESTING"):
+            from app.models.team import Team as TeamModel
+            if TeamModel.query.count() == 0:
+                print("🌱 No teams found, seeding database...")
+                from app.api.routes import seed_db
+                seed_db()
+                print("✅ Database seeded!")
 
     return app
