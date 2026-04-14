@@ -8,11 +8,12 @@ on:
 
 jobs:
   # ─────────────────────────────────────────────────────────────
-  # 1. Test
+  # 1. Test — runs on pull requests only, not on push to main
   # ─────────────────────────────────────────────────────────────
   test:
     name: Pytest
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
     defaults:
       run:
@@ -39,7 +40,7 @@ jobs:
         run: pytest tests/ -v --tb=short
 
   # ─────────────────────────────────────────────────────────────
-  # 2. Deploy to Elastic Beanstalk (push to main only)
+  # 2. Deploy to Elastic Beanstalk — runs on push to main only
   # ─────────────────────────────────────────────────────────────
   deploy:
     name: Deploy to Elastic Beanstalk
@@ -56,17 +57,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # Build a clean zip — no venv, __pycache__, .env, or test artefacts
       - name: Package application
         run: |
           cd backend
-          zip -r ../deploy.zip . \
-            --exclude "venv/*" \
-            --exclude "__pycache__/*" \
-            --exclude "*.pyc" \
-            --exclude ".env" \
-            --exclude "tests/*" \
-            --exclude "backend/*"
+          # Use find to build the file list explicitly — avoids zip's
+          # shallow --exclude patterns missing nested venv/pycache paths
+          find . \
+            -not -path "./venv/*" \
+            -not -path "./.git/*" \
+            -not -path "./__pycache__/*" \
+            -not -path "*/__pycache__/*" \
+            -not -path "./backend/*" \
+            -not -name "*.pyc" \
+            -not -name ".env" \
+            -not -path "./tests/*" \
+            | zip ../deploy.zip -@
+          echo "── deploy.zip size ──"
+          du -sh ../deploy.zip
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
