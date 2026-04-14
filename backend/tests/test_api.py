@@ -18,18 +18,22 @@ from app.models.team import Team
 
 @pytest.fixture(scope="module")
 def app():
-    """Application configured for testing with an in-memory SQLite DB."""
-    test_app = create_app()
-    test_app.config.update(
-        TESTING=True,
-        SQLALCHEMY_DATABASE_URI="sqlite:///:memory:",
+    """Application configured for testing with an in-memory SQLite DB.
+
+    Config is passed into create_app() so TESTING=True is set before the
+    auto-seed block inside create_app() runs — preventing it from querying
+    a table that doesn't exist yet.
+    """
+    test_app = create_app({
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
         # StaticPool forces all connections to reuse the same in-memory SQLite
         # connection, so create_all() and test queries see the same schema.
-        SQLALCHEMY_ENGINE_OPTIONS={
+        "SQLALCHEMY_ENGINE_OPTIONS": {
             "connect_args": {"check_same_thread": False},
             "poolclass": StaticPool,
         },
-    )
+    })
     with test_app.app_context():
         _db.create_all()
         _seed_teams()
