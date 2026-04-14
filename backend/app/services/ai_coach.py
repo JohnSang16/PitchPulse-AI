@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-
 def get_coaching_insight(home_team, away_team, home_formation, away_formation, simulation_result):
     prompt = f"""
     You are an expert soccer tactical analyst and coach.
@@ -30,6 +28,7 @@ def get_coaching_insight(home_team, away_team, home_formation, away_formation, s
     Keep your response concise and focused. Use soccer terminology.
     """
 
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=prompt
