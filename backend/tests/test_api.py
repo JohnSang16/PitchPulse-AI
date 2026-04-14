@@ -6,6 +6,7 @@ The `app` and `client` fixtures create a fresh app + DB for each test module.
 """
 import pytest
 from unittest.mock import patch, MagicMock
+from sqlalchemy.pool import StaticPool
 from app import create_app
 from app.extensions import db as _db
 from app.models.team import Team
@@ -22,8 +23,12 @@ def app():
     test_app.config.update(
         TESTING=True,
         SQLALCHEMY_DATABASE_URI="sqlite:///:memory:",
-        # Disable the auto-seed that fires in create_app — it hits the real DB
-        # and calls the external API-Football endpoint.
+        # StaticPool forces all connections to reuse the same in-memory SQLite
+        # connection, so create_all() and test queries see the same schema.
+        SQLALCHEMY_ENGINE_OPTIONS={
+            "connect_args": {"check_same_thread": False},
+            "poolclass": StaticPool,
+        },
     )
     with test_app.app_context():
         _db.create_all()
