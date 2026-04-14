@@ -1,34 +1,29 @@
 import { useEffect, useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 
 // ── Counting number hook ───────────────────────────────────────────────────
 function useCountUp(target, duration = 1100) {
   const [value, setValue] = useState(0)
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
 
   useEffect(() => {
-    if (!inView) return
     let start = null
-    const from = 0
     const to = parseFloat(target) || 0
-
     const tick = (ts) => {
       if (!start) start = ts
       const p = Math.min((ts - start) / duration, 1)
       const eased = 1 - Math.pow(1 - p, 3)
-      setValue(+(from + (to - from) * eased).toFixed(1))
+      setValue(+(to * eased).toFixed(1))
       if (p < 1) requestAnimationFrame(tick)
     }
-
     requestAnimationFrame(tick)
-  }, [inView, target, duration])
+  }, [target, duration])
 
   return [value, ref]
 }
 
 // ── Stat column ────────────────────────────────────────────────────────────
-function StatColumn({ label, pct, color, delay = 0 }) {
+function StatColumn({ label, pct, color, delay = 0, xG, isWinner }) {
   const [count, ref] = useCountUp(pct, 1000 + delay)
 
   return (
@@ -36,14 +31,55 @@ function StatColumn({ label, pct, color, delay = 0 }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: delay / 1000, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      style={{ textAlign: "center", flex: 1 }}
+      style={{ textAlign: "center", flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}
     >
-      <p style={{ fontSize: "10px", fontWeight: "600", letterSpacing: "0.13em", textTransform: "uppercase", color, margin: "0 0 6px 0" }}>
+      {/* Outcome label */}
+      <p style={{
+        fontSize: "10px", fontWeight: "600", letterSpacing: "0.13em",
+        textTransform: "uppercase", color, margin: 0,
+      }}>
         {label}
       </p>
-      <p ref={ref} style={{ fontSize: "44px", fontWeight: "800", letterSpacing: "-0.04em", color: "#f8fafc", margin: 0, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-        {Math.round(count)}%
-      </p>
+
+      {/* Big percentage */}
+      <div style={{ position: "relative", display: "inline-block" }}>
+        {isWinner && (
+          <div style={{
+            position: "absolute", inset: "-10px", borderRadius: "20px",
+            background: `radial-gradient(ellipse, ${color}28 0%, transparent 70%)`,
+          }} />
+        )}
+        <p ref={ref} style={{
+          fontSize: "52px", fontWeight: "800", letterSpacing: "-0.04em",
+          color: isWinner ? color : "#e2e8f0",
+          margin: 0, lineHeight: 1,
+          fontVariantNumeric: "tabular-nums",
+          position: "relative",
+          textShadow: isWinner ? `0 0 32px ${color}55` : "none",
+          transition: "color 0.3s",
+        }}>
+          {Math.round(count)}%
+        </p>
+      </div>
+
+      {/* xG pill — only for home/away */}
+      {xG != null && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.75 + delay / 1000, duration: 0.3 }}
+          style={{
+            display: "inline-flex", alignItems: "center",
+            padding: "3px 10px", borderRadius: "100px",
+            background: `${color}14`,
+            border: `1px solid ${color}30`,
+          }}
+        >
+          <span style={{ fontSize: "11px", fontWeight: "700", color, fontVariantNumeric: "tabular-nums" }}>
+            {xG} xG
+          </span>
+        </motion.div>
+      )}
     </motion.div>
   )
 }
@@ -56,25 +92,29 @@ function BarSegment({ pct, gradient, glow, delay = 0, radius = "0" }) {
       animate={{ width: `${pct}%` }}
       transition={{ delay: delay / 1000, duration: 1, ease: [0.34, 1.2, 0.64, 1] }}
       style={{
-        height: "100%",
-        background: gradient,
-        borderRadius: radius,
-        boxShadow: glow,
-        position: "relative",
-        overflow: "hidden",
+        height: "100%", background: gradient, borderRadius: radius,
+        boxShadow: glow, position: "relative", overflow: "hidden",
       }}
     >
-      {/* pulse shimmer */}
       <motion.div
         animate={{ x: ["-100%", "200%"] }}
         transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 1 + delay / 1000 }}
         style={{
-          position: "absolute", inset: 0,
+          position: "absolute", inset: 0, width: "60%",
           background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)",
-          width: "60%",
         }}
       />
     </motion.div>
+  )
+}
+
+// ── Divider ────────────────────────────────────────────────────────────────
+function Divider() {
+  return (
+    <div style={{
+      width: "1px", alignSelf: "stretch", margin: "8px 0",
+      background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.08), transparent)",
+    }} />
   )
 }
 
@@ -82,7 +122,10 @@ function BarSegment({ pct, gradient, glow, delay = 0, radius = "0" }) {
 export default function WinProbability({ result, homeTeam, awayTeam }) {
   if (!result) return null
 
-  const drawColor = "#94a3b8"
+  const home = result.home_win_pct
+  const draw = result.draw_pct
+  const away = result.away_win_pct
+  const max = Math.max(home, draw, away)
 
   return (
     <motion.div
@@ -95,49 +138,69 @@ export default function WinProbability({ result, homeTeam, awayTeam }) {
         WebkitBackdropFilter: "blur(20px)",
         border: "1px solid rgba(255,255,255,0.08)",
         borderRadius: "20px",
-        padding: "28px",
+        padding: "28px 24px 22px",
         width: "100%",
         fontFamily: "'Plus Jakarta Sans', sans-serif",
       }}
     >
-      <p style={{ textAlign: "center", fontSize: "10px", fontWeight: "600", letterSpacing: "0.18em", textTransform: "uppercase", color: "#64748b", margin: "0 0 24px 0" }}>
+      {/* Header */}
+      <p style={{
+        textAlign: "center", fontSize: "10px", fontWeight: "600",
+        letterSpacing: "0.18em", textTransform: "uppercase",
+        color: "#475569", margin: "0 0 22px 0",
+      }}>
         Match Prediction
       </p>
 
-      {/* Percentage columns */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "24px" }}>
-        <StatColumn label={homeTeam} pct={result.home_win_pct} color="#3b82f6" delay={0} />
-        <div style={{ textAlign: "center", flex: 1 }}>
-          <p style={{ fontSize: "10px", fontWeight: "600", letterSpacing: "0.13em", textTransform: "uppercase", color: drawColor, margin: "0 0 6px 0" }}>Draw</p>
-          <StatColumn label="" pct={result.draw_pct} color={drawColor} delay={120} />
-        </div>
-        <StatColumn label={awayTeam} pct={result.away_win_pct} color="#ef4444" delay={60} />
+      {/* Stat columns */}
+      <div style={{ display: "flex", alignItems: "stretch", marginBottom: "20px" }}>
+        <StatColumn
+          label={homeTeam || "Home"}
+          pct={home}
+          color="#3b82f6"
+          delay={0}
+          xG={result.home_expected_goals}
+          isWinner={home === max && home !== draw}
+        />
+        <Divider />
+        <StatColumn
+          label="Draw"
+          pct={draw}
+          color="#94a3b8"
+          delay={120}
+          isWinner={draw === max && draw !== home && draw !== away}
+        />
+        <Divider />
+        <StatColumn
+          label={awayTeam || "Away"}
+          pct={away}
+          color="#ef4444"
+          delay={60}
+          xG={result.away_expected_goals}
+          isWinner={away === max && away !== draw}
+        />
       </div>
 
       {/* Probability bar */}
       <div style={{
-        display: "flex",
-        borderRadius: "100px",
-        overflow: "hidden",
-        height: "6px",
-        background: "rgba(255,255,255,0.04)",
-        gap: "2px",
+        display: "flex", borderRadius: "100px", overflow: "hidden",
+        height: "8px", background: "rgba(255,255,255,0.04)", gap: "2px",
       }}>
         <BarSegment
-          pct={result.home_win_pct}
+          pct={home}
           gradient="linear-gradient(90deg, #1d4ed8, #3b82f6)"
           glow="0 0 10px rgba(59,130,246,0.7)"
           delay={200}
           radius="100px 0 0 100px"
         />
         <BarSegment
-          pct={result.draw_pct}
+          pct={draw}
           gradient="rgba(71,85,105,0.7)"
           glow="none"
           delay={280}
         />
         <BarSegment
-          pct={result.away_win_pct}
+          pct={away}
           gradient="linear-gradient(90deg, #ef4444, #dc2626)"
           glow="0 0 10px rgba(239,68,68,0.7)"
           delay={360}
@@ -145,23 +208,18 @@ export default function WinProbability({ result, homeTeam, awayTeam }) {
         />
       </div>
 
-      {/* xG row */}
-      <motion.div
+      {/* Simulations count */}
+      <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.4 }}
-        style={{ display: "flex", justifyContent: "space-between", marginTop: "14px" }}
+        transition={{ delay: 1.0, duration: 0.4 }}
+        style={{
+          textAlign: "center", fontSize: "10px", color: "#334155",
+          fontWeight: "500", margin: "12px 0 0 0", letterSpacing: "0.04em",
+        }}
       >
-        <span style={{ fontSize: "11px", color: "#3b82f6", fontWeight: "600" }}>
-          {result.home_expected_goals} xG
-        </span>
-        <span style={{ fontSize: "11px", color: "#64748b", fontWeight: "500" }}>
-          {result.simulations?.toLocaleString()} sims
-        </span>
-        <span style={{ fontSize: "11px", color: "#ef4444", fontWeight: "600" }}>
-          {result.away_expected_goals} xG
-        </span>
-      </motion.div>
+        {result.simulations?.toLocaleString()} simulations
+      </motion.p>
     </motion.div>
   )
 }
