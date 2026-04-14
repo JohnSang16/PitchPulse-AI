@@ -50,6 +50,47 @@ As a Computer Science student and a lifelong soccer enthusiast, I recognized tha
 
 On a technical level, this project allowed me to move beyond basic CRUD applications and explore the intersection of <strong>predictive mathematics and scalable systems</strong>. By implementing Monte Carlo simulations in a Flask environment and delivering them through an optimized React interface, I’ve created a tool that doesn't just display stats—it predicts outcomes and offers strategic counsel. This is a reflection of my commitment to using technology to solve complex, niche problems in industries I am passionate about.
 
+## 🧪 QA Testing
+
+PitchPulse AI includes an automated QA agent that black-box tests the live API and prints a formatted results table.
+
+### Running locally
+
+```bash
+# Start the Flask backend first (in one terminal)
+cd backend && flask --app run run
+
+# Then run the QA agent (in another terminal)
+python backend/tests/qa_agent.py
+```
+
+### Running against production
+
+```bash
+python backend/tests/qa_agent.py --env production
+```
+
+### What each test covers
+
+| Test | Endpoint | What it verifies |
+|------|----------|-----------------|
+| Health check | `GET /api/hello` | Server is up, status = "ok" |
+| List teams | `GET /api/teams` | 200, non-empty list, each item has `id` and `name` |
+| Get players | `GET /api/teams/{id}/players` | 200, returns player objects for a valid team |
+| Players 404 | `GET /api/teams/99999/players` | Returns 404 for a non-existent team |
+| Simulate valid | `POST /api/simulate` | 200, win/draw/loss sums to 100%, xG values present |
+| Simulate same team | `POST /api/simulate` | Still returns valid result when same team selected twice |
+| Simulate invalid IDs | `POST /api/simulate` | Returns 400 for non-existent team IDs |
+| Simulate missing body | `POST /api/simulate` | Returns 400 for empty request body |
+| Coach valid | `POST /api/coach` | 200, `insight` field is a non-empty string |
+| Coach invalid IDs | `POST /api/coach` | Returns 400 for non-existent team IDs |
+
+### CI integration
+
+The QA agent runs automatically on every pull request via GitHub Actions (after pytest passes). A failing API test will block the PR from merging.
+
+---
+
 ## 🤝 Acknowledgements
 Special Thanks to:
 <ul>

@@ -40,7 +40,50 @@ jobs:
         run: pytest tests/ -v --tb=short
 
   # ─────────────────────────────────────────────────────────────
-  # 2. Deploy to Elastic Beanstalk — runs on push to main only
+  # 2. QA Agent — runs on pull requests only, after pytest passes
+  # ─────────────────────────────────────────────────────────────
+  qa:
+    name: QA Agent
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: test
+
+    defaults:
+      run:
+        working-directory: backend
+
+    env:
+      DATABASE_URL: "sqlite:///:memory:"
+      SECRET_KEY: ci-secret-key
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt requests
+
+      - name: Start Flask server
+        run: |
+          flask --app run db upgrade
+          flask --app run run --host=0.0.0.0 --port=5000 &
+          echo "Waiting for Flask to start..."
+          for i in $(seq 1 15); do
+            curl -sf http://localhost:5000/api/hello && break || sleep 1
+          done
+
+      - name: Run QA agent
+        run: python tests/qa_agent.py --env local
+
+  # ─────────────────────────────────────────────────────────────
+  # 3. Deploy to Elastic Beanstalk — runs on push to main only
   # ─────────────────────────────────────────────────────────────
   deploy:
     name: Deploy to Elastic Beanstalk
