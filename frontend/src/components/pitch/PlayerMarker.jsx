@@ -5,9 +5,9 @@ export default function PlayerMarker({ x, y, name, isAway = false }) {
     <g style={{ cursor: "default" }}>
       <circle
         cx={x} cy={y} r="7"
-        fill={isAway ? "#2e2814" : "#c9a84c"}
-        stroke={isAway ? "rgba(201,168,76,0.2)" : "none"}
-        strokeWidth="0.5"
+        fill={isAway ? "#1e1608" : "#c9a84c"}
+        stroke={isAway ? "rgba(201,168,76,0.55)" : "none"}
+        strokeWidth="1"
       />
       <text
         x={x} y={y + 2}

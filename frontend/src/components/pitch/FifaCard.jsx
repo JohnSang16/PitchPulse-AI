@@ -14,9 +14,9 @@ export default function FifaCard({ x, y, player, isAway = false }) {
   const displayName = shortName.length > 7 ? shortName.substring(0, 6) + "." : shortName
 
   // Home: gold-filled card. Away: dark ghost card.
-  const bg     = isAway ? "#2e2814" : "#c9a84c"
-  const border = isAway ? "rgba(201,168,76,0.2)" : "rgba(201,168,76,0.8)"
-  const text   = isAway ? "rgba(201,168,76,0.53)" : "#080808"
+  const bg     = isAway ? "#1e1608" : "#c9a84c"
+  const border = isAway ? "rgba(201,168,76,0.55)" : "rgba(201,168,76,0.8)"
+  const text   = isAway ? "rgba(201,168,76,0.85)" : "#080808"
 
   return (
     <g style={{ cursor: "default" }}>

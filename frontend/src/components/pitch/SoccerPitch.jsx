@@ -148,9 +148,9 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
             <FifaCard key={i} x={slot.x} y={slot.y} player={slot.player} isAway={true} />
           ) : (
             <g key={i}>
-              <circle cx={slot.x} cy={slot.y} r="7" fill="#2e2814" stroke="rgba(201,168,76,0.2)" strokeWidth="0.5" />
+              <circle cx={slot.x} cy={slot.y} r="7" fill="#1e1608" stroke="rgba(201,168,76,0.55)" strokeWidth="1" />
               <text x={slot.x} y={slot.y + 2} textAnchor="middle" dominantBaseline="middle"
-                fill="rgba(201,168,76,0.53)" fontSize="6" fontFamily={MONO} style={{ pointerEvents: "none" }}>
+                fill="rgba(201,168,76,0.75)" fontSize="6" fontFamily={MONO} style={{ pointerEvents: "none" }}>
                 {slot.name}
               </text>
             </g>
