@@ -1,8 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #07050e;
+  --bg-base:        #080808;
+  --bg-surface:     #0d0d0d;
+  --bg-raised:      #111111;
+  --border-dim:     #141210;
+  --border-default: #1e1a12;
+  --border-accent:  #c9a84c33;
+  --gold:           #c9a84c;
+  --gold-dim:       #8a7a52;
+  --gold-ghost:     #3d3520;
+  --gold-whisper:   #2e2814;
+  --text-primary:   #f0ead6;
+  --text-secondary: #8a7a52;
+  --text-muted:     #3d3520;
+  --pitch-bg:       #0a1a0a;
+  --pitch-line:     #1a2e1a;
 }
 
 *, *::before, *::after {
@@ -12,30 +25,27 @@
 html, body, #root {
   margin: 0;
   padding: 0;
-  background-color: #07050e;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-base);
+  font-family: 'DM Mono', 'Courier New', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom select styling reset */
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.3);
-  border-radius: 3px;
+  background: var(--gold-ghost);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.5);
+  background: var(--gold-dim);
 }

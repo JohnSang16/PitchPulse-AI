@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
 import client from "../../api/client"
+
+const MONO = "'DM Mono', 'Courier New', monospace"
 
 export default function TeamSelector({ label, onSelect }) {
   const [teams, setTeams] = useState([])
   const [focused, setFocused] = useState(false)
-  const [hasValue, setHasValue] = useState(false)
 
   useEffect(() => {
     client.get("/teams")
@@ -14,80 +14,52 @@ export default function TeamSelector({ label, onSelect }) {
   }, [])
 
   return (
-    <motion.div
-      whileHover={{
-        scale: 1.02,
-        boxShadow: "0 0 28px rgba(139,92,246,0.18), 0 8px 32px rgba(0,0,0,0.35)",
-      }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        border: focused
-          ? "1px solid rgba(139,92,246,0.45)"
-          : "1px solid rgba(255,255,255,0.08)",
-        borderRadius: "14px",
-        padding: "16px",
-        transition: "border-color 0.2s ease",
-      }}
-    >
+    <div>
       <label style={{
         display: "block",
-        fontSize: "10px",
-        fontWeight: "600",
-        letterSpacing: "0.16em",
-        textTransform: "uppercase",
-        color: focused ? "#a78bfa" : "#94a3b8",
-        marginBottom: "10px",
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        transition: "color 0.2s",
+        fontFamily: MONO, fontSize: "8px", fontWeight: "400",
+        letterSpacing: "0.18em", textTransform: "uppercase",
+        color: "#3d3520", marginBottom: "6px",
       }}>
         {label}
       </label>
       <div style={{ position: "relative" }}>
         <select
-          onChange={e => {
-            onSelect(Number(e.target.value))
-            setHasValue(!!e.target.value)
-          }}
+          onChange={e => onSelect(Number(e.target.value))}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={{
             width: "100%",
-            background: "rgba(15,23,42,0.8)",
-            color: hasValue ? "#e2e8f0" : "#94a3b8",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "8px",
-            padding: "10px 36px 10px 12px",
-            fontSize: "13px",
-            fontWeight: "500",
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            background: "#0d0d0d",
+            color: "#8a7a52",
+            border: `0.5px solid ${focused ? "#c9a84c33" : "#1e1a12"}`,
+            borderRadius: "3px",
+            padding: "9px 28px 9px 12px",
+            fontSize: "10px",
+            fontFamily: MONO,
+            letterSpacing: "0.06em",
             cursor: "pointer",
             outline: "none",
             appearance: "none",
             WebkitAppearance: "none",
-            boxShadow: focused ? "0 0 0 3px rgba(139,92,246,0.14)" : "none",
-            transition: "box-shadow 0.2s, border-color 0.2s",
+            transition: "border-color 0.15s",
           }}
         >
-          <option value="" style={{ background: "#1e293b", color: "#64748b" }}>Select a team...</option>
+          <option value="" style={{ background: "#0d0d0d", color: "#3d3520" }}>Select a team...</option>
           {teams.map(team => (
-            <option key={team.id} value={team.id} style={{ background: "#1e293b", color: "#e2e8f0" }}>
+            <option key={team.id} value={team.id} style={{ background: "#0d0d0d", color: "#8a7a52" }}>
               {team.name}
             </option>
           ))}
         </select>
-        {/* Animated chevron */}
-        <motion.svg
-          animate={{ rotate: focused ? 180 : 0 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          style={{ position: "absolute", right: "10px", top: "50%", marginTop: "-7px", pointerEvents: "none", color: focused ? "#a78bfa" : "#94a3b8" }}
-          width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </motion.svg>
+        {/* Custom arrow */}
+        <span style={{
+          position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)",
+          pointerEvents: "none", color: "#3d3520", fontSize: "10px", lineHeight: 1,
+        }}>
+          ▾
+        </span>
       </div>
-    </motion.div>
+    </div>
   )
 }

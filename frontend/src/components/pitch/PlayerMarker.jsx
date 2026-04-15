@@ -1,35 +1,21 @@
-export default function PlayerMarker({ x, y, name, color = "#3b82f6", isAway = false }) {
-  const gradId = `playerGrad-${x}-${y}`
+const MONO = "'DM Mono', 'Courier New', monospace"
+
+export default function PlayerMarker({ x, y, name, isAway = false }) {
   return (
-    <g style={{ cursor: "pointer" }}>
-      <defs>
-        <radialGradient id={gradId} cx="40%" cy="35%" r="60%">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
-          <stop offset="100%" stopColor={color} />
-        </radialGradient>
-      </defs>
-      {/* Glow ring */}
-      <circle cx={x} cy={y} r="18" fill={color} opacity="0.18" />
-      {/* Badge body */}
+    <g style={{ cursor: "default" }}>
       <circle
-        cx={x}
-        cy={y}
-        r="14"
-        fill={`url(#${gradId})`}
-        stroke="rgba(255,255,255,0.55)"
-        strokeWidth="1.5"
-        style={{ filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.6))" }}
+        cx={x} cy={y} r="7"
+        fill={isAway ? "#2e2814" : "#c9a84c"}
+        stroke={isAway ? "rgba(201,168,76,0.2)" : "none"}
+        strokeWidth="0.5"
       />
-      {/* Shine highlight */}
-      <circle cx={x - 4} cy={y - 4} r="4" fill="rgba(255,255,255,0.18)" />
       <text
-        x={x}
-        y={y + 4}
+        x={x} y={y + 2}
         textAnchor="middle"
-        fill="white"
-        fontSize="8"
-        fontWeight="700"
-        fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
+        dominantBaseline="middle"
+        fill={isAway ? "rgba(201,168,76,0.53)" : "#080808"}
+        fontSize="6"
+        fontFamily={MONO}
         style={{ pointerEvents: "none" }}
       >
         {name.split(" ").pop().substring(0, 6)}
