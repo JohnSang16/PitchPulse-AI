@@ -84,8 +84,9 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "0", fontFamily: MONO }}>
 
-      {/* Formation selectors header */}
+      {/* Formation selectors header — sticky so it stays visible on scroll */}
       <div style={{
+        position: "sticky", top: 0, zIndex: 10,
         display: "flex", gap: "12px", padding: "16px 20px",
         borderBottom: "0.5px solid #1e1a12", background: "#080808",
       }}>
@@ -94,7 +95,7 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
       </div>
 
       {/* Pitch */}
-      <svg viewBox="-15 -12 630 464" style={{ width: "100%", display: "block", maxHeight: "78vh" }}>
+      <svg viewBox="-15 -12 630 464" style={{ width: "100%", display: "block" }}>
         {/* Pitch surface */}
         <rect x="0" y="0" width="600" height="440" fill="#0a1a0a" />
 

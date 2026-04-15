@@ -337,7 +337,7 @@ export default function App() {
 
             {/* ── Main ── */}
             <main style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
-              <div style={{ flex: 1, overflow: "hidden" }}>
+              <div style={{ flex: 1, overflowY: "auto" }}>
                 <SoccerPitch
                   homePlayers={homePlayers}
                   awayPlayers={awayPlayers}
