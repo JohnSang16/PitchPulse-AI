@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Analytics } from '@vercel/analytics/react'
 import { motion, AnimatePresence } from "framer-motion"
 import client from "./api/client"
@@ -189,6 +189,17 @@ function AboutPage() {
   )
 }
 
+// ── Mobile detection ─────────────────────────────────────────────────────────
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener("resize", handler)
+    return () => window.removeEventListener("resize", handler)
+  }, [])
+  return isMobile
+}
+
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage]                   = useState("home")
@@ -240,22 +251,28 @@ export default function App() {
   }
 
   const canSimulate = homeTeamId && awayTeamId && !loading
+  const isMobile = useIsMobile()
 
   return (
-    <div style={{ height: "100vh", overflow: "hidden", background: T.bgBase, fontFamily: T.MONO }}>
+    <div style={{
+      height: isMobile ? "auto" : "100vh",
+      minHeight: "100vh",
+      overflow: isMobile ? "visible" : "hidden",
+      background: T.bgBase, fontFamily: T.MONO,
+    }}>
 
       {/* ── Navbar ── */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
         height: "54px", display: "flex", alignItems: "center",
-        justifyContent: "space-between", padding: "0 24px",
+        justifyContent: "space-between", padding: isMobile ? "0 16px" : "0 24px",
         background: T.bgBase, borderBottom: `0.5px solid ${T.border}`,
       }}>
-        <span style={{ fontFamily: T.SERIF, fontSize: "18px", fontWeight: "400", letterSpacing: "0.06em", color: T.gold }}>
+        <span style={{ fontFamily: T.SERIF, fontSize: isMobile ? "15px" : "18px", fontWeight: "400", letterSpacing: "0.06em", color: T.gold }}>
           PitchPulse AI
         </span>
 
-        <div style={{ display: "flex", gap: "24px" }}>
+        <div style={{ display: "flex", gap: isMobile ? "16px" : "24px" }}>
           {["home", "about"].map(p => (
             <motion.button
               key={p}
@@ -265,7 +282,7 @@ export default function App() {
               transition={{ duration: 0.12 }}
               style={{
                 background: "none", border: "none", padding: 0, cursor: "pointer",
-                fontFamily: T.MONO, fontSize: "12px", fontWeight: "400",
+                fontFamily: T.MONO, fontSize: isMobile ? "10px" : "12px", fontWeight: "400",
                 letterSpacing: "0.16em", textTransform: "uppercase",
                 color: page === p ? T.gold : T.goldGhost,
               }}
@@ -284,11 +301,82 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            style={{ marginTop: "54px", height: "calc(100vh - 54px)", overflowY: "auto", padding: "40px 24px 60px", display: "flex", justifyContent: "center" }}
+            style={{
+              marginTop: "54px",
+              height: isMobile ? "auto" : "calc(100vh - 54px)",
+              overflowY: "auto",
+              padding: isMobile ? "24px 16px 48px" : "40px 24px 60px",
+              display: "flex", justifyContent: "center",
+            }}
           >
             <AboutPage />
           </motion.div>
+
+        ) : isMobile ? (
+          /* ── Mobile dashboard ── */
+          <motion.div
+            key="home-mobile"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.25 } }}
+            exit={{ opacity: 0, transition: { duration: 0.15 } }}
+            style={{ marginTop: "54px", padding: "20px 16px 40px", display: "flex", flexDirection: "column", gap: "16px" }}
+          >
+            {/* Team selectors */}
+            <div>
+              <Eyebrow>Select Teams</Eyebrow>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "10px" }}>
+                <TeamSelector label="Home" onSelect={handleHomeTeamSelect} />
+                <TeamSelector label="Away" onSelect={handleAwayTeamSelect} />
+              </div>
+              <button
+                onClick={handleSimulate}
+                disabled={!canSimulate}
+                style={{
+                  width: "100%",
+                  background: canSimulate ? T.gold : T.goldWhisper,
+                  color: canSimulate ? "#080808" : T.goldGhost,
+                  fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
+                  letterSpacing: "0.18em", textTransform: "uppercase",
+                  padding: "13px 16px", border: "none", borderRadius: "2px",
+                  cursor: canSimulate ? "pointer" : "not-allowed",
+                  transition: "background 0.15s",
+                }}
+              >
+                {loading ? "Running..." : "Run Simulation"}
+              </button>
+            </div>
+
+            {/* Pitch */}
+            <div style={{ borderTop: `0.5px solid ${T.border}` }}>
+              <SoccerPitch
+                homePlayers={homePlayers}
+                awayPlayers={awayPlayers}
+                onFormationChange={(home, away) => { setHomeFormation(home); setAwayFormation(away) }}
+              />
+            </div>
+
+            {/* Stats */}
+            <WinProbability result={result} homeTeam={homeTeamName} awayTeam={awayTeamName} isMobile />
+
+            {/* AI Coach */}
+            <AnimatePresence>
+              {(insight || aiLoading) && (
+                <motion.div
+                  key="aicoach-mobile"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Divider style={{ margin: "0 0 16px" }} />
+                  <AICoach insight={insight} loading={aiLoading} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
         ) : (
+          /* ── Desktop dashboard ── */
           <motion.div
             key="home"
             initial={{ opacity: 0 }}

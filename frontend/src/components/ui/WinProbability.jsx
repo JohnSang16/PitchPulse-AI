@@ -70,7 +70,8 @@ function PlainStat({ label, value }) {
   )
 }
 
-function StatDivider() {
+function StatDivider({ isMobile }) {
+  if (isMobile) return null
   return (
     <div style={{
       width: "0.5px", background: "#141210",
@@ -79,30 +80,32 @@ function StatDivider() {
   )
 }
 
-export default function WinProbability({ result, homeTeam, awayTeam }) {
+export default function WinProbability({ result, homeTeam, awayTeam, isMobile = false }) {
   const max = result ? Math.max(result.home_win_pct, result.draw_pct, result.away_win_pct) : null
 
   return (
     <div style={{
       borderTop: "0.5px solid #1e1a12",
-      padding: "20px 28px",
+      padding: isMobile ? "16px" : "20px 28px",
       background: "#080808",
-      display: "flex",
+      display: isMobile ? "grid" : "flex",
+      gridTemplateColumns: isMobile ? "1fr 1fr 1fr" : undefined,
+      gap: isMobile ? "16px 0" : undefined,
       alignItems: "flex-start",
       flexShrink: 0,
     }}>
       {result ? (
         <>
           <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} primary={result.home_win_pct === max} />
-          <StatDivider />
+          <StatDivider isMobile={isMobile} />
           <PctStat label="Draw" value={result.draw_pct} primary={result.draw_pct === max} />
-          <StatDivider />
+          <StatDivider isMobile={isMobile} />
           <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} primary={result.away_win_pct === max} />
-          <StatDivider />
+          <StatDivider isMobile={isMobile} />
           <PlainStat label="Home xG" value={result.home_expected_goals} />
-          <StatDivider />
+          <StatDivider isMobile={isMobile} />
           <PlainStat label="Away xG" value={result.away_expected_goals} />
-          <StatDivider />
+          <StatDivider isMobile={isMobile} />
           <PlainStat label="Simulations" value={result.simulations?.toLocaleString()} />
         </>
       ) : (
