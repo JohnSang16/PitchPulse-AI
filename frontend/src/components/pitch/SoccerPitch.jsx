@@ -94,7 +94,7 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
       </div>
 
       {/* Pitch */}
-      <svg viewBox="-15 -12 630 464" style={{ width: "100%", display: "block", maxHeight: "58vh" }}>
+      <svg viewBox="-15 -12 630 464" style={{ width: "100%", display: "block", maxHeight: "78vh" }}>
         {/* Pitch surface */}
         <rect x="0" y="0" width="600" height="440" fill="#0a1a0a" />
 
