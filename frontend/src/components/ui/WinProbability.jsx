@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 
 const MONO = "'DM Mono', 'Courier New', monospace"
 
@@ -22,13 +23,18 @@ function useCountUp(target, duration = 900) {
 function PctStat({ label, value, primary }) {
   const count = useCountUp(value)
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <span style={{
-        fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em",
-        textTransform: "uppercase", color: "#8a7a52",
-      }}>
+    <motion.div
+      whileHover={{ y: -1 }}
+      transition={{ duration: 0.12 }}
+      style={{ display: "flex", flexDirection: "column", gap: "8px", cursor: "default" }}
+    >
+      <motion.span
+        whileHover={{ color: "#c9a84c" }}
+        transition={{ duration: 0.15 }}
+        style={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8a7a52" }}
+      >
         {label}
-      </span>
+      </motion.span>
       <span style={{
         fontFamily: MONO, fontSize: "32px", lineHeight: 1,
         color: primary ? "#c9a84c" : "#8a7a52",
@@ -36,26 +42,31 @@ function PctStat({ label, value, primary }) {
       }}>
         {Math.round(count)}%
       </span>
-    </div>
+    </motion.div>
   )
 }
 
 function PlainStat({ label, value }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <span style={{
-        fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em",
-        textTransform: "uppercase", color: "#8a7a52",
-      }}>
+    <motion.div
+      whileHover={{ y: -1 }}
+      transition={{ duration: 0.12 }}
+      style={{ display: "flex", flexDirection: "column", gap: "8px", cursor: "default" }}
+    >
+      <motion.span
+        whileHover={{ color: "#c9a84c" }}
+        transition={{ duration: 0.15 }}
+        style={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#8a7a52" }}
+      >
         {label}
-      </span>
+      </motion.span>
       <span style={{
         fontFamily: MONO, fontSize: "32px", lineHeight: 1,
         color: "#8a7a52", fontVariantNumeric: "tabular-nums",
       }}>
         {value ?? "—"}
       </span>
-    </div>
+    </motion.div>
   )
 }
 

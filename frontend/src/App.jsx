@@ -11,6 +11,7 @@ import SoccerPitch from "./components/pitch/SoccerPitch"
 const T = {
   bgBase:       "#080808",
   bgSurface:    "#0d0d0d",
+  bgRaised:     "#111111",
   border:       "#1e1a12",
   borderDim:    "#141210",
   gold:         "#c9a84c",
@@ -25,16 +26,20 @@ const T = {
 }
 
 // ── Flat card ─────────────────────────────────────────────────────────────────
-function FlatCard({ children, style = {} }) {
+function FlatCard({ children, style = {}, hoverable = false }) {
   return (
-    <div style={{
-      background: T.bgSurface,
-      border: `0.5px solid ${T.border}`,
-      borderRadius: "2px",
-      ...style,
-    }}>
+    <motion.div
+      whileHover={hoverable ? { borderColor: "#8a7a52", background: T.bgRaised, y: -2 } : {}}
+      transition={{ duration: 0.15 }}
+      style={{
+        background: T.bgSurface,
+        border: `0.5px solid ${T.border}`,
+        borderRadius: "2px",
+        ...style,
+      }}
+    >
       {children}
-    </div>
+    </motion.div>
   )
 }
 
@@ -102,7 +107,7 @@ function AboutPage() {
       {/* Features grid */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
         {features.map(item => (
-          <FlatCard key={item.title} style={{ padding: "18px 20px" }}>
+          <FlatCard key={item.title} hoverable style={{ padding: "18px 20px" }}>
             <p style={{ fontFamily: T.MONO, fontSize: "11px", fontWeight: "400", letterSpacing: "0.14em", textTransform: "uppercase", color: T.gold, margin: "0 0 8px 0" }}>
               {item.title}
             </p>
@@ -122,12 +127,15 @@ function AboutPage() {
 
       <FlatCard>
         {techStack.map((item, i) => (
-          <div
+          <motion.div
             key={item.label}
+            whileHover={{ background: T.bgRaised }}
+            transition={{ duration: 0.15 }}
             style={{
               display: "flex", gap: "20px", padding: "16px 22px",
               borderBottom: i < techStack.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
               alignItems: "flex-start",
+              cursor: "default",
             }}
           >
             <div style={{ width: "80px", flexShrink: 0, paddingTop: "2px" }}>
@@ -143,7 +151,7 @@ function AboutPage() {
                 {item.desc}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </FlatCard>
 
@@ -156,16 +164,23 @@ function AboutPage() {
 
       <FlatCard>
         {infra.map(({ q, a }, i) => (
-          <div
+          <motion.div
             key={q}
+            whileHover={{ background: T.bgRaised }}
+            transition={{ duration: 0.15 }}
             style={{
               padding: "16px 22px",
               borderBottom: i < infra.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
+              cursor: "default",
             }}
           >
-            <p style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, margin: "0 0 6px 0" }}>{q}</p>
+            <motion.p
+              whileHover={{ color: "#c9a84c" }}
+              transition={{ duration: 0.15 }}
+              style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, margin: "0 0 6px 0" }}
+            >{q}</motion.p>
             <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>{a}</p>
-          </div>
+          </motion.div>
         ))}
       </FlatCard>
     </div>
@@ -240,19 +255,21 @@ export default function App() {
 
         <div style={{ display: "flex", gap: "24px" }}>
           {["home", "about"].map(p => (
-            <button
+            <motion.button
               key={p}
               onClick={() => setPage(p)}
+              whileHover={{ color: T.gold, y: -1 }}
+              whileTap={{ y: 0 }}
+              transition={{ duration: 0.12 }}
               style={{
                 background: "none", border: "none", padding: 0, cursor: "pointer",
                 fontFamily: T.MONO, fontSize: "12px", fontWeight: "400",
                 letterSpacing: "0.16em", textTransform: "uppercase",
                 color: page === p ? T.gold : T.goldGhost,
-                transition: "color 0.15s",
               }}
             >
               {p === "home" ? "Dashboard" : "About"}
-            </button>
+            </motion.button>
           ))}
         </div>
       </nav>

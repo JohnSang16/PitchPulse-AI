@@ -78,8 +78,10 @@ export default function AICoach({ insight, loading }) {
               const body = section.replace(/^\*?\*?\d+[\.\)]\*?\*?\s*/m, "").trim()
 
               return (
-                <div
+                <motion.div
                   key={i}
+                  whileHover={{ background: "#111111", borderColor: "#8a7a52" }}
+                  transition={{ duration: 0.15 }}
                   style={{
                     background: "#0d0d0d",
                     border: "0.5px solid #1e1a12",
@@ -109,7 +111,7 @@ export default function AICoach({ insight, loading }) {
                       }}
                     />
                   </div>
-                </div>
+                </motion.div>
               )
             })}
           </div>
