@@ -72,17 +72,19 @@ export default function FifaCard({ x, y, player, isAway = false }) {
       <line x1={cx + 4} y1={cy + 44} x2={cx + W - 4} y2={cy + 44}
         stroke={isAway ? "rgba(201,168,76,0.1)" : "rgba(201,168,76,0.15)"} strokeWidth="0.5" />
 
-      {/* ATK */}
-      <text x={cx + 6} y={cy + 57} textAnchor="start"
-        fill={txtDim} fontSize="6" fontFamily={MONO}>
-        <tspan>ATK</tspan><tspan dx="5">{atk}</tspan>
-      </text>
+      {/* ATK label */}
+      <text x={cx + 5} y={cy + 57} textAnchor="start"
+        fill={txtDim} fontSize="5" fontFamily={MONO}>ATK</text>
+      {/* ATK value */}
+      <text x={cx + 17} y={cy + 57} textAnchor="start"
+        fill={txtDim} fontSize="5" fontFamily={MONO}>{atk}</text>
 
-      {/* DEF */}
+      {/* DEF label */}
+      <text x={cx + W / 2 + 2} y={cy + 57} textAnchor="start"
+        fill={txtDim} fontSize="5" fontFamily={MONO}>DEF</text>
+      {/* DEF value */}
       <text x={cx + W - 4} y={cy + 57} textAnchor="end"
-        fill={txtDim} fontSize="6" fontFamily={MONO}>
-        <tspan>DEF</tspan><tspan dx="5">{def}</tspan>
-      </text>
+        fill={txtDim} fontSize="5" fontFamily={MONO}>{def}</text>
     </g>
   )
 }
