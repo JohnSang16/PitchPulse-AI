@@ -17,9 +17,9 @@ export default function TeamSelector({ label, onSelect }) {
     <div>
       <label style={{
         display: "block",
-        fontFamily: MONO, fontSize: "8px", fontWeight: "400",
-        letterSpacing: "0.18em", textTransform: "uppercase",
-        color: "#3d3520", marginBottom: "6px",
+        fontFamily: MONO, fontSize: "10px", fontWeight: "400",
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        color: "#3d3520", marginBottom: "8px",
       }}>
         {label}
       </label>
@@ -34,8 +34,8 @@ export default function TeamSelector({ label, onSelect }) {
             color: "#8a7a52",
             border: `0.5px solid ${focused ? "#c9a84c33" : "#1e1a12"}`,
             borderRadius: "3px",
-            padding: "9px 28px 9px 12px",
-            fontSize: "10px",
+            padding: "10px 28px 10px 12px",
+            fontSize: "12px",
             fontFamily: MONO,
             letterSpacing: "0.06em",
             cursor: "pointer",

@@ -42,9 +42,9 @@ function FlatCard({ children, style = {} }) {
 function Eyebrow({ children }) {
   return (
     <p style={{
-      fontFamily: T.MONO, fontSize: "8px", fontWeight: "400",
-      letterSpacing: "0.25em", textTransform: "uppercase",
-      color: T.textMuted, margin: "0 0 14px 0",
+      fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
+      letterSpacing: "0.18em", textTransform: "uppercase",
+      color: T.textSecondary, margin: "0 0 14px 0",
     }}>
       {children}
     </p>
@@ -87,26 +87,26 @@ function AboutPage() {
   ]
 
   return (
-    <div style={{ width: "100%", maxWidth: "680px", display: "flex", flexDirection: "column", gap: "12px" }}>
+    <div style={{ width: "100%", maxWidth: "780px", display: "flex", flexDirection: "column", gap: "16px" }}>
       {/* Hero */}
       <div style={{ paddingBottom: "4px" }}>
-        <h2 style={{ fontFamily: T.SERIF, fontSize: "24px", fontWeight: "300", letterSpacing: "0.04em", color: T.textPrimary, margin: "0 0 10px 0" }}>
+        <h2 style={{ fontFamily: T.SERIF, fontSize: "28px", fontWeight: "300", letterSpacing: "0.04em", color: T.textPrimary, margin: "0 0 12px 0" }}>
           About PitchPulse AI
         </h2>
-        <p style={{ fontFamily: T.MONO, fontSize: "12px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>
+        <p style={{ fontFamily: T.MONO, fontSize: "14px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>
           A modern football analytics platform that simulates Premier League matches using statistical modelling and generative AI.
           Every percentage is backed by real squad data and thousands of simulated 90-minute matches.
         </p>
       </div>
 
       {/* Features grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
         {features.map(item => (
-          <FlatCard key={item.title} style={{ padding: "14px 16px" }}>
-            <p style={{ fontFamily: T.MONO, fontSize: "9px", fontWeight: "400", letterSpacing: "0.16em", textTransform: "uppercase", color: T.gold, margin: "0 0 6px 0" }}>
+          <FlatCard key={item.title} style={{ padding: "18px 20px" }}>
+            <p style={{ fontFamily: T.MONO, fontSize: "11px", fontWeight: "400", letterSpacing: "0.14em", textTransform: "uppercase", color: T.gold, margin: "0 0 8px 0" }}>
               {item.title}
             </p>
-            <p style={{ fontFamily: T.MONO, fontSize: "11px", color: T.textSecondary, lineHeight: 1.7, margin: 0 }}>
+            <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
               {item.body}
             </p>
           </FlatCard>
@@ -115,7 +115,7 @@ function AboutPage() {
 
       {/* Technical deep dive */}
       <div style={{ marginTop: "8px" }}>
-        <p style={{ fontFamily: T.MONO, fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase", color: T.textMuted, margin: "0 0 10px 0" }}>
+        <p style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.20em", textTransform: "uppercase", color: T.textSecondary, margin: "0 0 10px 0" }}>
           Technical Stack
         </p>
       </div>
@@ -125,21 +125,21 @@ function AboutPage() {
           <div
             key={item.label}
             style={{
-              display: "flex", gap: "16px", padding: "14px 20px",
+              display: "flex", gap: "20px", padding: "16px 22px",
               borderBottom: i < techStack.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
               alignItems: "flex-start",
             }}
           >
-            <div style={{ width: "70px", flexShrink: 0, paddingTop: "1px" }}>
-              <span style={{ fontFamily: T.MONO, fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase", color: T.textMuted }}>
+            <div style={{ width: "80px", flexShrink: 0, paddingTop: "2px" }}>
+              <span style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: T.textSecondary }}>
                 {item.label}
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <span style={{ fontFamily: T.MONO, fontSize: "10px", color: T.gold, display: "block", marginBottom: "5px" }}>
+              <span style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, display: "block", marginBottom: "6px" }}>
                 {item.chip}
               </span>
-              <p style={{ fontFamily: T.MONO, fontSize: "11px", color: T.textSecondary, lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
                 {item.desc}
               </p>
             </div>
@@ -149,7 +149,7 @@ function AboutPage() {
 
       {/* Cloud infrastructure */}
       <div style={{ marginTop: "4px" }}>
-        <p style={{ fontFamily: T.MONO, fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase", color: T.textMuted, margin: "0 0 10px 0" }}>
+        <p style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.20em", textTransform: "uppercase", color: T.textSecondary, margin: "0 0 10px 0" }}>
           Cloud Infrastructure
         </p>
       </div>
@@ -159,12 +159,12 @@ function AboutPage() {
           <div
             key={q}
             style={{
-              padding: "14px 20px",
+              padding: "16px 22px",
               borderBottom: i < infra.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
             }}
           >
-            <p style={{ fontFamily: T.MONO, fontSize: "10px", color: T.gold, margin: "0 0 5px 0" }}>{q}</p>
-            <p style={{ fontFamily: T.MONO, fontSize: "11px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>{a}</p>
+            <p style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, margin: "0 0 6px 0" }}>{q}</p>
+            <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>{a}</p>
           </div>
         ))}
       </FlatCard>
@@ -277,9 +277,11 @@ export default function App() {
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
             style={{
               display: "grid",
-              gridTemplateColumns: "260px 1fr",
+              gridTemplateColumns: "340px 1fr",
               height: "calc(100vh - 44px)",
+              maxHeight: "calc(100vh - 44px)",
               marginTop: "44px",
+              overflow: "hidden",
             }}
           >
             {/* ── Sidebar ── */}
@@ -306,9 +308,9 @@ export default function App() {
                   width: "100%", marginTop: "12px",
                   background: canSimulate ? T.gold : T.goldWhisper,
                   color: canSimulate ? "#080808" : T.goldGhost,
-                  fontFamily: T.MONO, fontSize: "9px", fontWeight: "400",
-                  letterSpacing: "0.22em", textTransform: "uppercase",
-                  padding: "10px 16px", border: "none", borderRadius: "2px",
+                  fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
+                  letterSpacing: "0.18em", textTransform: "uppercase",
+                  padding: "12px 16px", border: "none", borderRadius: "2px",
                   cursor: canSimulate ? "pointer" : "not-allowed",
                   transition: "background 0.15s",
                 }}
@@ -335,7 +337,7 @@ export default function App() {
 
             {/* ── Main ── */}
             <main style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
-              <div style={{ flex: 1, overflowY: "auto" }}>
+              <div style={{ flex: 1, overflow: "hidden" }}>
                 <SoccerPitch
                   homePlayers={homePlayers}
                   awayPlayers={awayPlayers}

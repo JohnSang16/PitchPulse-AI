@@ -19,15 +19,21 @@ function useCountUp(target, duration = 900) {
   return value
 }
 
-// Each stat that needs count-up gets its own component so hooks are called at top level
 function PctStat({ label, value, primary }) {
   const count = useCountUp(value)
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-      <span style={{ fontFamily: MONO, fontSize: "7px", letterSpacing: "0.20em", textTransform: "uppercase", color: "#2e2814" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <span style={{
+        fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em",
+        textTransform: "uppercase", color: "#8a7a52",
+      }}>
         {label}
       </span>
-      <span style={{ fontFamily: MONO, fontSize: "14px", color: primary ? "#c9a84c" : "#8a7a52", fontVariantNumeric: "tabular-nums" }}>
+      <span style={{
+        fontFamily: MONO, fontSize: "32px", lineHeight: 1,
+        color: primary ? "#c9a84c" : "#8a7a52",
+        fontVariantNumeric: "tabular-nums",
+      }}>
         {Math.round(count)}%
       </span>
     </div>
@@ -36,11 +42,17 @@ function PctStat({ label, value, primary }) {
 
 function PlainStat({ label, value }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-      <span style={{ fontFamily: MONO, fontSize: "7px", letterSpacing: "0.20em", textTransform: "uppercase", color: "#2e2814" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <span style={{
+        fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em",
+        textTransform: "uppercase", color: "#8a7a52",
+      }}>
         {label}
       </span>
-      <span style={{ fontFamily: MONO, fontSize: "14px", color: "#8a7a52", fontVariantNumeric: "tabular-nums" }}>
+      <span style={{
+        fontFamily: MONO, fontSize: "32px", lineHeight: 1,
+        color: "#8a7a52", fontVariantNumeric: "tabular-nums",
+      }}>
         {value ?? "—"}
       </span>
     </div>
@@ -49,7 +61,10 @@ function PlainStat({ label, value }) {
 
 function StatDivider() {
   return (
-    <div style={{ width: "0.5px", background: "#141210", margin: "0 20px", alignSelf: "stretch", flexShrink: 0 }} />
+    <div style={{
+      width: "0.5px", background: "#141210",
+      margin: "0 28px", alignSelf: "stretch", flexShrink: 0,
+    }} />
   )
 }
 
@@ -59,7 +74,7 @@ export default function WinProbability({ result, homeTeam, awayTeam }) {
   return (
     <div style={{
       borderTop: "0.5px solid #1e1a12",
-      padding: "14px 24px",
+      padding: "20px 28px",
       background: "#080808",
       display: "flex",
       alignItems: "flex-start",

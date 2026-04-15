@@ -10,8 +10,8 @@ const SELECT_STYLE = {
   color: "#8a7a52",
   border: "0.5px solid #1e1a12",
   borderRadius: "3px",
-  padding: "9px 28px 9px 12px",
-  fontSize: "10px",
+  padding: "10px 28px 10px 12px",
+  fontSize: "13px",
   fontFamily: MONO,
   letterSpacing: "0.06em",
   cursor: "pointer",
@@ -25,9 +25,9 @@ function FormationSelect({ label, value, onChange }) {
   return (
     <div style={{ flex: 1 }}>
       <label style={{
-        display: "block", fontFamily: MONO, fontSize: "8px",
-        letterSpacing: "0.18em", textTransform: "uppercase",
-        color: "#3d3520", marginBottom: "6px",
+        display: "block", fontFamily: MONO, fontSize: "11px",
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        color: "#8a7a52", marginBottom: "8px",
       }}>
         {label}
       </label>
@@ -94,7 +94,7 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
       </div>
 
       {/* Pitch */}
-      <svg viewBox="0 0 600 440" style={{ width: "100%", display: "block" }}>
+      <svg viewBox="-15 -12 630 464" style={{ width: "100%", display: "block" }}>
         {/* Pitch surface */}
         <rect x="0" y="0" width="600" height="440" fill="#0a1a0a" />
 
