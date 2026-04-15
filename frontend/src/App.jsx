@@ -29,7 +29,7 @@ const T = {
 function FlatCard({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "#8a7a52", background: T.bgRaised, y: -2 } : {}}
+      whileHover={hoverable ? { borderColor: "#8a7a52", background: T.bgRaised, y: -2, scale: 1.02 } : {}}
       transition={{ duration: 0.15 }}
       style={{
         background: T.bgSurface,
