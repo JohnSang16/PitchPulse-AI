@@ -230,7 +230,7 @@ export default function App() {
       {/* ── Navbar ── */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
-        height: "44px", display: "flex", alignItems: "center",
+        height: "54px", display: "flex", alignItems: "center",
         justifyContent: "space-between", padding: "0 24px",
         background: T.bgBase, borderBottom: `0.5px solid ${T.border}`,
       }}>
@@ -265,7 +265,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            style={{ marginTop: "44px", height: "calc(100vh - 44px)", overflowY: "auto", padding: "40px 24px 60px", display: "flex", justifyContent: "center" }}
+            style={{ marginTop: "54px", height: "calc(100vh - 54px)", overflowY: "auto", padding: "40px 24px 60px", display: "flex", justifyContent: "center" }}
           >
             <AboutPage />
           </motion.div>
@@ -278,9 +278,9 @@ export default function App() {
             style={{
               display: "grid",
               gridTemplateColumns: "340px 1fr",
-              height: "calc(100vh - 44px)",
-              maxHeight: "calc(100vh - 44px)",
-              marginTop: "44px",
+              height: "calc(100vh - 54px)",
+              maxHeight: "calc(100vh - 54px)",
+              marginTop: "54px",
               overflow: "hidden",
             }}
           >
