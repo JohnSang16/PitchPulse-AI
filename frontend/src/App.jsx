@@ -225,7 +225,7 @@ export default function App() {
   const canSimulate = homeTeamId && awayTeamId && !loading
 
   return (
-    <div style={{ minHeight: "100vh", background: T.bgBase, fontFamily: T.MONO }}>
+    <div style={{ height: "100vh", overflow: "hidden", background: T.bgBase, fontFamily: T.MONO }}>
 
       {/* ── Navbar ── */}
       <nav style={{
@@ -265,7 +265,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            style={{ marginTop: "44px", padding: "40px 24px 60px", display: "flex", justifyContent: "center" }}
+            style={{ marginTop: "44px", height: "calc(100vh - 44px)", overflowY: "auto", padding: "40px 24px 60px", display: "flex", justifyContent: "center" }}
           >
             <AboutPage />
           </motion.div>
