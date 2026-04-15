@@ -29,11 +29,13 @@ const T = {
 function FlatCard({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "#8a7a52", background: T.bgRaised, y: -2, scale: 1.02 } : {}}
-      transition={{ duration: 0.15 }}
+      whileHover={hoverable ? { borderColor: "#c9a84c", backgroundColor: T.bgRaised, y: -3, scale: 1.025 } : {}}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
-        background: T.bgSurface,
-        border: `0.5px solid ${T.border}`,
+        backgroundColor: T.bgSurface,
+        borderWidth: "0.5px",
+        borderStyle: "solid",
+        borderColor: T.border,
         borderRadius: "2px",
         ...style,
       }}
@@ -129,7 +131,7 @@ function AboutPage() {
         {techStack.map((item, i) => (
           <motion.div
             key={item.label}
-            whileHover={{ background: T.bgRaised }}
+            whileHover={{ backgroundColor: T.bgRaised }}
             transition={{ duration: 0.15 }}
             style={{
               display: "flex", gap: "20px", padding: "16px 22px",
@@ -166,7 +168,7 @@ function AboutPage() {
         {infra.map(({ q, a }, i) => (
           <motion.div
             key={q}
-            whileHover={{ background: T.bgRaised }}
+            whileHover={{ backgroundColor: T.bgRaised }}
             transition={{ duration: 0.15 }}
             style={{
               padding: "16px 22px",

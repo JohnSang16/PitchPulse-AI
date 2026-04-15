@@ -24,8 +24,8 @@ function PctStat({ label, value, primary }) {
   const count = useCountUp(value)
   return (
     <motion.div
-      whileHover={{ y: -1 }}
-      transition={{ duration: 0.12 }}
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       style={{ display: "flex", flexDirection: "column", gap: "8px", cursor: "default" }}
     >
       <motion.span
@@ -49,8 +49,8 @@ function PctStat({ label, value, primary }) {
 function PlainStat({ label, value }) {
   return (
     <motion.div
-      whileHover={{ y: -1 }}
-      transition={{ duration: 0.12 }}
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       style={{ display: "flex", flexDirection: "column", gap: "8px", cursor: "default" }}
     >
       <motion.span

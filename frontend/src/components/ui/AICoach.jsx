@@ -80,11 +80,13 @@ export default function AICoach({ insight, loading }) {
               return (
                 <motion.div
                   key={i}
-                  whileHover={{ background: "#111111", borderColor: "#8a7a52" }}
-                  transition={{ duration: 0.15 }}
+                  whileHover={{ backgroundColor: "#111111", borderColor: "#8a7a52" }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{
-                    background: "#0d0d0d",
-                    border: "0.5px solid #1e1a12",
+                    backgroundColor: "#0d0d0d",
+                    borderWidth: "0.5px",
+                    borderStyle: "solid",
+                    borderColor: "#1e1a12",
                     borderLeft: "2px solid #c9a84c",
                     borderRadius: "0 2px 2px 0",
                     overflow: "hidden",
