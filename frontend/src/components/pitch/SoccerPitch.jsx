@@ -137,6 +137,12 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
         <circle cx="300" cy="220" r="2" fill="#1a2e1a" />
 
 
+        {/* Corner kick boxes */}
+        <rect x="20"  y="20"  width="10" height="10" fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
+        <rect x="570" y="20"  width="10" height="10" fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
+        <rect x="20"  y="410" width="10" height="10" fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
+        <rect x="570" y="410" width="10" height="10" fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
+
         {/* Left penalty area */}
         <rect x="20" y="140" width="100" height="160" fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
         <rect x="20" y="180" width="40"  height="80"  fill="none" stroke="#1a2e1a" strokeWidth="0.5" />
