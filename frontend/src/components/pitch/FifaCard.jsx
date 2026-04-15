@@ -6,7 +6,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
   const [hovered, setHovered] = useState(false)
 
   const W = 54
-  const H = 66
+  const H = 76
   const cx = x - W / 2
   const cy = y - H / 2
 
@@ -63,27 +63,27 @@ export default function FifaCard({ x, y, player, isAway = false }) {
       </text>
 
       {/* Player name */}
-      <text x={cx + W / 2} y={cy + 38} textAnchor="middle"
+      <text x={cx + W / 2} y={cy + 42} textAnchor="middle"
         fill={txtMain} fontSize="8.5" fontFamily={MONO} letterSpacing="0.04em">
         {displayName}
       </text>
 
       {/* Bottom rule */}
-      <line x1={cx + 4} y1={cy + 44} x2={cx + W - 4} y2={cy + 44}
+      <line x1={cx + 4} y1={cy + 50} x2={cx + W - 4} y2={cy + 50}
         stroke={isAway ? "rgba(201,168,76,0.1)" : "rgba(201,168,76,0.15)"} strokeWidth="0.5" />
 
       {/* ATK label */}
-      <text x={cx + 5} y={cy + 57} textAnchor="start"
+      <text x={cx + 5} y={cy + 64} textAnchor="start"
         fill={txtDim} fontSize="5" fontFamily={MONO}>ATK</text>
       {/* ATK value */}
-      <text x={cx + 17} y={cy + 57} textAnchor="start"
+      <text x={cx + 17} y={cy + 64} textAnchor="start"
         fill={txtDim} fontSize="5" fontFamily={MONO}>{atk}</text>
 
       {/* DEF label */}
-      <text x={cx + W / 2 + 2} y={cy + 57} textAnchor="start"
+      <text x={cx + W / 2 + 2} y={cy + 64} textAnchor="start"
         fill={txtDim} fontSize="5" fontFamily={MONO}>DEF</text>
       {/* DEF value */}
-      <text x={cx + W - 4} y={cy + 57} textAnchor="end"
+      <text x={cx + W - 4} y={cy + 64} textAnchor="end"
         fill={txtDim} fontSize="5" fontFamily={MONO}>{def}</text>
     </g>
   )
