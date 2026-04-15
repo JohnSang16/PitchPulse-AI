@@ -75,13 +75,13 @@ export default function FifaCard({ x, y, player, isAway = false }) {
       {/* ATK */}
       <text x={cx + 6} y={cy + 57} textAnchor="start"
         fill={txtDim} fontSize="6" fontFamily={MONO}>
-        ATK {atk}
+        <tspan>ATK</tspan><tspan dx="5">{atk}</tspan>
       </text>
 
       {/* DEF */}
       <text x={cx + W - 4} y={cy + 57} textAnchor="end"
         fill={txtDim} fontSize="6" fontFamily={MONO}>
-        DEF {def}
+        <tspan>DEF</tspan><tspan dx="5">{def}</tspan>
       </text>
     </g>
   )
