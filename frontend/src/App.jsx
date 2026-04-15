@@ -234,7 +234,7 @@ export default function App() {
         justifyContent: "space-between", padding: "0 24px",
         background: T.bgBase, borderBottom: `0.5px solid ${T.border}`,
       }}>
-        <span style={{ fontFamily: T.SERIF, fontSize: "13px", fontWeight: "400", letterSpacing: "0.06em", color: T.gold }}>
+        <span style={{ fontFamily: T.SERIF, fontSize: "18px", fontWeight: "400", letterSpacing: "0.06em", color: T.gold }}>
           PitchPulse AI
         </span>
 
@@ -245,8 +245,8 @@ export default function App() {
               onClick={() => setPage(p)}
               style={{
                 background: "none", border: "none", padding: 0, cursor: "pointer",
-                fontFamily: T.MONO, fontSize: "9px", fontWeight: "400",
-                letterSpacing: "0.18em", textTransform: "uppercase",
+                fontFamily: T.MONO, fontSize: "12px", fontWeight: "400",
+                letterSpacing: "0.16em", textTransform: "uppercase",
                 color: page === p ? T.gold : T.goldGhost,
                 transition: "color 0.15s",
               }}
