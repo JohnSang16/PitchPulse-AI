@@ -4,7 +4,7 @@ import { formations } from "./formations"
 
 function PositionNode({ x, y, name, isAway }) {
   const [hovered, setHovered] = useState(false)
-  const scale = hovered ? 1.35 : 1
+  const scale = hovered ? 1.18 : 1
   return (
     <g
       style={{

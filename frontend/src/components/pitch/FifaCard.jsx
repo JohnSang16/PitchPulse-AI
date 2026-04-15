@@ -21,7 +21,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
   const border = isAway ? "rgba(201,168,76,0.55)" : "rgba(201,168,76,0.8)"
   const text   = isAway ? "rgba(201,168,76,0.85)" : "#080808"
 
-  const scale = hovered ? 1.3 : 1
+  const scale = hovered ? 1.12 : 1
 
   return (
     <g
