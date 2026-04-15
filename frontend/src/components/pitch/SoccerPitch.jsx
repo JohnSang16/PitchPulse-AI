@@ -2,6 +2,37 @@ import { useState } from "react"
 import FifaCard from "./FifaCard"
 import { formations } from "./formations"
 
+function PositionNode({ x, y, name, isAway }) {
+  const [hovered, setHovered] = useState(false)
+  const scale = hovered ? 1.35 : 1
+  return (
+    <g
+      style={{
+        cursor: "pointer",
+        transform: `scale(${scale})`,
+        transformOrigin: `${x}px ${y}px`,
+        transition: "transform 0.18s ease-out",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {isAway ? (
+        <circle cx={x} cy={y} r="7" fill="#1e1608"
+          stroke={hovered ? "rgba(201,168,76,0.9)" : "rgba(201,168,76,0.55)"}
+          strokeWidth={hovered ? "1.5" : "1"} />
+      ) : (
+        <circle cx={x} cy={y} r="7"
+          fill={hovered ? "#d4b660" : "#c9a84c"} />
+      )}
+      <text x={x} y={y + 2} textAnchor="middle" dominantBaseline="middle"
+        fill={isAway ? "rgba(201,168,76,0.85)" : "#080808"}
+        fontSize="6" fontFamily={MONO} style={{ pointerEvents: "none" }}>
+        {name}
+      </text>
+    </g>
+  )
+}
+
 const MONO = "'DM Mono', 'Courier New', monospace"
 
 const SELECT_STYLE = {
@@ -129,32 +160,16 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
 
         {/* Home players */}
         {homeSlots.map((slot, i) =>
-          slot.player ? (
-            <FifaCard key={i} x={slot.x} y={slot.y} player={slot.player} isAway={false} />
-          ) : (
-            <g key={i}>
-              <circle cx={slot.x} cy={slot.y} r="7" fill="#c9a84c" />
-              <text x={slot.x} y={slot.y + 2} textAnchor="middle" dominantBaseline="middle"
-                fill="#080808" fontSize="6" fontFamily={MONO} style={{ pointerEvents: "none" }}>
-                {slot.name}
-              </text>
-            </g>
-          )
+          slot.player
+            ? <FifaCard key={i} x={slot.x} y={slot.y} player={slot.player} isAway={false} />
+            : <PositionNode key={i} x={slot.x} y={slot.y} name={slot.name} isAway={false} />
         )}
 
         {/* Away players */}
         {awaySlots.map((slot, i) =>
-          slot.player ? (
-            <FifaCard key={i} x={slot.x} y={slot.y} player={slot.player} isAway={true} />
-          ) : (
-            <g key={i}>
-              <circle cx={slot.x} cy={slot.y} r="7" fill="#1e1608" stroke="rgba(201,168,76,0.55)" strokeWidth="1" />
-              <text x={slot.x} y={slot.y + 2} textAnchor="middle" dominantBaseline="middle"
-                fill="rgba(201,168,76,0.75)" fontSize="6" fontFamily={MONO} style={{ pointerEvents: "none" }}>
-                {slot.name}
-              </text>
-            </g>
-          )
+          slot.player
+            ? <FifaCard key={i} x={slot.x} y={slot.y} player={slot.player} isAway={true} />
+            : <PositionNode key={i} x={slot.x} y={slot.y} name={slot.name} isAway={true} />
         )}
       </svg>
     </div>
