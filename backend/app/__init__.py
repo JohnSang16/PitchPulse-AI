@@ -8,7 +8,11 @@ def create_app(test_config=None):
     app.config.from_object(Config)
     if test_config:
         app.config.update(test_config)
-    CORS(app)
+    CORS(app, origins=[
+        "https://pitch-pulse-ai.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ], supports_credentials=False)
     db.init_app(app)
     migrate.init_app(app, db)
 
