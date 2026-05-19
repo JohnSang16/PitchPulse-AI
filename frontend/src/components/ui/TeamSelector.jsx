@@ -25,7 +25,7 @@ export default function TeamSelector({ label, onSelect }) {
       </label>
       <div style={{ position: "relative" }}>
         <select
-          onChange={e => onSelect(Number(e.target.value))}
+          onChange={e => e.target.value && onSelect(Number(e.target.value))}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={{
