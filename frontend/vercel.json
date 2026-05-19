@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "http://pitchpulse-backend-env.eba-yhtgfwu8.us-east-1.elasticbeanstalk.com/api/:path*"
-    }
-  ]
-}
