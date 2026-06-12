@@ -37,7 +37,7 @@ Four data layers work together for every prediction:
 | Frontend | React + Vite, Framer Motion, Vercel Analytics |
 | Backend | Python 3 / Flask, Gunicorn |
 | Database | PostgreSQL on AWS RDS |
-| Simulation | NumPy Poisson Monte Carlo (1,000 iterations) |
+| Simulation | NumPy Poisson Monte Carlo (10,000 iterations) |
 | AI | Google Gemini 2.5 Flash |
 | Backend hosting | AWS Elastic Beanstalk (Docker) |
 | Frontend hosting | Vercel |
@@ -64,7 +64,7 @@ POST /api/coach
   → load home_team, away_team from PostgreSQL
   → compute home_xG = home_attack * (1 / away_defense) * 1.1
   → compute away_xG = away_attack * (1 / home_defense)
-  → np.random.poisson(home_xG, 1000), np.random.poisson(away_xG, 1000)
+  → np.random.poisson(home_xG, 10000), np.random.poisson(away_xG, 10000)
   → count outcomes, compute percentages
   → send formation + simulation result to Gemini 2.5 Flash
   → return { home_win_pct, draw_pct, away_win_pct, home_xG, away_xG, insight }

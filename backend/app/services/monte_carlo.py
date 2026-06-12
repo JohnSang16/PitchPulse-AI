@@ -1,6 +1,6 @@
 import numpy as np
 
-def run_simulation(home_attack, home_defense, away_attack, away_defense, n=1000):
+def run_simulation(home_attack, home_defense, away_attack, away_defense, n=10000):
     """
     Simulates n matches between two teams using Poisson distribution.
     

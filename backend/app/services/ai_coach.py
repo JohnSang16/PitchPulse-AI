@@ -12,7 +12,7 @@ def get_coaching_insight(home_team, away_team, home_formation, away_formation, s
     - Home Team: {home_team} playing {home_formation}
     - Away Team: {away_team} playing {away_formation}
     
-    Simulation Results (based on 1000 Monte Carlo simulations):
+    Simulation Results (based on 10,000 Monte Carlo simulations):
     - {home_team} Win Probability: {simulation_result['home_win_pct']}%
     - Draw Probability: {simulation_result['draw_pct']}%
     - {away_team} Win Probability: {simulation_result['away_win_pct']}%
