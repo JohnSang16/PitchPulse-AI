@@ -4,7 +4,7 @@ import client from "../../api/client"
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-export default function TeamSelector({ label, accent = "#a3e635", onSelect }) {
+export default function TeamSelector({ label, accent = "#a8c97f", onSelect }) {
   const [teams, setTeams] = useState([])
   const [focused, setFocused] = useState(false)
   const [selected, setSelected] = useState(false)

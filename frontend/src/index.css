@@ -6,12 +6,12 @@
   --bg-raised:      #121a2b;
   --border-dim:     #131b2b;
   --border-default: #1b2436;
-  --border-accent:  rgba(163, 230, 53, 0.35);
-  --lime:           #a3e635;
-  --lime-bright:    #bef264;
-  --lime-dim:       rgba(163, 230, 53, 0.55);
-  --cyan:           #38bdf8;
-  --cyan-dim:       rgba(56, 189, 248, 0.55);
+  --border-accent:  rgba(168, 201, 127, 0.35);
+  --lime:           #a8c97f;
+  --lime-bright:    #bcd897;
+  --lime-dim:       rgba(168, 201, 127, 0.55);
+  --cyan:           #7eb6d9;
+  --cyan-dim:       rgba(126, 182, 217, 0.55);
   --text-primary:   #edf2fa;
   --text-secondary: #94a3bd;
   --text-muted:     #566179;
@@ -34,7 +34,7 @@ html, body, #root {
 }
 
 ::selection {
-  background: rgba(163, 230, 53, 0.25);
+  background: rgba(168, 201, 127, 0.20);
   color: var(--text-primary);
 }
 

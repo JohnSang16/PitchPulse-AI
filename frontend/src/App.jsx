@@ -14,10 +14,10 @@ const T = {
   bgRaised:     "#121a2b",
   border:       "#1b2436",
   borderDim:    "#131b2b",
-  lime:         "#a3e635",
-  limeBright:   "#bef264",
-  limeDim:      "rgba(163,230,53,0.55)",
-  cyan:         "#38bdf8",
+  lime:         "#a8c97f",
+  limeBright:   "#bcd897",
+  limeDim:      "rgba(168,201,127,0.55)",
+  cyan:         "#7eb6d9",
   textPrimary:  "#edf2fa",
   textSecondary:"#94a3bd",
   textMuted:    "#566179",
@@ -30,7 +30,7 @@ const T = {
 function Card({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "rgba(163,230,53,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
+      whileHover={hoverable ? { borderColor: "rgba(168,201,127,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         backgroundColor: T.bgSurface,
@@ -197,7 +197,7 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
     <motion.button
       onClick={onClick}
       disabled={disabled}
-      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 28px rgba(163,230,53,0.35)" } : {}}
+      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 24px rgba(168,201,127,0.22)" } : {}}
       whileTap={!disabled ? { scale: 0.985 } : {}}
       transition={{ duration: 0.15 }}
       style={{
@@ -208,7 +208,7 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
         letterSpacing: "0.08em", textTransform: "uppercase",
         padding: "14px 16px", border: "none", borderRadius: "10px",
         cursor: disabled ? "not-allowed" : "pointer",
-        boxShadow: disabled ? "none" : "0 0 20px rgba(163,230,53,0.18)",
+        boxShadow: disabled ? "none" : "0 0 16px rgba(168,201,127,0.10)",
         transition: "background 0.15s",
         ...style,
       }}
@@ -224,7 +224,7 @@ function Brand({ compact = false }) {
     <span style={{ display: "inline-flex", alignItems: "center", gap: "9px" }}>
       <span style={{
         width: "9px", height: "9px", borderRadius: "50%",
-        background: T.lime, boxShadow: "0 0 12px rgba(163,230,53,0.8)",
+        background: T.lime, boxShadow: "0 0 10px rgba(168,201,127,0.45)",
         animation: "pulse-dot 2.4s ease-in-out infinite",
       }} />
       <span style={{ fontFamily: T.DISPLAY, fontSize: compact ? "16px" : "18px", fontWeight: "700", letterSpacing: "-0.01em", color: T.textPrimary }}>

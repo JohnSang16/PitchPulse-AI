@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const LIME  = "#a3e635"
-const CYAN  = "#38bdf8"
+const LIME  = "#a8c97f"
+const CYAN  = "#7eb6d9"
 const SLATE = "#475569"
 
 function useCountUp(target, duration = 900) {
@@ -46,7 +46,7 @@ function PctStat({ label, value, color, primary }) {
         fontFamily: MONO, fontSize: "30px", fontWeight: "600", lineHeight: 1,
         color: primary ? color : "#edf2fa",
         fontVariantNumeric: "tabular-nums",
-        textShadow: primary ? `0 0 24px ${color}55` : "none",
+        textShadow: primary ? `0 0 20px ${color}33` : "none",
       }}>
         {Math.round(count)}<span style={{ fontSize: "16px", color: "#566179" }}>%</span>
       </span>

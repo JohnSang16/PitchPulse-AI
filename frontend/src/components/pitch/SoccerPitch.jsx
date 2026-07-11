@@ -5,8 +5,8 @@ import { formations } from "./formations"
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const LIME = "#a3e635"
-const CYAN = "#38bdf8"
+const LIME = "#a8c97f"
+const CYAN = "#7eb6d9"
 const LINE = "#23402c"
 
 function PositionNode({ x, y, name, isAway }) {
@@ -26,14 +26,14 @@ function PositionNode({ x, y, name, isAway }) {
     >
       {isAway ? (
         <circle cx={x} cy={y} r="8" fill="#0b101c"
-          stroke={hovered ? CYAN : "rgba(56,189,248,0.6)"}
+          stroke={hovered ? CYAN : "rgba(126,182,217,0.6)"}
           strokeWidth={hovered ? "1.5" : "1"} />
       ) : (
         <circle cx={x} cy={y} r="8"
-          fill={hovered ? "#bef264" : LIME} />
+          fill={hovered ? "#bcd897" : LIME} />
       )}
       <text x={x} y={y + 2} textAnchor="middle" dominantBaseline="middle"
-        fill={isAway ? "rgba(56,189,248,0.9)" : "#0a0f04"}
+        fill={isAway ? "rgba(126,182,217,0.9)" : "#0a0f04"}
         fontSize="6" fontWeight="600" fontFamily={MONO} style={{ pointerEvents: "none" }}>
         {name}
       </text>

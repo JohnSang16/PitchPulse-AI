@@ -1,6 +1,6 @@
 # PitchPulse — Design System
 **Aesthetic: Floodlight**
-A night match under stadium lights. Deep navy-black surfaces, electric lime as the primary accent (home team, CTAs, the "pulse"), sky cyan for the away team. Space Grotesk headlines, Inter UI text, JetBrains Mono for data. Broadcast-graphics energy: think Premier League on-screen stats package, not a spreadsheet.
+A night match under stadium lights. Deep navy-black surfaces, soft sage green as the primary accent (home team, CTAs, the "pulse"), muted sky blue for the away team. Space Grotesk headlines, Inter UI text, JetBrains Mono for data. Broadcast-graphics energy: think Premier League on-screen stats package, not a spreadsheet.
 
 ---
 
@@ -15,14 +15,14 @@ A night match under stadium lights. Deep navy-black surfaces, electric lime as t
 
   --border-dim:     #131b2b;   /* subtle dividers */
   --border-default: #1b2436;   /* standard borders */
-  --border-accent:  rgba(163,230,53,0.35); /* lime-tinted border on focus */
+  --border-accent:  rgba(168,201,127,0.35); /* lime-tinted border on focus */
 
-  --lime:           #a3e635;   /* primary accent — CTAs, home team, brand pulse */
-  --lime-bright:    #bef264;   /* hover state for lime elements */
-  --lime-dim:       rgba(163,230,53,0.55);
+  --lime:           #a8c97f;   /* primary accent — CTAs, home team, brand pulse */
+  --lime-bright:    #bcd897;   /* hover state for lime elements */
+  --lime-dim:       rgba(168,201,127,0.55);
 
-  --cyan:           #38bdf8;   /* secondary accent — away team, away advice */
-  --cyan-dim:       rgba(56,189,248,0.55);
+  --cyan:           #7eb6d9;   /* secondary accent — away team, away advice */
+  --cyan-dim:       rgba(126,182,217,0.55);
 
   --text-primary:   #edf2fa;   /* headlines, stat values, selected inputs */
   --text-secondary: #94a3bd;   /* body copy, data labels */
@@ -34,7 +34,7 @@ A night match under stadium lights. Deep navy-black surfaces, electric lime as t
 }
 ```
 
-**Color meaning is load-bearing:** lime always means home, cyan always means away, slate `#475569` means draw, amber `#f59e0b` marks the key battle. Never reuse these hues for anything else.
+**Color meaning is load-bearing:** lime always means home, cyan always means away, slate `#475569` means draw, amber `#d9a441` marks the key battle. Never reuse these hues for anything else.
 
 ---
 
@@ -99,8 +99,8 @@ Focus: border tints to the owning team's accent at 40% alpha. Custom `▾` arrow
 background: --lime;  color: #0a0f04
 font: Space Grotesk 13px 700 uppercase 0.08em
 padding: 14px 16px;  border-radius: 10px
-resting glow: 0 0 20px rgba(163,230,53,0.18)
-hover: scale 1.015 + glow 0 0 28px rgba(163,230,53,0.35)
+resting glow: 0 0 16px rgba(168,201,127,0.10)
+hover: scale 1.015 + glow 0 0 24px rgba(168,201,127,0.22)
 disabled: background #1a2233, text --text-muted, no glow
 ```
 
@@ -114,7 +114,7 @@ disabled: background #1a2233, text --text-muted, no glow
 background: --bg-surface;  border: 1px solid --border-default
 border-left: 3px solid [section color];  border-radius: 10px
 ```
-Section colors: Tactical Overview lime, Key Battle amber `#f59e0b`, Home Advice lime, Away Advice cyan. Cards stagger in with a 70ms delay each.
+Section colors: Tactical Overview lime, Key Battle amber `#d9a441`, Home Advice lime, Away Advice cyan. Cards stagger in with a 70ms delay each.
 
 ---
 
@@ -123,8 +123,8 @@ Section colors: Tactical Overview lime, Key Battle amber `#f59e0b`, Home Advice 
 ```
 Surface:         #08130c with 75px-wide alternating mow stripes #0a170e
 All lines:       #23402c (stroke-width: 1)
-Home nodes:      fill #a3e635, text #0a0f04 (dark on lime)
-Away nodes:      fill #0b101c, stroke rgba(56,189,248,0.6), text cyan
+Home nodes:      fill #a8c97f, text #0a0f04 (dark on lime)
+Away nodes:      fill #0b101c, stroke rgba(126,182,217,0.6), text cyan
 Node radius:     8px;  font: JetBrains Mono 6px 600
 Player cards:    navy body #0b101c, header #121a2b, radius 4,
                  lime accents (home) / cyan accents (away), name in --text-primary
@@ -159,8 +159,8 @@ Paste this at the top of any prompt:
 
 ```
 Reference STYLE.md for all design decisions. This project uses the Floodlight aesthetic:
-deep navy-black backgrounds (#05070d), electric lime primary (#a3e635, home/CTA),
-sky cyan secondary (#38bdf8, away), Space Grotesk for headings, Inter for UI text,
+deep navy-black backgrounds (#05070d), soft sage green primary (#a8c97f, home/CTA),
+muted sky blue secondary (#7eb6d9, away), Space Grotesk for headings, Inter for UI text,
 JetBrains Mono for data, 1px borders in #1b2436, 10-12px radii, subtle lime glows
 on accents only. See STYLE.md for full token reference.
 ```

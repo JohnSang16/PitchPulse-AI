@@ -5,15 +5,15 @@ export default function PlayerMarker({ x, y, name, isAway = false }) {
     <g style={{ cursor: "default" }}>
       <circle
         cx={x} cy={y} r="8"
-        fill={isAway ? "#0b101c" : "#a3e635"}
-        stroke={isAway ? "rgba(56,189,248,0.6)" : "none"}
+        fill={isAway ? "#0b101c" : "#a8c97f"}
+        stroke={isAway ? "rgba(126,182,217,0.6)" : "none"}
         strokeWidth="1"
       />
       <text
         x={x} y={y + 2}
         textAnchor="middle"
         dominantBaseline="middle"
-        fill={isAway ? "rgba(56,189,248,0.9)" : "#0a0f04"}
+        fill={isAway ? "rgba(126,182,217,0.9)" : "#0a0f04"}
         fontSize="6"
         fontWeight="600"
         fontFamily={MONO}
