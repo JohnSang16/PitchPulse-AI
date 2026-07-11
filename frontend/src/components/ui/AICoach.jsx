@@ -1,12 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion"
 
-const MONO = "'DM Mono', 'Courier New', monospace"
+const UI   = "'Inter', -apple-system, sans-serif"
+const MONO = "'JetBrains Mono', 'Courier New', monospace"
+const DISPLAY = "'Space Grotesk', 'Inter', sans-serif"
 
 const SECTION_META = [
-  { label: "Tactical Overview" },
-  { label: "Key Battle"        },
-  { label: "Home Advice"       },
-  { label: "Away Advice"       },
+  { label: "Tactical Overview", color: "#a3e635" },
+  { label: "Key Battle",        color: "#f59e0b" },
+  { label: "Home Advice",       color: "#a3e635" },
+  { label: "Away Advice",       color: "#38bdf8" },
 ]
 
 function RichText({ text, style }) {
@@ -15,9 +17,26 @@ function RichText({ text, style }) {
     <p style={style}>
       {parts.map((part, i) =>
         part.startsWith("**") && part.endsWith("**")
-          ? <strong key={i} style={{ color: "#f0ead6", fontWeight: "400" }}>{part.slice(2, -2)}</strong>
+          ? <strong key={i} style={{ color: "#edf2fa", fontWeight: "600" }}>{part.slice(2, -2)}</strong>
           : part
       )}
+    </p>
+  )
+}
+
+function CoachHeader() {
+  return (
+    <p style={{
+      display: "flex", alignItems: "center", gap: "8px",
+      fontFamily: MONO, fontSize: "10px", fontWeight: "500",
+      letterSpacing: "0.16em", textTransform: "uppercase",
+      color: "#566179", margin: "0 0 12px 0",
+    }}>
+      <span style={{
+        width: "7px", height: "7px", borderRadius: "50%",
+        background: "#a3e635", boxShadow: "0 0 8px rgba(163,230,53,0.7)",
+      }} />
+      AI Coach
     </p>
   )
 }
@@ -37,23 +56,21 @@ export default function AICoach({ insight, loading }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <p style={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3d3520", margin: "0 0 12px 0" }}>
-            AI Coach
-          </p>
+          <CoachHeader />
           <div style={{
-            background: "#0d0d0d", border: "0.5px solid #1e1a12",
-            borderRadius: "2px", padding: "18px",
+            background: "#0b101c", border: "1px solid #1b2436",
+            borderRadius: "12px", padding: "18px",
           }}>
-            <p style={{ fontFamily: MONO, fontSize: "13px", color: "#3d3520", margin: "0 0 10px 0" }}>
-              Analyzing matchup...
+            <p style={{ fontFamily: UI, fontSize: "13.5px", color: "#94a3bd", margin: "0 0 12px 0" }}>
+              Analyzing matchup…
             </p>
-            <div style={{ display: "flex", gap: "4px" }}>
+            <div style={{ display: "flex", gap: "5px" }}>
               {[0, 1, 2].map(i => (
                 <motion.div
                   key={i}
                   animate={{ opacity: [0.2, 1, 0.2] }}
                   transition={{ repeat: Infinity, duration: 1.4, delay: i * 0.22, ease: "easeInOut" }}
-                  style={{ width: "4px", height: "4px", background: "#3d3520", borderRadius: "50%" }}
+                  style={{ width: "5px", height: "5px", background: "#a3e635", borderRadius: "50%" }}
                 />
               ))}
             </div>
@@ -69,37 +86,35 @@ export default function AICoach({ insight, loading }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <p style={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3d3520", margin: "0 0 12px 0" }}>
-            AI Coach
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          <CoachHeader />
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {sections.map((section, i) => {
-              const meta = SECTION_META[i] ?? { label: `Point ${i + 1}` }
+              const meta = SECTION_META[i] ?? { label: `Point ${i + 1}`, color: "#94a3bd" }
               const body = section.replace(/^\*?\*?\d+[\.\)]\*?\*?\s*/m, "").trim()
 
               return (
                 <motion.div
                   key={i}
-                  whileHover={{ backgroundColor: "#111111", borderColor: "#8a7a52" }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.07, ease: "easeOut" }}
+                  whileHover={{ backgroundColor: "#121a2b" }}
                   style={{
-                    backgroundColor: "#0d0d0d",
-                    borderWidth: "0.5px",
-                    borderStyle: "solid",
-                    borderColor: "#1e1a12",
-                    borderLeft: "2px solid #c9a84c",
-                    borderRadius: "0 2px 2px 0",
+                    backgroundColor: "#0b101c",
+                    border: "1px solid #1b2436",
+                    borderLeft: `3px solid ${meta.color}`,
+                    borderRadius: "10px",
                     overflow: "hidden",
                   }}
                 >
                   <div style={{
                     padding: "10px 14px 8px",
-                    borderBottom: "0.5px solid #141210",
+                    borderBottom: "1px solid #131b2b",
                   }}>
                     <span style={{
-                      fontFamily: MONO, fontSize: "10px", fontWeight: "400",
-                      letterSpacing: "0.14em", textTransform: "uppercase",
-                      color: "#8a7a52",
+                      fontFamily: DISPLAY, fontSize: "12.5px", fontWeight: "600",
+                      letterSpacing: "0.02em",
+                      color: "#edf2fa",
                     }}>
                       {meta.label}
                     </span>
@@ -108,8 +123,8 @@ export default function AICoach({ insight, loading }) {
                     <RichText
                       text={body}
                       style={{
-                        fontFamily: MONO, fontSize: "13px", color: "#8a7a52",
-                        lineHeight: 1.8, whiteSpace: "pre-line", margin: 0,
+                        fontFamily: UI, fontSize: "13px", color: "#94a3bd",
+                        lineHeight: 1.7, whiteSpace: "pre-line", margin: 0,
                       }}
                     />
                   </div>

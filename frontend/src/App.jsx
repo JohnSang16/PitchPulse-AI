@@ -7,36 +7,35 @@ import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
 
-// ── Design tokens ─────────────────────────────────────────────────────────────
+// ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
-  bgBase:       "#080808",
-  bgSurface:    "#0d0d0d",
-  bgRaised:     "#111111",
-  border:       "#1e1a12",
-  borderDim:    "#141210",
-  gold:         "#c9a84c",
-  goldDim:      "#8a7a52",
-  goldGhost:    "#3d3520",
-  goldWhisper:  "#2e2814",
-  textPrimary:  "#f0ead6",
-  textSecondary:"#8a7a52",
-  textMuted:    "#3d3520",
-  MONO:         "'DM Mono', 'Courier New', monospace",
-  SERIF:        "'Playfair Display', Georgia, serif",
+  bgBase:       "#05070d",
+  bgSurface:    "#0b101c",
+  bgRaised:     "#121a2b",
+  border:       "#1b2436",
+  borderDim:    "#131b2b",
+  lime:         "#a3e635",
+  limeBright:   "#bef264",
+  limeDim:      "rgba(163,230,53,0.55)",
+  cyan:         "#38bdf8",
+  textPrimary:  "#edf2fa",
+  textSecondary:"#94a3bd",
+  textMuted:    "#566179",
+  UI:           "'Inter', -apple-system, sans-serif",
+  DISPLAY:      "'Space Grotesk', 'Inter', sans-serif",
+  MONO:         "'JetBrains Mono', 'Courier New', monospace",
 }
 
-// ── Flat card ─────────────────────────────────────────────────────────────────
-function FlatCard({ children, style = {}, hoverable = false }) {
+// ── Card ──────────────────────────────────────────────────────────────────────
+function Card({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "#c9a84c", backgroundColor: T.bgRaised, y: -3, scale: 1.025 } : {}}
+      whileHover={hoverable ? { borderColor: "rgba(163,230,53,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         backgroundColor: T.bgSurface,
-        borderWidth: "0.5px",
-        borderStyle: "solid",
-        borderColor: T.border,
-        borderRadius: "2px",
+        border: `1px solid ${T.border}`,
+        borderRadius: "12px",
         ...style,
       }}
     >
@@ -49,9 +48,9 @@ function FlatCard({ children, style = {}, hoverable = false }) {
 function Eyebrow({ children }) {
   return (
     <p style={{
-      fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
-      letterSpacing: "0.18em", textTransform: "uppercase",
-      color: T.textSecondary, margin: "0 0 14px 0",
+      fontFamily: T.MONO, fontSize: "11px", fontWeight: "500",
+      letterSpacing: "0.16em", textTransform: "uppercase",
+      color: T.textMuted, margin: "0 0 14px 0",
     }}>
       {children}
     </p>
@@ -62,7 +61,7 @@ function Eyebrow({ children }) {
 function Divider({ style = {} }) {
   return (
     <hr style={{
-      border: "none", borderTop: `0.5px solid ${T.borderDim}`,
+      border: "none", borderTop: `1px solid ${T.borderDim}`,
       margin: "4px 0 16px", ...style,
     }} />
   )
@@ -94,40 +93,38 @@ function AboutPage() {
   ]
 
   return (
-    <div style={{ width: "100%", maxWidth: "780px", display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div style={{ width: "100%", maxWidth: "820px", display: "flex", flexDirection: "column", gap: "18px" }}>
       {/* Hero */}
-      <div style={{ paddingBottom: "4px" }}>
-        <h2 style={{ fontFamily: T.SERIF, fontSize: "28px", fontWeight: "300", letterSpacing: "0.04em", color: T.textPrimary, margin: "0 0 12px 0" }}>
-          About PitchPulse AI
+      <div style={{ paddingBottom: "6px" }}>
+        <h2 style={{ fontFamily: T.DISPLAY, fontSize: "32px", fontWeight: "600", letterSpacing: "-0.02em", color: T.textPrimary, margin: "0 0 12px 0" }}>
+          About <span style={{ color: T.lime }}>PitchPulse AI</span>
         </h2>
-        <p style={{ fontFamily: T.MONO, fontSize: "14px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>
+        <p style={{ fontFamily: T.UI, fontSize: "15px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
           A modern football analytics platform that simulates Premier League matches using statistical modelling and generative AI.
           Every percentage is backed by real squad data and thousands of simulated 90-minute matches.
         </p>
       </div>
 
       {/* Features grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "12px" }}>
         {features.map(item => (
-          <FlatCard key={item.title} hoverable style={{ padding: "18px 20px" }}>
-            <p style={{ fontFamily: T.MONO, fontSize: "11px", fontWeight: "400", letterSpacing: "0.14em", textTransform: "uppercase", color: T.gold, margin: "0 0 8px 0" }}>
+          <Card key={item.title} hoverable style={{ padding: "20px 22px" }}>
+            <p style={{ fontFamily: T.DISPLAY, fontSize: "15px", fontWeight: "600", color: T.textPrimary, margin: "0 0 8px 0" }}>
               {item.title}
             </p>
-            <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
+            <p style={{ fontFamily: T.UI, fontSize: "13.5px", color: T.textSecondary, lineHeight: 1.7, margin: 0 }}>
               {item.body}
             </p>
-          </FlatCard>
+          </Card>
         ))}
       </div>
 
       {/* Technical deep dive */}
-      <div style={{ marginTop: "8px" }}>
-        <p style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.20em", textTransform: "uppercase", color: T.textSecondary, margin: "0 0 10px 0" }}>
-          Technical Stack
-        </p>
+      <div style={{ marginTop: "10px" }}>
+        <Eyebrow>Technical Stack</Eyebrow>
       </div>
 
-      <FlatCard>
+      <Card style={{ overflow: "hidden", marginTop: "-10px" }}>
         {techStack.map((item, i) => (
           <motion.div
             key={item.label}
@@ -135,36 +132,34 @@ function AboutPage() {
             transition={{ duration: 0.15 }}
             style={{
               display: "flex", gap: "20px", padding: "16px 22px",
-              borderBottom: i < techStack.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
+              borderBottom: i < techStack.length - 1 ? `1px solid ${T.borderDim}` : "none",
               alignItems: "flex-start",
               cursor: "default",
             }}
           >
-            <div style={{ width: "80px", flexShrink: 0, paddingTop: "2px" }}>
-              <span style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: T.textSecondary }}>
+            <div style={{ width: "88px", flexShrink: 0, paddingTop: "3px" }}>
+              <span style={{ fontFamily: T.MONO, fontSize: "10px", fontWeight: "500", letterSpacing: "0.12em", textTransform: "uppercase", color: T.textMuted }}>
                 {item.label}
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <span style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, display: "block", marginBottom: "6px" }}>
+              <span style={{ fontFamily: T.DISPLAY, fontSize: "14px", fontWeight: "600", color: T.lime, display: "block", marginBottom: "5px" }}>
                 {item.chip}
               </span>
-              <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
+              <p style={{ fontFamily: T.UI, fontSize: "13.5px", color: T.textSecondary, lineHeight: 1.7, margin: 0 }}>
                 {item.desc}
               </p>
             </div>
           </motion.div>
         ))}
-      </FlatCard>
+      </Card>
 
       {/* Cloud infrastructure */}
-      <div style={{ marginTop: "4px" }}>
-        <p style={{ fontFamily: T.MONO, fontSize: "10px", letterSpacing: "0.20em", textTransform: "uppercase", color: T.textSecondary, margin: "0 0 10px 0" }}>
-          Cloud Infrastructure
-        </p>
+      <div style={{ marginTop: "6px" }}>
+        <Eyebrow>Cloud Infrastructure</Eyebrow>
       </div>
 
-      <FlatCard>
+      <Card style={{ overflow: "hidden", marginTop: "-10px" }}>
         {infra.map(({ q, a }, i) => (
           <motion.div
             key={q}
@@ -172,19 +167,15 @@ function AboutPage() {
             transition={{ duration: 0.15 }}
             style={{
               padding: "16px 22px",
-              borderBottom: i < infra.length - 1 ? `0.5px solid ${T.borderDim}` : "none",
+              borderBottom: i < infra.length - 1 ? `1px solid ${T.borderDim}` : "none",
               cursor: "default",
             }}
           >
-            <motion.p
-              whileHover={{ color: "#c9a84c" }}
-              transition={{ duration: 0.15 }}
-              style={{ fontFamily: T.MONO, fontSize: "12px", color: T.gold, margin: "0 0 6px 0" }}
-            >{q}</motion.p>
-            <p style={{ fontFamily: T.MONO, fontSize: "13px", color: T.textSecondary, lineHeight: 1.8, margin: 0 }}>{a}</p>
+            <p style={{ fontFamily: T.DISPLAY, fontSize: "14px", fontWeight: "600", color: T.textPrimary, margin: "0 0 6px 0" }}>{q}</p>
+            <p style={{ fontFamily: T.UI, fontSize: "13.5px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>{a}</p>
           </motion.div>
         ))}
-      </FlatCard>
+      </Card>
     </div>
   )
 }
@@ -198,6 +189,49 @@ function useIsMobile() {
     return () => window.removeEventListener("resize", handler)
   }, [])
   return isMobile
+}
+
+// ── Simulate button ───────────────────────────────────────────────────────────
+function SimulateButton({ onClick, disabled, loading, style = {} }) {
+  return (
+    <motion.button
+      onClick={onClick}
+      disabled={disabled}
+      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 28px rgba(163,230,53,0.35)" } : {}}
+      whileTap={!disabled ? { scale: 0.985 } : {}}
+      transition={{ duration: 0.15 }}
+      style={{
+        width: "100%",
+        background: disabled ? "#1a2233" : T.lime,
+        color: disabled ? T.textMuted : "#0a0f04",
+        fontFamily: T.DISPLAY, fontSize: "13px", fontWeight: "700",
+        letterSpacing: "0.08em", textTransform: "uppercase",
+        padding: "14px 16px", border: "none", borderRadius: "10px",
+        cursor: disabled ? "not-allowed" : "pointer",
+        boxShadow: disabled ? "none" : "0 0 20px rgba(163,230,53,0.18)",
+        transition: "background 0.15s",
+        ...style,
+      }}
+    >
+      {loading ? "Simulating…" : "Run Simulation"}
+    </motion.button>
+  )
+}
+
+// ── Brand mark ────────────────────────────────────────────────────────────────
+function Brand({ compact = false }) {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "9px" }}>
+      <span style={{
+        width: "9px", height: "9px", borderRadius: "50%",
+        background: T.lime, boxShadow: "0 0 12px rgba(163,230,53,0.8)",
+        animation: "pulse-dot 2.4s ease-in-out infinite",
+      }} />
+      <span style={{ fontFamily: T.DISPLAY, fontSize: compact ? "16px" : "18px", fontWeight: "700", letterSpacing: "-0.01em", color: T.textPrimary }}>
+        PitchPulse<span style={{ color: T.lime }}> AI</span>
+      </span>
+    </span>
+  )
 }
 
 // ── Main App ──────────────────────────────────────────────────────────────────
@@ -258,33 +292,34 @@ export default function App() {
       height: isMobile ? "auto" : "100vh",
       minHeight: "100vh",
       overflow: isMobile ? "visible" : "hidden",
-      background: T.bgBase, fontFamily: T.MONO,
+      background: T.bgBase, fontFamily: T.UI,
     }}>
 
       {/* ── Navbar ── */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
-        height: "54px", display: "flex", alignItems: "center",
+        height: "60px", display: "flex", alignItems: "center",
         justifyContent: "space-between", padding: isMobile ? "0 16px" : "0 24px",
-        background: T.bgBase, borderBottom: `0.5px solid ${T.border}`,
+        background: "rgba(5,7,13,0.85)", backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: `1px solid ${T.border}`,
       }}>
-        <span style={{ fontFamily: T.SERIF, fontSize: isMobile ? "15px" : "18px", fontWeight: "400", letterSpacing: "0.06em", color: T.gold }}>
-          PitchPulse AI
-        </span>
+        <Brand compact={isMobile} />
 
-        <div style={{ display: "flex", gap: isMobile ? "16px" : "24px" }}>
+        <div style={{ display: "flex", gap: "6px" }}>
           {["home", "about"].map(p => (
             <motion.button
               key={p}
               onClick={() => setPage(p)}
-              whileHover={{ color: T.gold, y: -1 }}
-              whileTap={{ y: 0 }}
+              whileHover={{ color: T.textPrimary }}
+              whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.12 }}
               style={{
-                background: "none", border: "none", padding: 0, cursor: "pointer",
-                fontFamily: T.MONO, fontSize: isMobile ? "10px" : "12px", fontWeight: "400",
-                letterSpacing: "0.16em", textTransform: "uppercase",
-                color: page === p ? T.gold : T.goldGhost,
+                background: page === p ? T.bgRaised : "none",
+                border: page === p ? `1px solid ${T.border}` : "1px solid transparent",
+                padding: "7px 14px", borderRadius: "8px", cursor: "pointer",
+                fontFamily: T.UI, fontSize: "13px", fontWeight: "500",
+                color: page === p ? T.textPrimary : T.textMuted,
               }}
             >
               {p === "home" ? "Dashboard" : "About"}
@@ -302,11 +337,11 @@ export default function App() {
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
             style={{
-              marginTop: "54px",
-              height: isMobile ? "auto" : "calc(100vh - 54px)",
+              marginTop: "60px",
+              height: isMobile ? "auto" : "calc(100vh - 60px)",
               overflowY: "auto",
-              padding: isMobile ? "24px 16px 48px" : "40px 24px 60px",
-              display: "flex", justifyContent: "center",
+              padding: isMobile ? "24px 16px 48px" : "44px 24px 64px",
+              display: "flex", justifyContent: "center", alignItems: "flex-start",
             }}
           >
             <AboutPage />
@@ -319,35 +354,20 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            style={{ marginTop: "54px", padding: "20px 16px 40px", display: "flex", flexDirection: "column", gap: "16px" }}
+            style={{ marginTop: "60px", padding: "20px 16px 40px", display: "flex", flexDirection: "column", gap: "18px" }}
           >
             {/* Team selectors */}
             <div>
-              <Eyebrow>Select Teams</Eyebrow>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "10px" }}>
-                <TeamSelector label="Home" onSelect={handleHomeTeamSelect} />
-                <TeamSelector label="Away" onSelect={handleAwayTeamSelect} />
+              <Eyebrow>Matchup</Eyebrow>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+                <TeamSelector label="Home" accent={T.lime} onSelect={handleHomeTeamSelect} />
+                <TeamSelector label="Away" accent={T.cyan} onSelect={handleAwayTeamSelect} />
               </div>
-              <button
-                onClick={handleSimulate}
-                disabled={!canSimulate}
-                style={{
-                  width: "100%",
-                  background: canSimulate ? T.gold : T.goldWhisper,
-                  color: canSimulate ? "#080808" : T.goldGhost,
-                  fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
-                  letterSpacing: "0.18em", textTransform: "uppercase",
-                  padding: "13px 16px", border: "none", borderRadius: "2px",
-                  cursor: canSimulate ? "pointer" : "not-allowed",
-                  transition: "background 0.15s",
-                }}
-              >
-                {loading ? "Running..." : "Run Simulation"}
-              </button>
+              <SimulateButton onClick={handleSimulate} disabled={!canSimulate} loading={loading} />
             </div>
 
             {/* Pitch */}
-            <div style={{ borderTop: `0.5px solid ${T.border}` }}>
+            <div style={{ border: `1px solid ${T.border}`, borderRadius: "14px", overflow: "hidden" }}>
               <SoccerPitch
                 homePlayers={homePlayers}
                 awayPlayers={awayPlayers}
@@ -384,48 +404,33 @@ export default function App() {
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
             style={{
               display: "grid",
-              gridTemplateColumns: "340px 1fr",
-              height: "calc(100vh - 54px)",
-              maxHeight: "calc(100vh - 54px)",
-              marginTop: "54px",
+              gridTemplateColumns: "360px 1fr",
+              height: "calc(100vh - 60px)",
+              maxHeight: "calc(100vh - 60px)",
+              marginTop: "60px",
               overflow: "hidden",
             }}
           >
             {/* ── Sidebar ── */}
             <aside style={{
               background: T.bgBase,
-              borderRight: `0.5px solid ${T.border}`,
-              padding: "24px 20px",
+              borderRight: `1px solid ${T.border}`,
+              padding: "26px 22px",
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
               gap: "0",
             }}>
-              <Eyebrow>Select Teams</Eyebrow>
+              <Eyebrow>Matchup</Eyebrow>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <TeamSelector label="Home Team" onSelect={handleHomeTeamSelect} />
-                <TeamSelector label="Away Team" onSelect={handleAwayTeamSelect} />
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <TeamSelector label="Home Team" accent={T.lime} onSelect={handleHomeTeamSelect} />
+                <TeamSelector label="Away Team" accent={T.cyan} onSelect={handleAwayTeamSelect} />
               </div>
 
-              <button
-                onClick={handleSimulate}
-                disabled={!canSimulate}
-                style={{
-                  width: "100%", marginTop: "12px",
-                  background: canSimulate ? T.gold : T.goldWhisper,
-                  color: canSimulate ? "#080808" : T.goldGhost,
-                  fontFamily: T.MONO, fontSize: "11px", fontWeight: "400",
-                  letterSpacing: "0.18em", textTransform: "uppercase",
-                  padding: "12px 16px", border: "none", borderRadius: "2px",
-                  cursor: canSimulate ? "pointer" : "not-allowed",
-                  transition: "background 0.15s",
-                }}
-              >
-                {loading ? "Running..." : "Run Simulation"}
-              </button>
+              <SimulateButton onClick={handleSimulate} disabled={!canSimulate} loading={loading} style={{ marginTop: "16px" }} />
 
-              <Divider style={{ margin: "20px 0 16px" }} />
+              <Divider style={{ margin: "22px 0 18px" }} />
 
               <AnimatePresence>
                 {(insight || aiLoading) && (

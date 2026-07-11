@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import client from "../../api/client"
 
-const MONO = "'DM Mono', 'Courier New', monospace"
+const UI   = "'Inter', -apple-system, sans-serif"
+const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-export default function TeamSelector({ label, onSelect }) {
+export default function TeamSelector({ label, accent = "#a3e635", onSelect }) {
   const [teams, setTeams] = useState([])
   const [focused, setFocused] = useState(false)
+  const [selected, setSelected] = useState(false)
 
   useEffect(() => {
     client.get("/teams")
@@ -16,28 +18,33 @@ export default function TeamSelector({ label, onSelect }) {
   return (
     <div>
       <label style={{
-        display: "block",
-        fontFamily: MONO, fontSize: "10px", fontWeight: "400",
+        display: "flex", alignItems: "center", gap: "7px",
+        fontFamily: MONO, fontSize: "10px", fontWeight: "500",
         letterSpacing: "0.14em", textTransform: "uppercase",
-        color: "#3d3520", marginBottom: "8px",
+        color: "#566179", marginBottom: "8px",
       }}>
+        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: accent, flexShrink: 0 }} />
         {label}
       </label>
       <div style={{ position: "relative" }}>
         <select
-          onChange={e => e.target.value && onSelect(Number(e.target.value))}
+          onChange={e => {
+            if (!e.target.value) return
+            setSelected(true)
+            onSelect(Number(e.target.value))
+          }}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={{
             width: "100%",
-            background: "#0d0d0d",
-            color: "#8a7a52",
-            border: `0.5px solid ${focused ? "#c9a84c33" : "#1e1a12"}`,
-            borderRadius: "3px",
-            padding: "10px 28px 10px 12px",
-            fontSize: "12px",
-            fontFamily: MONO,
-            letterSpacing: "0.06em",
+            background: "#0b101c",
+            color: selected ? "#edf2fa" : "#94a3bd",
+            border: `1px solid ${focused ? accent + "66" : "#1b2436"}`,
+            borderRadius: "10px",
+            padding: "11px 30px 11px 13px",
+            fontSize: "13.5px",
+            fontWeight: "500",
+            fontFamily: UI,
             cursor: "pointer",
             outline: "none",
             appearance: "none",
@@ -45,17 +52,17 @@ export default function TeamSelector({ label, onSelect }) {
             transition: "border-color 0.15s",
           }}
         >
-          <option value="" style={{ background: "#0d0d0d", color: "#3d3520" }}>Select a team...</option>
+          <option value="" style={{ background: "#0b101c", color: "#566179" }}>Select a team…</option>
           {teams.map(team => (
-            <option key={team.id} value={team.id} style={{ background: "#0d0d0d", color: "#8a7a52" }}>
+            <option key={team.id} value={team.id} style={{ background: "#0b101c", color: "#edf2fa" }}>
               {team.name}
             </option>
           ))}
         </select>
         {/* Custom arrow */}
         <span style={{
-          position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)",
-          pointerEvents: "none", color: "#3d3520", fontSize: "10px", lineHeight: 1,
+          position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)",
+          pointerEvents: "none", color: "#566179", fontSize: "10px", lineHeight: 1,
         }}>
           ▾
         </span>
