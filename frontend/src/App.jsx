@@ -6,7 +6,7 @@ import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
-import { TournamentRibbon, Scoreboard, FixtureCard, Laurel, Pennants } from "./components/ui/Tournament"
+import { TournamentRibbon, Scoreboard, FixtureCard, Laurel, Pennants, TrophyCup } from "./components/ui/Tournament"
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
@@ -99,6 +99,7 @@ function AboutPage() {
       <div style={{ paddingBottom: "6px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "14px", margin: "0 0 12px 0" }}>
           <Laurel height={30} />
+          <TrophyCup size={44} />
           <h2 style={{ fontFamily: T.DISPLAY, fontSize: "32px", fontWeight: "600", letterSpacing: "-0.02em", color: T.textPrimary, margin: 0 }}>
             About <span style={{ color: T.gold }}>PitchPulse AI</span>
           </h2>

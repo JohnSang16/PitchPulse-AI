@@ -1,25 +1,29 @@
 import { useId, useMemo } from "react"
 import { motion, useReducedMotion } from "framer-motion"
+import trophyPng from "../../assets/world-cup-trophy.png"
 
 const MONO    = "'JetBrains Mono', 'Courier New', monospace"
 const DISPLAY = "'Archivo Black', 'Noto Sans', sans-serif"
 
-// Muted bunting colors: gold, slate, jersey red tinted toward the navy base
-const PENNANT_COLORS = ["rgba(212,175,55,0.5)", "rgba(71,85,105,0.5)", "rgba(200,80,63,0.5)"]
+// FWC26 emblem-style block strip: squares and quarter-circles, the geometric
+// vocabulary of the World Cup 26 identity, in gold / iris / persian red.
+const BLOCK_COLORS = ["rgba(212,175,55,0.55)", "rgba(123,128,224,0.45)", "rgba(200,80,63,0.5)"]
 
 export function Pennants({ height = 10, style = {} }) {
   const id = useId().replace(/[^a-zA-Z0-9]/g, "")
+  const h = height
   return (
-    <svg height={height} width="100%" preserveAspectRatio="none"
+    <svg height={h} width="100%" preserveAspectRatio="none"
       style={{ flex: 1, minWidth: 0, display: "block", ...style }}>
       <defs>
-        <pattern id={id} width="54" height={height} patternUnits="userSpaceOnUse">
-          {PENNANT_COLORS.map((c, i) => (
-            <path key={i} d={`M${i * 18},0 L${i * 18 + 14},0 L${i * 18 + 7},${height - 1} Z`} fill={c} />
-          ))}
+        <pattern id={id} width={h * 6} height={h} patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width={h} height={h} fill={BLOCK_COLORS[0]} />
+          <path d={`M${h * 1.5},0 a${h},${h} 0 0 1 ${h},${h} h-${h} Z`} fill={BLOCK_COLORS[1]} />
+          <rect x={h * 3} y="0" width={h} height={h} fill={BLOCK_COLORS[2]} />
+          <path d={`M${h * 4.5},${h} a${h},${h} 0 0 1 ${h},-${h} v${h} Z`} fill={BLOCK_COLORS[0]} />
         </pattern>
       </defs>
-      <rect width="100%" height={height} fill={`url(#${id})`} />
+      <rect width="100%" height={h} fill={`url(#${id})`} />
     </svg>
   )
 }
@@ -106,9 +110,12 @@ export function Scoreboard({ homeName, awayName, result, isMobile }) {
       {side(homeName, homePct, GOLD, homeFav, false)}
       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
         <Laurel />
-        <span style={{ fontFamily: DISPLAY, fontSize: isMobile ? "13px" : "15px", fontWeight: "700", letterSpacing: "0.06em", color: "#edf2fa" }}>
-          VS
-        </span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+          <TrophyCup size={isMobile ? 22 : 30} />
+          <span style={{ fontFamily: DISPLAY, fontSize: isMobile ? "12px" : "14px", fontWeight: "700", letterSpacing: "0.06em", color: "#edf2fa" }}>
+            VS
+          </span>
+        </div>
         <Laurel flip />
       </div>
       {side(awayName, awayPct, RED, awayFav, true)}
@@ -116,16 +123,15 @@ export function Scoreboard({ homeName, awayName, result, isMobile }) {
   )
 }
 
-// Original cup mark: simple chalice with two handles. Deliberately generic.
+// The World Cup trophy PNG with a soft glow in the owning team's color.
+// size is the rendered height; the image keeps its natural aspect ratio.
 export function TrophyCup({ size = 16, color = "#d4af37" }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 20 20" style={{ flexShrink: 0, display: "block" }}>
-      <path d="M6,3 h8 v3.5 a4,4 0 0 1 -8,0 Z" fill={color} fillOpacity="0.9" />
-      <path d="M6,4.5 C3,4.5 3,8.5 6.4,8.8" stroke={color} strokeOpacity="0.7" strokeWidth="1.2" fill="none" />
-      <path d="M14,4.5 C17,4.5 17,8.5 13.6,8.8" stroke={color} strokeOpacity="0.7" strokeWidth="1.2" fill="none" />
-      <rect x="9" y="10.5" width="2" height="3.2" fill={color} fillOpacity="0.8" />
-      <rect x="6.2" y="13.7" width="7.6" height="1.9" rx="0.95" fill={color} fillOpacity="0.9" />
-    </svg>
+    <img src={trophyPng} alt="" aria-hidden="true"
+      style={{
+        height: `${size}px`, width: "auto", flexShrink: 0, display: "block",
+        filter: `drop-shadow(0 0 ${Math.max(3, size * 0.2)}px ${color}55)`,
+      }} />
   )
 }
 
@@ -227,7 +233,7 @@ export function TournamentRibbon({ isMobile }) {
         letterSpacing: "0.18em", textTransform: "uppercase",
         color: "#566179", whiteSpace: "nowrap", flexShrink: 0,
       }}>
-        Pitchpulse Invitational · Summer 2026
+        Pitchpulse Invitational · We Are 26
       </span>
       <Pennants style={sideStyle} />
     </div>
