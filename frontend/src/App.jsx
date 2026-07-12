@@ -209,7 +209,7 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
       transition={{ duration: 0.15 }}
       style={{
         width: "100%",
-        background: disabled ? "#1a2233" : T.gold,
+        background: disabled ? "#1c1c21" : T.gold,
         color: disabled ? T.textMuted : "#171207",
         fontFamily: T.DISPLAY, fontSize: "13px", fontWeight: "700",
         letterSpacing: "0.08em", textTransform: "uppercase",
