@@ -22,8 +22,8 @@ const T = {
   textPrimary:  "#edf2fa",
   textSecondary:"#94a3bd",
   textMuted:    "#566179",
-  UI:           "'Inter', -apple-system, sans-serif",
-  DISPLAY:      "'Space Grotesk', 'Inter', sans-serif",
+  UI:           "'Noto Sans', -apple-system, sans-serif",
+  DISPLAY:      "'Archivo Black', 'Noto Sans', sans-serif",
   MONO:         "'JetBrains Mono', 'Courier New', monospace",
 }
 

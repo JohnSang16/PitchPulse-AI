@@ -2,7 +2,7 @@ import { useId, useMemo } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 
 const MONO    = "'JetBrains Mono', 'Courier New', monospace"
-const DISPLAY = "'Space Grotesk', 'Inter', sans-serif"
+const DISPLAY = "'Archivo Black', 'Noto Sans', sans-serif"
 
 // Muted bunting colors: gold, slate, jersey red tinted toward the navy base
 const PENNANT_COLORS = ["rgba(212,181,106,0.5)", "rgba(71,85,105,0.5)", "rgba(205,130,114,0.5)"]

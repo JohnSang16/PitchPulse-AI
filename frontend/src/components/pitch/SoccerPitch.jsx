@@ -2,7 +2,7 @@ import { useState } from "react"
 import FifaCard from "./FifaCard"
 import { formations } from "./formations"
 
-const UI   = "'Inter', -apple-system, sans-serif"
+const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
 const GOLD = "#d4b56a"

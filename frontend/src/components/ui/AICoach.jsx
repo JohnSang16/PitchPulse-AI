@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion"
 
-const UI   = "'Inter', -apple-system, sans-serif"
+const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
-const DISPLAY = "'Space Grotesk', 'Inter', sans-serif"
+const DISPLAY = "'Archivo Black', 'Noto Sans', sans-serif"
 
 const SECTION_META = [
   { label: "Tactical Overview", color: "#d4b56a" },

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Crest, TrophyCup, Confetti } from "./Tournament"
 
-const UI   = "'Inter', -apple-system, sans-serif"
+const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
 const GOLD  = "#d4b56a"
