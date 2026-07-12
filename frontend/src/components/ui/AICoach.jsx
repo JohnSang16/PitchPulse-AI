@@ -5,10 +5,10 @@ const MONO = "'JetBrains Mono', 'Courier New', monospace"
 const DISPLAY = "'Space Grotesk', 'Inter', sans-serif"
 
 const SECTION_META = [
-  { label: "Tactical Overview", color: "#a8c97f" },
-  { label: "Key Battle",        color: "#d9a441" },
-  { label: "Home Advice",       color: "#a8c97f" },
-  { label: "Away Advice",       color: "#7eb6d9" },
+  { label: "Tactical Overview", color: "#d4b56a" },
+  { label: "Key Battle",        color: "#8fa8cc" },
+  { label: "Home Advice",       color: "#d4b56a" },
+  { label: "Away Advice",       color: "#cd8272" },
 ]
 
 function RichText({ text, style }) {
@@ -34,7 +34,7 @@ function CoachHeader() {
     }}>
       <span style={{
         width: "7px", height: "7px", borderRadius: "50%",
-        background: "#a8c97f", boxShadow: "0 0 6px rgba(168,201,127,0.4)",
+        background: "#d4b56a", boxShadow: "0 0 6px rgba(212,181,106,0.4)",
       }} />
       AI Coach
     </p>
@@ -70,7 +70,7 @@ export default function AICoach({ insight, loading }) {
                   key={i}
                   animate={{ opacity: [0.2, 1, 0.2] }}
                   transition={{ repeat: Infinity, duration: 1.4, delay: i * 0.22, ease: "easeInOut" }}
-                  style={{ width: "5px", height: "5px", background: "#a8c97f", borderRadius: "50%" }}
+                  style={{ width: "5px", height: "5px", background: "#d4b56a", borderRadius: "50%" }}
                 />
               ))}
             </div>

@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const LIME  = "#a8c97f"
-const CYAN  = "#7eb6d9"
+const GOLD  = "#d4b56a"
+const RED  = "#cd8272"
 const SLATE = "#475569"
 
 function useCountUp(target, duration = 900) {
@@ -91,9 +91,9 @@ function StatDivider({ isMobile }) {
 // Stacked home / draw / away probability bar
 function ProbBar({ result }) {
   const segments = [
-    { pct: result.home_win_pct, color: LIME },
+    { pct: result.home_win_pct, color: GOLD },
     { pct: result.draw_pct,     color: SLATE },
-    { pct: result.away_win_pct, color: CYAN },
+    { pct: result.away_win_pct, color: RED },
   ]
   return (
     <div style={{
@@ -133,11 +133,11 @@ export default function WinProbability({ result, homeTeam, awayTeam, isMobile = 
       }}>
         {result ? (
           <>
-            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={LIME} primary={result.home_win_pct === max} />
+            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={GOLD} primary={result.home_win_pct === max} />
             <StatDivider isMobile={isMobile} />
             <PctStat label="Draw" value={result.draw_pct} color={SLATE} primary={result.draw_pct === max} />
             <StatDivider isMobile={isMobile} />
-            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={CYAN} primary={result.away_win_pct === max} />
+            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={RED} primary={result.away_win_pct === max} />
             <StatDivider isMobile={isMobile} />
             <PlainStat label="Home xG" value={result.home_expected_goals} />
             <StatDivider isMobile={isMobile} />

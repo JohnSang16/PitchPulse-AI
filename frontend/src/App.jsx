@@ -14,10 +14,10 @@ const T = {
   bgRaised:     "#121a2b",
   border:       "#1b2436",
   borderDim:    "#131b2b",
-  lime:         "#a8c97f",
-  limeBright:   "#bcd897",
-  limeDim:      "rgba(168,201,127,0.55)",
-  cyan:         "#7eb6d9",
+  gold:         "#d4b56a",
+  goldBright:   "#e2c98b",
+  goldDim:      "rgba(212,181,106,0.55)",
+  red:         "#cd8272",
   textPrimary:  "#edf2fa",
   textSecondary:"#94a3bd",
   textMuted:    "#566179",
@@ -30,7 +30,7 @@ const T = {
 function Card({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "rgba(168,201,127,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
+      whileHover={hoverable ? { borderColor: "rgba(212,181,106,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         backgroundColor: T.bgSurface,
@@ -97,7 +97,7 @@ function AboutPage() {
       {/* Hero */}
       <div style={{ paddingBottom: "6px" }}>
         <h2 style={{ fontFamily: T.DISPLAY, fontSize: "32px", fontWeight: "600", letterSpacing: "-0.02em", color: T.textPrimary, margin: "0 0 12px 0" }}>
-          About <span style={{ color: T.lime }}>PitchPulse AI</span>
+          About <span style={{ color: T.gold }}>PitchPulse AI</span>
         </h2>
         <p style={{ fontFamily: T.UI, fontSize: "15px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
           A modern football analytics platform that simulates Premier League matches using statistical modelling and generative AI.
@@ -143,7 +143,7 @@ function AboutPage() {
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <span style={{ fontFamily: T.DISPLAY, fontSize: "14px", fontWeight: "600", color: T.lime, display: "block", marginBottom: "5px" }}>
+              <span style={{ fontFamily: T.DISPLAY, fontSize: "14px", fontWeight: "600", color: T.gold, display: "block", marginBottom: "5px" }}>
                 {item.chip}
               </span>
               <p style={{ fontFamily: T.UI, fontSize: "13.5px", color: T.textSecondary, lineHeight: 1.7, margin: 0 }}>
@@ -197,18 +197,18 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
     <motion.button
       onClick={onClick}
       disabled={disabled}
-      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 24px rgba(168,201,127,0.22)" } : {}}
+      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 24px rgba(212,181,106,0.22)" } : {}}
       whileTap={!disabled ? { scale: 0.985 } : {}}
       transition={{ duration: 0.15 }}
       style={{
         width: "100%",
-        background: disabled ? "#1a2233" : T.lime,
-        color: disabled ? T.textMuted : "#0a0f04",
+        background: disabled ? "#1a2233" : T.gold,
+        color: disabled ? T.textMuted : "#171207",
         fontFamily: T.DISPLAY, fontSize: "13px", fontWeight: "700",
         letterSpacing: "0.08em", textTransform: "uppercase",
         padding: "14px 16px", border: "none", borderRadius: "10px",
         cursor: disabled ? "not-allowed" : "pointer",
-        boxShadow: disabled ? "none" : "0 0 16px rgba(168,201,127,0.10)",
+        boxShadow: disabled ? "none" : "0 0 16px rgba(212,181,106,0.10)",
         transition: "background 0.15s",
         ...style,
       }}
@@ -223,12 +223,12 @@ function Brand({ compact = false }) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "9px" }}>
       <span style={{
-        width: "9px", height: "9px", borderRadius: "50%",
-        background: T.lime, boxShadow: "0 0 10px rgba(168,201,127,0.45)",
+        color: T.gold, fontSize: compact ? "12px" : "14px", lineHeight: 1,
+        textShadow: "0 0 10px rgba(212,181,106,0.45)",
         animation: "pulse-dot 2.4s ease-in-out infinite",
-      }} />
+      }}>★</span>
       <span style={{ fontFamily: T.DISPLAY, fontSize: compact ? "16px" : "18px", fontWeight: "700", letterSpacing: "-0.01em", color: T.textPrimary }}>
-        PitchPulse<span style={{ color: T.lime }}> AI</span>
+        PitchPulse<span style={{ color: T.gold }}> AI</span>
       </span>
     </span>
   )
@@ -360,8 +360,8 @@ export default function App() {
             <div>
               <Eyebrow>Matchup</Eyebrow>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
-                <TeamSelector label="Home" accent={T.lime} onSelect={handleHomeTeamSelect} />
-                <TeamSelector label="Away" accent={T.cyan} onSelect={handleAwayTeamSelect} />
+                <TeamSelector label="Home" accent={T.gold} onSelect={handleHomeTeamSelect} />
+                <TeamSelector label="Away" accent={T.red} onSelect={handleAwayTeamSelect} />
               </div>
               <SimulateButton onClick={handleSimulate} disabled={!canSimulate} loading={loading} />
             </div>
@@ -424,8 +424,8 @@ export default function App() {
               <Eyebrow>Matchup</Eyebrow>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <TeamSelector label="Home Team" accent={T.lime} onSelect={handleHomeTeamSelect} />
-                <TeamSelector label="Away Team" accent={T.cyan} onSelect={handleAwayTeamSelect} />
+                <TeamSelector label="Home Team" accent={T.gold} onSelect={handleHomeTeamSelect} />
+                <TeamSelector label="Away Team" accent={T.red} onSelect={handleAwayTeamSelect} />
               </div>
 
               <SimulateButton onClick={handleSimulate} disabled={!canSimulate} loading={loading} style={{ marginTop: "16px" }} />

@@ -18,13 +18,13 @@ export default function FifaCard({ x, y, player, isAway = false }) {
   const displayName = (shortName.length > 8 ? shortName.substring(0, 7) + "." : shortName).toUpperCase()
 
   // Home: lime accents. Away: cyan accents. Both on dark navy card bodies.
-  const accent   = isAway ? "#7eb6d9" : "#a8c97f"
+  const accent   = isAway ? "#cd8272" : "#d4b56a"
   const bodyFill = "#0b101c"
   const headFill = "#121a2b"
-  const txtMain  = hovered ? accent : (isAway ? "rgba(126,182,217,0.9)" : "rgba(168,201,127,0.9)")
+  const txtMain  = hovered ? accent : (isAway ? "rgba(205,130,114,0.9)" : "rgba(212,181,106,0.9)")
   const txtName  = "#edf2fa"
-  const txtDim   = isAway ? "rgba(126,182,217,0.45)" : "rgba(168,201,127,0.45)"
-  const border   = hovered ? accent : (isAway ? "rgba(126,182,217,0.35)" : "rgba(168,201,127,0.35)")
+  const txtDim   = isAway ? "rgba(205,130,114,0.45)" : "rgba(212,181,106,0.45)"
+  const border   = hovered ? accent : (isAway ? "rgba(205,130,114,0.35)" : "rgba(212,181,106,0.35)")
   const bw       = hovered ? "1.25" : "0.75"
 
   const scale = hovered ? 1.12 : 1
@@ -50,7 +50,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
 
       {/* Header divider */}
       <line x1={cx + 4} y1={cy + 20} x2={cx + W - 4} y2={cy + 20}
-        stroke={isAway ? "rgba(126,182,217,0.2)" : "rgba(168,201,127,0.2)"} strokeWidth="0.5" />
+        stroke={isAway ? "rgba(205,130,114,0.2)" : "rgba(212,181,106,0.2)"} strokeWidth="0.5" />
 
       {/* OVR — left of header */}
       <text x={cx + 16} y={cy + 14} textAnchor="middle"
@@ -72,7 +72,7 @@ export default function FifaCard({ x, y, player, isAway = false }) {
 
       {/* Bottom rule */}
       <line x1={cx + 4} y1={cy + 50} x2={cx + W - 4} y2={cy + 50}
-        stroke={isAway ? "rgba(126,182,217,0.15)" : "rgba(168,201,127,0.15)"} strokeWidth="0.5" />
+        stroke={isAway ? "rgba(205,130,114,0.15)" : "rgba(212,181,106,0.15)"} strokeWidth="0.5" />
 
       {/* ATK label */}
       <text x={cx + 5} y={cy + 64} textAnchor="start"

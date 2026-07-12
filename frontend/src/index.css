@@ -6,12 +6,12 @@
   --bg-raised:      #121a2b;
   --border-dim:     #131b2b;
   --border-default: #1b2436;
-  --border-accent:  rgba(168, 201, 127, 0.35);
-  --lime:           #a8c97f;
-  --lime-bright:    #bcd897;
-  --lime-dim:       rgba(168, 201, 127, 0.55);
-  --cyan:           #7eb6d9;
-  --cyan-dim:       rgba(126, 182, 217, 0.55);
+  --border-accent:  rgba(212, 181, 106, 0.35);
+  --gold:           #d4b56a;
+  --gold-bright:    #e2c98b;
+  --gold-dim:       rgba(212, 181, 106, 0.55);
+  --red:           #cd8272;
+  --red-dim:       rgba(205, 130, 114, 0.55);
   --text-primary:   #edf2fa;
   --text-secondary: #94a3bd;
   --text-muted:     #566179;
@@ -34,7 +34,7 @@ html, body, #root {
 }
 
 ::selection {
-  background: rgba(168, 201, 127, 0.20);
+  background: rgba(212, 181, 106, 0.20);
   color: var(--text-primary);
 }
 

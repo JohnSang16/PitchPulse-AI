@@ -5,14 +5,14 @@ import { formations } from "./formations"
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const LIME = "#a8c97f"
-const CYAN = "#7eb6d9"
+const GOLD = "#d4b56a"
+const RED = "#cd8272"
 const LINE = "#23402c"
 
 function PositionNode({ x, y, name, isAway }) {
   const [hovered, setHovered] = useState(false)
   const scale = hovered ? 1.18 : 1
-  const color = isAway ? CYAN : LIME
+  const color = isAway ? RED : GOLD
   return (
     <g
       style={{
@@ -26,14 +26,14 @@ function PositionNode({ x, y, name, isAway }) {
     >
       {isAway ? (
         <circle cx={x} cy={y} r="8" fill="#0b101c"
-          stroke={hovered ? CYAN : "rgba(126,182,217,0.6)"}
+          stroke={hovered ? RED : "rgba(205,130,114,0.6)"}
           strokeWidth={hovered ? "1.5" : "1"} />
       ) : (
         <circle cx={x} cy={y} r="8"
-          fill={hovered ? "#bcd897" : LIME} />
+          fill={hovered ? "#e2c98b" : GOLD} />
       )}
       <text x={x} y={y + 2} textAnchor="middle" dominantBaseline="middle"
-        fill={isAway ? "rgba(126,182,217,0.9)" : "#0a0f04"}
+        fill={isAway ? "rgba(205,130,114,0.9)" : "#171207"}
         fontSize="6" fontWeight="600" fontFamily={MONO} style={{ pointerEvents: "none" }}>
         {name}
       </text>
@@ -130,8 +130,8 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
         borderBottom: "1px solid #1b2436",
         background: "rgba(5,7,13,0.9)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
       }}>
-        <FormationSelect label="Home Formation" accent={LIME} value={homeFormation} onChange={handleHomeFormationChange} />
-        <FormationSelect label="Away Formation" accent={CYAN} value={awayFormation} onChange={handleAwayFormationChange} />
+        <FormationSelect label="Home Formation" accent={GOLD} value={homeFormation} onChange={handleHomeFormationChange} />
+        <FormationSelect label="Away Formation" accent={RED} value={awayFormation} onChange={handleAwayFormationChange} />
       </div>
 
       {/* Pitch */}
