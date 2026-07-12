@@ -132,12 +132,43 @@ Player cards:    navy body #0b101c, header #121a2b, radius 4,
 
 ---
 
+## Tournament Chrome
+
+All tournament components live in `frontend/src/components/ui/Tournament.jsx`. Every color is a muted tint of the core palette; nothing here introduces a new hue.
+
+### Ribbon
+Fixed strip under the navbar, 32px tall, `--bg-surface` with 1px `--border-default` bottom border. SVG bunting pennants (pattern-repeated triangles) in gold, slate, and red at 0.5 alpha flank a centered JetBrains Mono 10px uppercase label: "PITCHPULSE INVITATIONAL · SUMMER 2026". Content offset becomes 92px (60 navbar + 32 ribbon).
+
+### Federation crest
+Generic rounded-square SVG badge: one star above a horizontal band, `--bg-raised` fill, accent stroke at 0.55 alpha. Two colorways only: gold (home) and red (away). Used in team selectors, stats bar labels, scoreboard, and fixture card. Never a national flag.
+
+### Scoreboard
+Appears above the pitch once both teams are selected. Home crest and name left in gold, "VS" center in Space Grotesk 700 flanked by laurel SVGs, away crest and name right in red. After simulation, win percentages render under each name and the favourite gets a 2px underline in its color with a soft shadow at 0.2 alpha.
+
+### Trophy moment
+Original chalice SVG (not the FIFA trophy) beside the leading win percentage in the stats bar, in the leading team's color. Never shown when Draw leads. On new results, a one-time confetti burst plays over the stats bar: 48 particles in gold, slate, and red, roughly 1.5s. Both respect `prefers-reduced-motion` (global CSS kill switch in `index.css`, plus `useReducedMotion` in the component).
+
+### Floodlight backdrop
+`radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)` on the pitch container. Barely visible by design; do not raise the alpha.
+
+### Fixture card
+Sidebar card above AI Coach when both teams are picked: "MATCH 01 · KNOCKOUT STAGE" eyebrow, crest + name rows (gold then red), "SIMULATED · 90 MIN + ET" footer. Static presentation, no logic.
+
+### About hero
+Laurel pair flanking the page title, one short pennant row (max-width 260px) under it.
+
+### Legal rule
+No FIFA marks, no official trophy silhouette, no recognisable national flags. Everything is original SVG in the muted palette.
+
+---
+
 ## Layout Grid
 
 ```
 Navbar:  full width, 60px tall, fixed, blurred
+Ribbon:  full width, 32px tall, fixed below navbar (content offset 92px)
 Body:    CSS grid, 360px sidebar | 1fr main content
-Main:    flex column — pitch header (sticky, blurred) / pitch (flex:1) / stats bar
+Main:    flex column — scoreboard / pitch header (sticky, blurred) / pitch (flex:1) / stats bar
 Mobile:  single column at <768px, pitch wrapped in a 14px-radius bordered card
 ```
 
