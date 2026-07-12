@@ -22,6 +22,21 @@ export function Pennants({ height = 10, style = {} }) {
   )
 }
 
+// Generic federation crest: rounded square, one star above a horizontal band.
+// Same mark in two colorways — gold (home) and red (away). Not a national flag.
+export function Crest({ color = "#d4b56a", size = 14, style = {} }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" style={{ flexShrink: 0, display: "block", ...style }}>
+      <rect x="1.5" y="1.5" width="17" height="17" rx="4.5"
+        fill="#121a2b" stroke={color} strokeWidth="1" strokeOpacity="0.55" />
+      <polygon
+        points="10,3.5 10.82,5.87 13.33,5.92 11.33,7.43 12.06,9.83 10,8.4 7.94,9.83 8.67,7.43 6.67,5.92 9.18,5.87"
+        fill={color} fillOpacity="0.9" />
+      <rect x="4.5" y="12" width="11" height="2.5" rx="1.25" fill={color} fillOpacity="0.7" />
+    </svg>
+  )
+}
+
 export function TournamentRibbon({ isMobile }) {
   const sideStyle = isMobile ? { flex: "0 0 48px" } : {}
   return (

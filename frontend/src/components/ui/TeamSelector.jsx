@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import client from "../../api/client"
+import { Crest } from "./Tournament"
 
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
@@ -23,7 +24,7 @@ export default function TeamSelector({ label, accent = "#d4b56a", onSelect }) {
         letterSpacing: "0.14em", textTransform: "uppercase",
         color: "#566179", marginBottom: "8px",
       }}>
-        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: accent, flexShrink: 0 }} />
+        <Crest color={accent} size={14} />
         {label}
       </label>
       <div style={{ position: "relative" }}>

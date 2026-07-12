@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { Crest } from "./Tournament"
 
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
@@ -25,7 +26,7 @@ function useCountUp(target, duration = 900) {
   return value
 }
 
-function PctStat({ label, value, color, primary }) {
+function PctStat({ label, value, color, primary, crest = false }) {
   const count = useCountUp(value)
   return (
     <motion.div
@@ -39,7 +40,9 @@ function PctStat({ label, value, color, primary }) {
         letterSpacing: "0.14em", textTransform: "uppercase", color: "#94a3bd",
         whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
       }}>
-        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: color, flexShrink: 0 }} />
+        {crest
+          ? <Crest color={color} size={14} />
+          : <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: color, flexShrink: 0 }} />}
         {label}
       </span>
       <span style={{
@@ -133,11 +136,11 @@ export default function WinProbability({ result, homeTeam, awayTeam, isMobile = 
       }}>
         {result ? (
           <>
-            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={GOLD} primary={result.home_win_pct === max} />
+            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={GOLD} primary={result.home_win_pct === max} crest />
             <StatDivider isMobile={isMobile} />
             <PctStat label="Draw" value={result.draw_pct} color={SLATE} primary={result.draw_pct === max} />
             <StatDivider isMobile={isMobile} />
-            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={RED} primary={result.away_win_pct === max} />
+            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={RED} primary={result.away_win_pct === max} crest />
             <StatDivider isMobile={isMobile} />
             <PlainStat label="Home xG" value={result.home_expected_goals} />
             <StatDivider isMobile={isMobile} />
