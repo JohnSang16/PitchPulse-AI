@@ -1,5 +1,5 @@
-import { useId } from "react"
-import { motion } from "framer-motion"
+import { useId, useMemo } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 
 const MONO    = "'JetBrains Mono', 'Courier New', monospace"
 const DISPLAY = "'Space Grotesk', 'Inter', sans-serif"
@@ -113,6 +113,56 @@ export function Scoreboard({ homeName, awayName, result, isMobile }) {
       </div>
       {side(awayName, awayPct, RED, awayFav, true)}
     </motion.div>
+  )
+}
+
+// Original cup mark: simple chalice with two handles. Deliberately generic.
+export function TrophyCup({ size = 16, color = "#d4b56a" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" style={{ flexShrink: 0, display: "block" }}>
+      <path d="M6,3 h8 v3.5 a4,4 0 0 1 -8,0 Z" fill={color} fillOpacity="0.9" />
+      <path d="M6,4.5 C3,4.5 3,8.5 6.4,8.8" stroke={color} strokeOpacity="0.7" strokeWidth="1.2" fill="none" />
+      <path d="M14,4.5 C17,4.5 17,8.5 13.6,8.8" stroke={color} strokeOpacity="0.7" strokeWidth="1.2" fill="none" />
+      <rect x="9" y="10.5" width="2" height="3.2" fill={color} fillOpacity="0.8" />
+      <rect x="6.2" y="13.7" width="7.6" height="1.9" rx="0.95" fill={color} fillOpacity="0.9" />
+    </svg>
+  )
+}
+
+// One-time confetti burst over the stats bar. Skipped under prefers-reduced-motion.
+const CONFETTI_COLORS = ["rgba(212,181,106,0.85)", "rgba(71,85,105,0.85)", "rgba(205,130,114,0.85)"]
+
+export function Confetti({ count = 48 }) {
+  const reduced = useReducedMotion()
+  const particles = useMemo(() =>
+    Array.from({ length: count }, (_, i) => ({
+      left: Math.random() * 100,
+      size: 3.5 + Math.random() * 2.5,
+      drift: (Math.random() - 0.5) * 60,
+      rotate: (Math.random() - 0.5) * 540,
+      delay: Math.random() * 0.25,
+      duration: 1.0 + Math.random() * 0.5,
+      color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+    })), [count])
+
+  if (reduced) return null
+
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+      {particles.map((p, i) => (
+        <motion.span
+          key={i}
+          initial={{ y: -12, x: 0, opacity: 1, rotate: 0 }}
+          animate={{ y: 130, x: p.drift, opacity: 0, rotate: p.rotate }}
+          transition={{ duration: p.duration, delay: p.delay, ease: [0.25, 0.6, 0.5, 1] }}
+          style={{
+            position: "absolute", top: 0, left: `${p.left}%`,
+            width: `${p.size}px`, height: `${p.size * 1.6}px`,
+            background: p.color, borderRadius: "1px",
+          }}
+        />
+      ))}
+    </div>
   )
 }
 

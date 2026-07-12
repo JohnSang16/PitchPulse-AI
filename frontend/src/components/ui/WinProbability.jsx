@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Crest } from "./Tournament"
+import { Crest, TrophyCup, Confetti } from "./Tournament"
 
 const UI   = "'Inter', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
@@ -26,7 +26,7 @@ function useCountUp(target, duration = 900) {
   return value
 }
 
-function PctStat({ label, value, color, primary, crest = false }) {
+function PctStat({ label, value, color, primary, crest = false, trophy = false }) {
   const count = useCountUp(value)
   return (
     <motion.div
@@ -45,13 +45,16 @@ function PctStat({ label, value, color, primary, crest = false }) {
           : <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: color, flexShrink: 0 }} />}
         {label}
       </span>
-      <span style={{
-        fontFamily: MONO, fontSize: "30px", fontWeight: "600", lineHeight: 1,
-        color: primary ? color : "#edf2fa",
-        fontVariantNumeric: "tabular-nums",
-        textShadow: primary ? `0 0 20px ${color}33` : "none",
-      }}>
-        {Math.round(count)}<span style={{ fontSize: "16px", color: "#566179" }}>%</span>
+      <span style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+        <span style={{
+          fontFamily: MONO, fontSize: "30px", fontWeight: "600", lineHeight: 1,
+          color: primary ? color : "#edf2fa",
+          fontVariantNumeric: "tabular-nums",
+          textShadow: primary ? `0 0 20px ${color}33` : "none",
+        }}>
+          {Math.round(count)}<span style={{ fontSize: "16px", color: "#566179" }}>%</span>
+        </span>
+        {trophy && <TrophyCup size={17} color={color} />}
       </span>
     </motion.div>
   )
@@ -119,14 +122,24 @@ function ProbBar({ result }) {
 
 export default function WinProbability({ result, homeTeam, awayTeam, isMobile = false }) {
   const max = result ? Math.max(result.home_win_pct, result.draw_pct, result.away_win_pct) : null
+  const [burst, setBurst] = useState(false)
+
+  useEffect(() => {
+    if (!result) return
+    setBurst(true)
+    const t = setTimeout(() => setBurst(false), 1700)
+    return () => clearTimeout(t)
+  }, [result])
 
   return (
     <div style={{
+      position: "relative",
       borderTop: "1px solid #1b2436",
       padding: isMobile ? "16px" : "18px 28px 20px",
       background: "#05070d",
       flexShrink: 0,
     }}>
+      {burst && <Confetti />}
       {result && <ProbBar result={result} />}
       <div style={{
         display: isMobile ? "grid" : "flex",
@@ -136,11 +149,11 @@ export default function WinProbability({ result, homeTeam, awayTeam, isMobile = 
       }}>
         {result ? (
           <>
-            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={GOLD} primary={result.home_win_pct === max} crest />
+            <PctStat label={homeTeam || "Home Win"} value={result.home_win_pct} color={GOLD} primary={result.home_win_pct === max} crest trophy={result.home_win_pct === max} />
             <StatDivider isMobile={isMobile} />
             <PctStat label="Draw" value={result.draw_pct} color={SLATE} primary={result.draw_pct === max} />
             <StatDivider isMobile={isMobile} />
-            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={RED} primary={result.away_win_pct === max} crest />
+            <PctStat label={awayTeam || "Away Win"} value={result.away_win_pct} color={RED} primary={result.away_win_pct === max} crest trophy={result.away_win_pct === max} />
             <StatDivider isMobile={isMobile} />
             <PlainStat label="Home xG" value={result.home_expected_goals} />
             <StatDivider isMobile={isMobile} />
