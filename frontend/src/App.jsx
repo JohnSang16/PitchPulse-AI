@@ -6,6 +6,7 @@ import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
+import { TournamentRibbon } from "./components/ui/Tournament"
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
@@ -328,6 +329,8 @@ export default function App() {
         </div>
       </nav>
 
+      <TournamentRibbon isMobile={isMobile} />
+
       {/* ── Body ── */}
       <AnimatePresence mode="sync" initial={false}>
         {page === "about" ? (
@@ -337,8 +340,8 @@ export default function App() {
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
             style={{
-              marginTop: "60px",
-              height: isMobile ? "auto" : "calc(100vh - 60px)",
+              marginTop: "92px",
+              height: isMobile ? "auto" : "calc(100vh - 92px)",
               overflowY: "auto",
               padding: isMobile ? "24px 16px 48px" : "44px 24px 64px",
               display: "flex", justifyContent: "center", alignItems: "flex-start",
@@ -354,7 +357,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            style={{ marginTop: "60px", padding: "20px 16px 40px", display: "flex", flexDirection: "column", gap: "18px" }}
+            style={{ marginTop: "92px", padding: "20px 16px 40px", display: "flex", flexDirection: "column", gap: "18px" }}
           >
             {/* Team selectors */}
             <div>
@@ -405,9 +408,9 @@ export default function App() {
             style={{
               display: "grid",
               gridTemplateColumns: "360px 1fr",
-              height: "calc(100vh - 60px)",
-              maxHeight: "calc(100vh - 60px)",
-              marginTop: "60px",
+              height: "calc(100vh - 92px)",
+              maxHeight: "calc(100vh - 92px)",
+              marginTop: "92px",
               overflow: "hidden",
             }}
           >
