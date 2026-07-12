@@ -166,6 +166,52 @@ export function Confetti({ count = 48 }) {
   )
 }
 
+// Static fixture listing styled like a tournament match card. Presentation only.
+export function FixtureCard({ homeName, awayName }) {
+  const row = (name, color) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "9px", padding: "7px 0" }}>
+      <Crest color={color} size={15} />
+      <span style={{
+        fontFamily: DISPLAY, fontSize: "13.5px", fontWeight: "600", color,
+        whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+      }}>
+        {name}
+      </span>
+    </div>
+  )
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 8 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      style={{
+        background: "#0b101c", border: "1px solid #1b2436",
+        borderRadius: "10px", padding: "12px 14px", marginBottom: "18px",
+      }}
+    >
+      <p style={{
+        fontFamily: MONO, fontSize: "9.5px", fontWeight: "500",
+        letterSpacing: "0.16em", textTransform: "uppercase",
+        color: "#566179", margin: "0 0 8px 0",
+      }}>
+        Match 01 · Knockout Stage
+      </p>
+      {row(homeName, "#d4b56a")}
+      {row(awayName, "#cd8272")}
+      <p style={{
+        fontFamily: MONO, fontSize: "9px", fontWeight: "500",
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        color: "#566179", margin: "8px 0 0 0", paddingTop: "8px",
+        borderTop: "1px solid #131b2b",
+      }}>
+        Simulated · 90 min + ET
+      </p>
+    </motion.div>
+  )
+}
+
 export function TournamentRibbon({ isMobile }) {
   const sideStyle = isMobile ? { flex: "0 0 48px" } : {}
   return (

@@ -6,7 +6,7 @@ import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
-import { TournamentRibbon, Scoreboard } from "./components/ui/Tournament"
+import { TournamentRibbon, Scoreboard, FixtureCard } from "./components/ui/Tournament"
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
@@ -393,6 +393,11 @@ export default function App() {
 
             {/* AI Coach */}
             <AnimatePresence>
+              {homeTeamName && awayTeamName && (insight || aiLoading) && (
+                <FixtureCard key="fixture-m" homeName={homeTeamName} awayName={awayTeamName} />
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
               {(insight || aiLoading) && (
                 <motion.div
                   key="aicoach-mobile"
@@ -444,6 +449,12 @@ export default function App() {
               <SimulateButton onClick={handleSimulate} disabled={!canSimulate} loading={loading} style={{ marginTop: "16px" }} />
 
               <Divider style={{ margin: "22px 0 18px" }} />
+
+              <AnimatePresence>
+                {homeTeamName && awayTeamName && (
+                  <FixtureCard key="fixture" homeName={homeTeamName} awayName={awayTeamName} />
+                )}
+              </AnimatePresence>
 
               <AnimatePresence>
                 {(insight || aiLoading) && (
