@@ -372,7 +372,10 @@ export default function App() {
             </div>
 
             {/* Pitch */}
-            <div style={{ border: `1px solid ${T.border}`, borderRadius: "14px", overflow: "hidden" }}>
+            <div style={{
+              border: `1px solid ${T.border}`, borderRadius: "14px", overflow: "hidden",
+              background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)",
+            }}>
               <AnimatePresence>
                 {homeTeamName && awayTeamName && (
                   <Scoreboard key="scoreboard-m" homeName={homeTeamName} awayName={awayTeamName} result={result} isMobile />
@@ -464,7 +467,10 @@ export default function App() {
                   <Scoreboard key="scoreboard" homeName={homeTeamName} awayName={awayTeamName} result={result} />
                 )}
               </AnimatePresence>
-              <div style={{ flex: 1, overflowY: "auto" }}>
+              <div style={{
+                flex: 1, overflowY: "auto",
+                background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)",
+              }}>
                 <SoccerPitch
                   homePlayers={homePlayers}
                   awayPlayers={awayPlayers}
