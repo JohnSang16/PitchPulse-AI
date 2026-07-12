@@ -6,7 +6,7 @@ import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
-import { TournamentRibbon } from "./components/ui/Tournament"
+import { TournamentRibbon, Scoreboard } from "./components/ui/Tournament"
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
@@ -251,14 +251,16 @@ export default function App() {
   const [homePlayers, setHomePlayers]     = useState([])
   const [awayPlayers, setAwayPlayers]     = useState([])
 
-  const handleHomeTeamSelect = async (id) => {
+  const handleHomeTeamSelect = async (id, name) => {
     setHomeTeamId(id)
+    if (name) setHomeTeamName(name)
     const res = await client.get(`/teams/${id}/players`)
     setHomePlayers(res.data.players)
   }
 
-  const handleAwayTeamSelect = async (id) => {
+  const handleAwayTeamSelect = async (id, name) => {
     setAwayTeamId(id)
+    if (name) setAwayTeamName(name)
     const res = await client.get(`/teams/${id}/players`)
     setAwayPlayers(res.data.players)
   }
@@ -371,6 +373,11 @@ export default function App() {
 
             {/* Pitch */}
             <div style={{ border: `1px solid ${T.border}`, borderRadius: "14px", overflow: "hidden" }}>
+              <AnimatePresence>
+                {homeTeamName && awayTeamName && (
+                  <Scoreboard key="scoreboard-m" homeName={homeTeamName} awayName={awayTeamName} result={result} isMobile />
+                )}
+              </AnimatePresence>
               <SoccerPitch
                 homePlayers={homePlayers}
                 awayPlayers={awayPlayers}
@@ -452,6 +459,11 @@ export default function App() {
 
             {/* ── Main ── */}
             <main style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
+              <AnimatePresence>
+                {homeTeamName && awayTeamName && (
+                  <Scoreboard key="scoreboard" homeName={homeTeamName} awayName={awayTeamName} result={result} />
+                )}
+              </AnimatePresence>
               <div style={{ flex: 1, overflowY: "auto" }}>
                 <SoccerPitch
                   homePlayers={homePlayers}

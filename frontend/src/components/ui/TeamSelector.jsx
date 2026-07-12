@@ -32,7 +32,7 @@ export default function TeamSelector({ label, accent = "#d4b56a", onSelect }) {
           onChange={e => {
             if (!e.target.value) return
             setSelected(true)
-            onSelect(Number(e.target.value))
+            onSelect(Number(e.target.value), e.target.options[e.target.selectedIndex].text)
           }}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

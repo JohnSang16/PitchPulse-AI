@@ -135,7 +135,7 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
       </div>
 
       {/* Pitch */}
-      <svg viewBox="-15 -12 630 464" style={{ width: "100%", maxHeight: "calc(100vh - 310px)", display: "block", margin: "0 auto" }}>
+      <svg viewBox="-15 -12 630 464" style={{ width: "100%", maxHeight: "max(320px, calc(100vh - 410px))", display: "block", margin: "0 auto" }}>
         {/* Pitch surface with mow stripes */}
         <rect x="0" y="0" width="600" height="440" fill="#08130c" />
         {[1, 3, 5, 7].map(i => (
