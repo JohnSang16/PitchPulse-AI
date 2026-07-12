@@ -6,7 +6,7 @@ import TeamSelector from "./components/ui/TeamSelector"
 import WinProbability from "./components/ui/WinProbability"
 import AICoach from "./components/ui/AICoach"
 import SoccerPitch from "./components/pitch/SoccerPitch"
-import { TournamentRibbon, Scoreboard, FixtureCard } from "./components/ui/Tournament"
+import { TournamentRibbon, Scoreboard, FixtureCard, Laurel, Pennants } from "./components/ui/Tournament"
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
@@ -97,9 +97,14 @@ function AboutPage() {
     <div style={{ width: "100%", maxWidth: "820px", display: "flex", flexDirection: "column", gap: "18px" }}>
       {/* Hero */}
       <div style={{ paddingBottom: "6px" }}>
-        <h2 style={{ fontFamily: T.DISPLAY, fontSize: "32px", fontWeight: "600", letterSpacing: "-0.02em", color: T.textPrimary, margin: "0 0 12px 0" }}>
-          About <span style={{ color: T.gold }}>PitchPulse AI</span>
-        </h2>
+        <div style={{ display: "flex", alignItems: "center", gap: "14px", margin: "0 0 12px 0" }}>
+          <Laurel height={30} />
+          <h2 style={{ fontFamily: T.DISPLAY, fontSize: "32px", fontWeight: "600", letterSpacing: "-0.02em", color: T.textPrimary, margin: 0 }}>
+            About <span style={{ color: T.gold }}>PitchPulse AI</span>
+          </h2>
+          <Laurel height={30} flip />
+        </div>
+        <Pennants height={9} style={{ maxWidth: "260px", margin: "0 0 14px 0" }} />
         <p style={{ fontFamily: T.UI, fontSize: "15px", color: T.textSecondary, lineHeight: 1.75, margin: 0 }}>
           A modern football analytics platform that simulates Premier League matches using statistical modelling and generative AI.
           Every percentage is backed by real squad data and thousands of simulated 90-minute matches.
