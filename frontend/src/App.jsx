@@ -10,15 +10,15 @@ import { TournamentRibbon, Scoreboard, FixtureCard, Laurel, Pennants } from "./c
 
 // ── Design tokens: "Floodlight" ───────────────────────────────────────────────
 const T = {
-  bgBase:       "#05070d",
-  bgSurface:    "#0b101c",
-  bgRaised:     "#121a2b",
-  border:       "#1b2436",
-  borderDim:    "#131b2b",
-  gold:         "#d4b56a",
-  goldBright:   "#e2c98b",
-  goldDim:      "rgba(212,181,106,0.55)",
-  red:         "#cd8272",
+  bgBase:       "#060607",
+  bgSurface:    "#101013",
+  bgRaised:     "#1a1a1f",
+  border:       "#242428",
+  borderDim:    "#161619",
+  gold:         "#d4af37",
+  goldBright:   "#e6c752",
+  goldDim:      "rgba(212,175,55,0.55)",
+  red:         "#c8503f",
   textPrimary:  "#edf2fa",
   textSecondary:"#94a3bd",
   textMuted:    "#566179",
@@ -31,7 +31,7 @@ const T = {
 function Card({ children, style = {}, hoverable = false }) {
   return (
     <motion.div
-      whileHover={hoverable ? { borderColor: "rgba(212,181,106,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
+      whileHover={hoverable ? { borderColor: "rgba(212,175,55,0.45)", backgroundColor: T.bgRaised, y: -3 } : {}}
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         backgroundColor: T.bgSurface,
@@ -203,7 +203,7 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
     <motion.button
       onClick={onClick}
       disabled={disabled}
-      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 24px rgba(212,181,106,0.22)" } : {}}
+      whileHover={!disabled ? { scale: 1.015, boxShadow: "0 0 24px rgba(212,175,55,0.22)" } : {}}
       whileTap={!disabled ? { scale: 0.985 } : {}}
       transition={{ duration: 0.15 }}
       style={{
@@ -214,7 +214,7 @@ function SimulateButton({ onClick, disabled, loading, style = {} }) {
         letterSpacing: "0.08em", textTransform: "uppercase",
         padding: "14px 16px", border: "none", borderRadius: "10px",
         cursor: disabled ? "not-allowed" : "pointer",
-        boxShadow: disabled ? "none" : "0 0 16px rgba(212,181,106,0.10)",
+        boxShadow: disabled ? "none" : "0 0 16px rgba(212,175,55,0.10)",
         transition: "background 0.15s",
         ...style,
       }}
@@ -230,7 +230,7 @@ function Brand({ compact = false }) {
     <span style={{ display: "inline-flex", alignItems: "center", gap: "9px" }}>
       <span style={{
         color: T.gold, fontSize: compact ? "12px" : "14px", lineHeight: 1,
-        textShadow: "0 0 10px rgba(212,181,106,0.45)",
+        textShadow: "0 0 10px rgba(212,175,55,0.45)",
         animation: "pulse-dot 2.4s ease-in-out infinite",
       }}>★</span>
       <span style={{ fontFamily: T.DISPLAY, fontSize: compact ? "16px" : "18px", fontWeight: "700", letterSpacing: "-0.01em", color: T.textPrimary }}>
@@ -308,7 +308,7 @@ export default function App() {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
         height: "60px", display: "flex", alignItems: "center",
         justifyContent: "space-between", padding: isMobile ? "0 16px" : "0 24px",
-        background: "rgba(5,7,13,0.85)", backdropFilter: "blur(12px)",
+        background: "rgba(6,6,7,0.85)", backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderBottom: `1px solid ${T.border}`,
       }}>
@@ -379,7 +379,7 @@ export default function App() {
             {/* Pitch */}
             <div style={{
               border: `1px solid ${T.border}`, borderRadius: "14px", overflow: "hidden",
-              background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)",
+              background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,175,55,0.04), transparent 70%)",
             }}>
               <AnimatePresence>
                 {homeTeamName && awayTeamName && (
@@ -485,7 +485,7 @@ export default function App() {
               </AnimatePresence>
               <div style={{
                 flex: 1, overflowY: "auto",
-                background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)",
+                background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,175,55,0.04), transparent 70%)",
               }}>
                 <SoccerPitch
                   homePlayers={homePlayers}

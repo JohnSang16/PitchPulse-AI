@@ -5,7 +5,7 @@ const MONO    = "'JetBrains Mono', 'Courier New', monospace"
 const DISPLAY = "'Archivo Black', 'Noto Sans', sans-serif"
 
 // Muted bunting colors: gold, slate, jersey red tinted toward the navy base
-const PENNANT_COLORS = ["rgba(212,181,106,0.5)", "rgba(71,85,105,0.5)", "rgba(205,130,114,0.5)"]
+const PENNANT_COLORS = ["rgba(212,175,55,0.5)", "rgba(71,85,105,0.5)", "rgba(200,80,63,0.5)"]
 
 export function Pennants({ height = 10, style = {} }) {
   const id = useId().replace(/[^a-zA-Z0-9]/g, "")
@@ -26,11 +26,11 @@ export function Pennants({ height = 10, style = {} }) {
 
 // Generic federation crest: rounded square, one star above a horizontal band.
 // Same mark in two colorways — gold (home) and red (away). Not a national flag.
-export function Crest({ color = "#d4b56a", size = 14, style = {} }) {
+export function Crest({ color = "#d4af37", size = 14, style = {} }) {
   return (
     <svg width={size} height={size} viewBox="0 0 20 20" style={{ flexShrink: 0, display: "block", ...style }}>
       <rect x="1.5" y="1.5" width="17" height="17" rx="4.5"
-        fill="#121a2b" stroke={color} strokeWidth="1" strokeOpacity="0.55" />
+        fill="#1a1a1f" stroke={color} strokeWidth="1" strokeOpacity="0.55" />
       <polygon
         points="10,3.5 10.82,5.87 13.33,5.92 11.33,7.43 12.06,9.83 10,8.4 7.94,9.83 8.67,7.43 6.67,5.92 9.18,5.87"
         fill={color} fillOpacity="0.9" />
@@ -40,7 +40,7 @@ export function Crest({ color = "#d4b56a", size = 14, style = {} }) {
 }
 
 // Thin laurel branch: stem arc with three leaves. flip mirrors it for the right side.
-export function Laurel({ flip = false, color = "rgba(212,181,106,0.5)", height = 24 }) {
+export function Laurel({ flip = false, color = "rgba(212,175,55,0.5)", height = 24 }) {
   return (
     <svg width={height * 0.7} height={height} viewBox="0 0 17 24"
       style={{ display: "block", transform: flip ? "scaleX(-1)" : "none", flexShrink: 0 }}>
@@ -55,8 +55,8 @@ export function Laurel({ flip = false, color = "rgba(212,181,106,0.5)", height =
 // Broadcast scoreboard: home crest/name left in gold, VS with laurels center,
 // away crest/name right in red. Win % appears under names once a result exists.
 export function Scoreboard({ homeName, awayName, result, isMobile }) {
-  const GOLD = "#d4b56a"
-  const RED  = "#cd8272"
+  const GOLD = "#d4af37"
+  const RED  = "#c8503f"
   const homePct = result?.home_win_pct
   const awayPct = result?.away_win_pct
   const homeFav = result && homePct >= awayPct && homePct >= result.draw_pct
@@ -100,7 +100,7 @@ export function Scoreboard({ homeName, awayName, result, isMobile }) {
       style={{
         display: "flex", alignItems: "center", gap: isMobile ? "10px" : "20px",
         padding: isMobile ? "12px 14px" : "14px 24px",
-        background: "#0b101c", borderBottom: "1px solid #1b2436",
+        background: "#101013", borderBottom: "1px solid #242428",
       }}
     >
       {side(homeName, homePct, GOLD, homeFav, false)}
@@ -117,7 +117,7 @@ export function Scoreboard({ homeName, awayName, result, isMobile }) {
 }
 
 // Original cup mark: simple chalice with two handles. Deliberately generic.
-export function TrophyCup({ size = 16, color = "#d4b56a" }) {
+export function TrophyCup({ size = 16, color = "#d4af37" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 20 20" style={{ flexShrink: 0, display: "block" }}>
       <path d="M6,3 h8 v3.5 a4,4 0 0 1 -8,0 Z" fill={color} fillOpacity="0.9" />
@@ -130,7 +130,7 @@ export function TrophyCup({ size = 16, color = "#d4b56a" }) {
 }
 
 // One-time confetti burst over the stats bar. Skipped under prefers-reduced-motion.
-const CONFETTI_COLORS = ["rgba(212,181,106,0.85)", "rgba(71,85,105,0.85)", "rgba(205,130,114,0.85)"]
+const CONFETTI_COLORS = ["rgba(212,175,55,0.85)", "rgba(71,85,105,0.85)", "rgba(200,80,63,0.85)"]
 
 export function Confetti({ count = 48 }) {
   const reduced = useReducedMotion()
@@ -187,7 +187,7 @@ export function FixtureCard({ homeName, awayName }) {
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       style={{
-        background: "#0b101c", border: "1px solid #1b2436",
+        background: "#101013", border: "1px solid #242428",
         borderRadius: "10px", padding: "12px 14px", marginBottom: "18px",
       }}
     >
@@ -198,13 +198,13 @@ export function FixtureCard({ homeName, awayName }) {
       }}>
         Match 01 · Knockout Stage
       </p>
-      {row(homeName, "#d4b56a")}
-      {row(awayName, "#cd8272")}
+      {row(homeName, "#d4af37")}
+      {row(awayName, "#c8503f")}
       <p style={{
         fontFamily: MONO, fontSize: "9px", fontWeight: "500",
         letterSpacing: "0.14em", textTransform: "uppercase",
         color: "#566179", margin: "8px 0 0 0", paddingTop: "8px",
-        borderTop: "1px solid #131b2b",
+        borderTop: "1px solid #161619",
       }}>
         Simulated · 90 min + ET
       </p>
@@ -219,7 +219,7 @@ export function TournamentRibbon({ isMobile }) {
       position: "fixed", top: "60px", left: 0, right: 0, zIndex: 9998,
       height: "32px", display: "flex", alignItems: "center",
       gap: isMobile ? "10px" : "16px", padding: isMobile ? "0 12px" : "0 24px",
-      background: "#0b101c", borderBottom: "1px solid #1b2436",
+      background: "#101013", borderBottom: "1px solid #242428",
     }}>
       <Pennants style={sideStyle} />
       <span style={{

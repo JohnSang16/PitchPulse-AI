@@ -5,7 +5,7 @@ import { Crest } from "./Tournament"
 const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-export default function TeamSelector({ label, accent = "#d4b56a", onSelect }) {
+export default function TeamSelector({ label, accent = "#d4af37", onSelect }) {
   const [teams, setTeams] = useState([])
   const [focused, setFocused] = useState(false)
   const [selected, setSelected] = useState(false)
@@ -38,9 +38,9 @@ export default function TeamSelector({ label, accent = "#d4b56a", onSelect }) {
           onBlur={() => setFocused(false)}
           style={{
             width: "100%",
-            background: "#0b101c",
+            background: "#101013",
             color: selected ? "#edf2fa" : "#94a3bd",
-            border: `1px solid ${focused ? accent + "66" : "#1b2436"}`,
+            border: `1px solid ${focused ? accent + "66" : "#242428"}`,
             borderRadius: "10px",
             padding: "11px 30px 11px 13px",
             fontSize: "13.5px",
@@ -53,9 +53,9 @@ export default function TeamSelector({ label, accent = "#d4b56a", onSelect }) {
             transition: "border-color 0.15s",
           }}
         >
-          <option value="" style={{ background: "#0b101c", color: "#566179" }}>Select a team…</option>
+          <option value="" style={{ background: "#101013", color: "#566179" }}>Select a team…</option>
           {teams.map(team => (
-            <option key={team.id} value={team.id} style={{ background: "#0b101c", color: "#edf2fa" }}>
+            <option key={team.id} value={team.id} style={{ background: "#101013", color: "#edf2fa" }}>
               {team.name}
             </option>
           ))}

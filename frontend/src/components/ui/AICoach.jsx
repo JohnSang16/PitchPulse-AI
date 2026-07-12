@@ -5,10 +5,10 @@ const MONO = "'JetBrains Mono', 'Courier New', monospace"
 const DISPLAY = "'Archivo Black', 'Noto Sans', sans-serif"
 
 const SECTION_META = [
-  { label: "Tactical Overview", color: "#d4b56a" },
-  { label: "Key Battle",        color: "#8fa8cc" },
-  { label: "Home Advice",       color: "#d4b56a" },
-  { label: "Away Advice",       color: "#cd8272" },
+  { label: "Tactical Overview", color: "#d4af37" },
+  { label: "Key Battle",        color: "#7b80e0" },
+  { label: "Home Advice",       color: "#d4af37" },
+  { label: "Away Advice",       color: "#c8503f" },
 ]
 
 function RichText({ text, style }) {
@@ -34,7 +34,7 @@ function CoachHeader() {
     }}>
       <span style={{
         width: "7px", height: "7px", borderRadius: "50%",
-        background: "#d4b56a", boxShadow: "0 0 6px rgba(212,181,106,0.4)",
+        background: "#d4af37", boxShadow: "0 0 6px rgba(212,175,55,0.4)",
       }} />
       AI Coach
     </p>
@@ -58,7 +58,7 @@ export default function AICoach({ insight, loading }) {
         >
           <CoachHeader />
           <div style={{
-            background: "#0b101c", border: "1px solid #1b2436",
+            background: "#101013", border: "1px solid #242428",
             borderRadius: "12px", padding: "18px",
           }}>
             <p style={{ fontFamily: UI, fontSize: "13.5px", color: "#94a3bd", margin: "0 0 12px 0" }}>
@@ -70,7 +70,7 @@ export default function AICoach({ insight, loading }) {
                   key={i}
                   animate={{ opacity: [0.2, 1, 0.2] }}
                   transition={{ repeat: Infinity, duration: 1.4, delay: i * 0.22, ease: "easeInOut" }}
-                  style={{ width: "5px", height: "5px", background: "#d4b56a", borderRadius: "50%" }}
+                  style={{ width: "5px", height: "5px", background: "#d4af37", borderRadius: "50%" }}
                 />
               ))}
             </div>
@@ -98,10 +98,10 @@ export default function AICoach({ insight, loading }) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.07, ease: "easeOut" }}
-                  whileHover={{ backgroundColor: "#121a2b" }}
+                  whileHover={{ backgroundColor: "#1a1a1f" }}
                   style={{
-                    backgroundColor: "#0b101c",
-                    border: "1px solid #1b2436",
+                    backgroundColor: "#101013",
+                    border: "1px solid #242428",
                     borderLeft: `3px solid ${meta.color}`,
                     borderRadius: "10px",
                     overflow: "hidden",
@@ -109,7 +109,7 @@ export default function AICoach({ insight, loading }) {
                 >
                   <div style={{
                     padding: "10px 14px 8px",
-                    borderBottom: "1px solid #131b2b",
+                    borderBottom: "1px solid #161619",
                   }}>
                     <span style={{
                       fontFamily: DISPLAY, fontSize: "12.5px", fontWeight: "600",

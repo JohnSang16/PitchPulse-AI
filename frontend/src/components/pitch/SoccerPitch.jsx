@@ -5,8 +5,8 @@ import { formations } from "./formations"
 const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const GOLD = "#d4b56a"
-const RED = "#cd8272"
+const GOLD = "#d4af37"
+const RED = "#c8503f"
 const LINE = "#23402c"
 
 function PositionNode({ x, y, name, isAway }) {
@@ -25,15 +25,15 @@ function PositionNode({ x, y, name, isAway }) {
       onMouseLeave={() => setHovered(false)}
     >
       {isAway ? (
-        <circle cx={x} cy={y} r="8" fill="#0b101c"
-          stroke={hovered ? RED : "rgba(205,130,114,0.6)"}
+        <circle cx={x} cy={y} r="8" fill="#101013"
+          stroke={hovered ? RED : "rgba(200,80,63,0.6)"}
           strokeWidth={hovered ? "1.5" : "1"} />
       ) : (
         <circle cx={x} cy={y} r="8"
-          fill={hovered ? "#e2c98b" : GOLD} />
+          fill={hovered ? "#e6c752" : GOLD} />
       )}
       <text x={x} y={y + 2} textAnchor="middle" dominantBaseline="middle"
-        fill={isAway ? "rgba(205,130,114,0.9)" : "#171207"}
+        fill={isAway ? "rgba(200,80,63,0.9)" : "#171207"}
         fontSize="6" fontWeight="600" fontFamily={MONO} style={{ pointerEvents: "none" }}>
         {name}
       </text>
@@ -43,9 +43,9 @@ function PositionNode({ x, y, name, isAway }) {
 
 const SELECT_STYLE = {
   width: "100%",
-  background: "#0b101c",
+  background: "#101013",
   color: "#edf2fa",
-  border: "1px solid #1b2436",
+  border: "1px solid #242428",
   borderRadius: "10px",
   padding: "10px 30px 10px 13px",
   fontSize: "13px",
@@ -78,12 +78,12 @@ function FormationSelect({ label, accent, value, onChange }) {
           onBlur={() => setFocused(false)}
           style={{
             ...SELECT_STYLE,
-            borderColor: focused ? accent + "66" : "#1b2436",
+            borderColor: focused ? accent + "66" : "#242428",
             transition: "border-color 0.15s",
           }}
         >
           {Object.keys(formations).map(f => (
-            <option key={f} value={f} style={{ background: "#0b101c" }}>{f}</option>
+            <option key={f} value={f} style={{ background: "#101013" }}>{f}</option>
           ))}
         </select>
         <span style={{
@@ -127,8 +127,8 @@ export default function SoccerPitch({ onFormationChange, homePlayers = [], awayP
       <div style={{
         position: "sticky", top: 0, zIndex: 10,
         display: "flex", gap: "14px", padding: "16px 20px",
-        borderBottom: "1px solid #1b2436",
-        background: "rgba(5,7,13,0.9)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
+        borderBottom: "1px solid #242428",
+        background: "rgba(6,6,7,0.9)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
       }}>
         <FormationSelect label="Home Formation" accent={GOLD} value={homeFormation} onChange={handleHomeFormationChange} />
         <FormationSelect label="Away Formation" accent={RED} value={awayFormation} onChange={handleAwayFormationChange} />

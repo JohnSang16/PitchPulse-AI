@@ -5,8 +5,8 @@ import { Crest, TrophyCup, Confetti } from "./Tournament"
 const UI   = "'Noto Sans', -apple-system, sans-serif"
 const MONO = "'JetBrains Mono', 'Courier New', monospace"
 
-const GOLD  = "#d4b56a"
-const RED  = "#cd8272"
+const GOLD  = "#d4af37"
+const RED  = "#c8503f"
 const SLATE = "#475569"
 
 function useCountUp(target, duration = 900) {
@@ -88,7 +88,7 @@ function StatDivider({ isMobile }) {
   if (isMobile) return null
   return (
     <div style={{
-      width: "1px", background: "#131b2b",
+      width: "1px", background: "#161619",
       margin: "0 26px", alignSelf: "stretch", flexShrink: 0,
     }} />
   )
@@ -104,7 +104,7 @@ function ProbBar({ result }) {
   return (
     <div style={{
       display: "flex", width: "100%", height: "6px",
-      borderRadius: "3px", overflow: "hidden", background: "#131b2b",
+      borderRadius: "3px", overflow: "hidden", background: "#161619",
       marginBottom: "18px",
     }}>
       {segments.map((s, i) => (
@@ -134,9 +134,9 @@ export default function WinProbability({ result, homeTeam, awayTeam, isMobile = 
   return (
     <div style={{
       position: "relative",
-      borderTop: "1px solid #1b2436",
+      borderTop: "1px solid #242428",
       padding: isMobile ? "16px" : "18px 28px 20px",
-      background: "#05070d",
+      background: "#060607",
       flexShrink: 0,
     }}>
       {burst && <Confetti />}
