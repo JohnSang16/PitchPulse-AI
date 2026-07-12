@@ -1,67 +1,70 @@
 # PitchPulse — Design System
-**Aesthetic: Noir Bloomberg**
-Jet black surfaces. Champagne gold accents. Thin serif headers. Monospace data type. Luxury terminal energy — think Bloomberg Terminal meets Michelin-star menu.
+**Aesthetic: FWC 26 Broadcast**
+Modeled on the FIFA World Cup 26 identity (fifa.com/worldcup and the Atlanta host city site): near-black surfaces, metallic trophy gold as the primary accent (home team, CTAs, brand), Atlanta persian red for the away team, iris blue as the tertiary accent. Archivo Black stands in for the custom FWC26 display face, Noto Sans (FIFA's real secondary font) for UI text, JetBrains Mono for data. The real World Cup trophy PNG anchors the scoreboard, results, and About hero.
 
 ---
 
 ## Color Tokens
 
 ```css
-/* Define these in your global CSS or index.css */
+/* Defined in src/index.css */
 :root {
-  --bg-base:        #080808;   /* page/root background */
-  --bg-surface:     #0d0d0d;   /* cards, inputs, dropdowns */
-  --bg-raised:      #111111;   /* hover states, elevated elements */
+  --bg-base:        #060607;   /* page/root background (near-black, FIFA style) */
+  --bg-surface:     #101013;   /* cards, inputs, dropdowns */
+  --bg-raised:      #1a1a1f;   /* hover states, elevated elements */
 
-  --border-dim:     #141210;   /* subtle dividers */
-  --border-default: #1e1a12;   /* standard borders */
-  --border-accent:  #c9a84c33; /* gold-tinted border on focus */
+  --border-dim:     #161619;   /* subtle dividers */
+  --border-default: #242428;   /* standard borders */
+  --border-accent:  rgba(212,175,55,0.35); /* gold-tinted border on focus */
 
-  --gold:           #c9a84c;   /* primary accent — CTAs, active states, home team */
-  --gold-dim:       #8a7a52;   /* secondary gold — stat values, muted data */
-  --gold-ghost:     #3d3520;   /* very dim gold — labels, inactive nav links */
-  --gold-whisper:   #2e2814;   /* near-invisible gold — section labels, borders */
+  --gold:           #d4af37;   /* metallic trophy gold — CTAs, home team, brand */
+  --gold-bright:    #e6c752;   /* hover state for gold elements */
+  --gold-dim:       rgba(212,175,55,0.55);
 
-  --text-primary:   #f0ead6;   /* headlines, hero text */
-  --text-secondary: #8a7a52;   /* body, data values */
-  --text-muted:     #3d3520;   /* labels, eyebrows, inactive */
+  --red:           #c8503f;   /* Atlanta persian red — away team, away advice */
+  --red-dim:       rgba(200,80,63,0.55);
 
-  --pitch-bg:       #0a1a0a;   /* football pitch surface */
-  --pitch-line:     #1a2e1a;   /* pitch markings */
+  --text-primary:   #edf2fa;   /* headlines, stat values, selected inputs */
+  --text-secondary: #94a3bd;   /* body copy, data labels */
+  --text-muted:     #566179;   /* eyebrows, placeholders, inactive nav */
+
+  --pitch-bg:       #08130c;   /* pitch surface */
+  --pitch-stripe:   #0a170e;   /* alternating mow stripes */
+  --pitch-line:     #23402c;   /* pitch markings */
 }
 ```
+
+**Color meaning is load-bearing:** gold always means home, red always means away, slate `#475569` means draw, iris blue `#7b80e0` (Atlanta host city accent) marks the key battle. Never reuse these hues for anything else.
 
 ---
 
 ## Typography
 
 ```css
-/* Google Fonts import — add to index.html or @import in CSS */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&family=DM+Mono:wght@300;400&display=swap');
+/* Google Fonts — loaded in index.html */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
-/* Usage rules */
-font-family: 'Playfair Display', Georgia, serif;  /* ONLY for: logo, page title, hero headers */
-font-family: 'DM Mono', 'Courier New', monospace; /* EVERYTHING else: nav, labels, inputs, data */
+font-family: 'Archivo Black', 'Noto Sans', sans-serif;     /* DISPLAY: FWC26-style poster face — brand, titles, headings, CTA */
+font-family: 'Noto Sans', -apple-system, sans-serif;       /* UI: FIFA's secondary font — body copy, nav, descriptions */
+font-family: 'JetBrains Mono', 'Courier New', monospace;   /* MONO: numbers, stats, eyebrows, formation labels */
 ```
 
 ### Scale
-| Role | Size | Weight | Letter-spacing | Color |
+| Role | Font | Size | Weight | Color |
 |---|---|---|---|---|
-| Logo / Brand | 13px | 400 | 0.06em | `--gold` |
-| Page title | 22–28px | 300 | 0.04em | `--text-primary` |
-| Section eyebrow | 8px | 400 | 0.25em | `--text-muted` |
-| Section label | 8px | 400 | 0.20em | `--gold-ghost` |
-| Field label | 8px | 400 | 0.18em | `--gold-ghost` |
-| Input / select text | 10–11px | 400 | 0.06em | `--gold-dim` |
-| Nav links | 9px | 400 | 0.18em | `--gold-ghost` (inactive) / `--gold` (active) |
-| CTA button | 9px | 400 | 0.22em | `#080808` on gold bg |
-| Stat value | 14px | 400 | 0 | `--gold` (primary) / `--gold-dim` (secondary) |
-| Stat label | 7px | 400 | 0.20em | `--gold-whisper` |
+| Brand | Archivo Black | 18px | 700 | `--text-primary` + gold "AI" |
+| Page title | Archivo Black | 32px | 600 | `--text-primary` |
+| Card heading | Archivo Black | 14-15px | 600 | `--text-primary` or `--gold` |
+| Body copy | Noto Sans | 13-15px | 400 | `--text-secondary` |
+| Nav links | Noto Sans | 13px | 500 | `--text-muted` / `--text-primary` active |
+| CTA button | Archivo Black | 13px | 700, uppercase, 0.08em | `#171207` on gold |
+| Eyebrow / label | JetBrains Mono | 10-11px | 500, uppercase, 0.14-0.16em | `--text-muted` |
+| Stat value | JetBrains Mono | 30px | 600, tabular-nums | team color or `--text-primary` |
 
 **Rules:**
-- ALL labels and nav items use `text-transform: uppercase`
-- Playfair Display headers should be `font-weight: 300` — thin is luxurious
-- Never use Inter, Roboto, or system fonts in this project
+- Eyebrows and field labels are mono + uppercase; everything else reads as normal case.
+- Numbers always use JetBrains Mono with `font-variant-numeric: tabular-nums`.
+- Labels tied to a team carry a 7px colored dot (gold = home, red = away).
 
 ---
 
@@ -69,116 +72,115 @@ font-family: 'DM Mono', 'Courier New', monospace; /* EVERYTHING else: nav, label
 
 ### Navbar
 ```
-height: 44px
-background: --bg-base
-border-bottom: 0.5px solid --border-default
-padding: 0 24px
+height: 60px
+background: rgba(5,7,13,0.85) + backdrop-filter: blur(12px)
+border-bottom: 1px solid --border-default
 ```
-Logo left. Nav links right. No hover backgrounds — only color change on hover.
+Brand left (pulsing gold champion's star ★ + wordmark). Nav links right as pill buttons: active gets `--bg-raised` background and 1px border, inactive is plain muted text.
 
-### Sidebar / Panel
+### Cards
 ```
-width: 260px
-background: --bg-base
-border-right: 0.5px solid --border-default
-padding: 24px 20px
+background: --bg-surface
+border: 1px solid --border-default
+border-radius: 10-12px
 ```
-Sections separated by `border-top: 0.5px solid --border-dim` with 16–20px vertical gap.
+Hover (when interactive): border shifts toward gold at 45% alpha, background to `--bg-raised`, lift `y: -3`.
 
 ### Select / Dropdown
-```css
-background: var(--bg-surface);
-border: 0.5px solid var(--border-default);
-color: var(--gold-dim);
-font-family: 'DM Mono', monospace;
-font-size: 10px;
-letter-spacing: 0.06em;
-padding: 9px 12px;
-border-radius: 3px;
-appearance: none;
 ```
-On focus: `border-color: var(--border-accent)`
-Use a custom `▾` arrow in `--gold-ghost`, positioned absolute right.
-
-### Primary CTA Button (Run Simulation)
-```css
-background: var(--gold);
-color: #080808;
-font-family: 'DM Mono', monospace;
-font-size: 9px;
-letter-spacing: 0.22em;
-text-transform: uppercase;
-padding: 10px 16px;
-border: none;
-border-radius: 2px;
-width: 100%;
+background: --bg-surface;  color: --text-primary
+border: 1px solid --border-default;  border-radius: 10px
+font: Noto Sans 13.5px / mono 13px for formations;  padding: 11px 30px 11px 13px
 ```
-Hover: `background: #d4b660`
-No border-radius above 3px on any button.
+Focus: border tints to the owning team's accent at 40% alpha. Custom `▾` arrow in `--text-muted`.
 
-### Stat Cards (bottom bar)
-```css
-/* Label */
-font-size: 7px; letter-spacing: 0.20em; color: var(--gold-whisper); text-transform: uppercase;
-
-/* Value */
-font-size: 14px; font-family: 'DM Mono'; color: var(--gold);   /* primary stat */
-font-size: 14px; font-family: 'DM Mono'; color: var(--gold-dim); /* secondary stat */
+### Primary CTA (Run Simulation)
 ```
-Use `—` as placeholder when no simulation has run yet.
-
-### Dividers / Section Separators
-```css
-border: none;
-border-top: 0.5px solid var(--border-dim);
-margin: 4px 0 16px;
+background: --gold;  color: #171207
+font: Archivo Black 13px 700 uppercase 0.08em
+padding: 14px 16px;  border-radius: 10px
+resting glow: 0 0 16px rgba(212,181,106,0.10)
+hover: scale 1.015 + glow 0 0 24px rgba(212,181,106,0.22)
+disabled: background #1a2233, text --text-muted, no glow
 ```
+
+### Stats Bar (bottom of dashboard)
+- Stacked probability bar first: 6px tall, radius 3px, segments gold / slate / red sized by percentage, animated on result.
+- Win % values in JetBrains Mono 30px 600; the most likely outcome renders in its team color with a soft matching text-shadow, others in `--text-primary`.
+- xG and simulation count in `--text-secondary`. Placeholder before first run: `–`.
+
+### AI Coach Cards
+```
+background: --bg-surface;  border: 1px solid --border-default
+border-left: 3px solid [section color];  border-radius: 10px
+```
+Section colors: Tactical Overview gold, Key Battle steel blue `#8fa8cc`, Home Advice gold, Away Advice red. Cards stagger in with a 70ms delay each.
 
 ---
 
 ## Football Pitch SVG
 
 ```
-Pitch background:  #0a1a0a
-All lines:         #1a2e1a  (stroke-width: 0.5)
-Home team nodes:   fill #c9a84c, text fill #080808
-Away team nodes:   fill #2e2814, stroke #c9a84c33 (0.5px), text fill #c9a84c88
-Node radius:       7px
-Node font:         DM Mono, 6px, text-anchor: middle
+Surface:         #08130c with 75px-wide alternating mow stripes #0a170e
+All lines:       #23402c (stroke-width: 1)
+Home nodes:      fill #d4af37, text #171207 (dark on gold)
+Away nodes:      fill #101013, stroke rgba(200,80,63,0.6), text red
+Node radius:     8px;  font: JetBrains Mono 6px 600
+Player cards:    body #101013, header #1a1a1f, radius 4,
+                 gold accents (home) / red accents (away), name in --text-primary
 ```
 
-Home players are fully lit gold. Away players are ghost-gold outlines — same palette, dimmed. This keeps the pitch on-brand without introducing a second color.
+---
+
+## Tournament Chrome
+
+All tournament components live in `frontend/src/components/ui/Tournament.jsx`. Every color is a muted tint of the core palette; nothing here introduces a new hue.
+
+### Ribbon
+Fixed strip under the navbar, 32px tall, `--bg-surface` with 1px `--border-default` bottom border. FWC26 emblem-style block strips (alternating squares and quarter-circles, the geometric vocabulary of the World Cup 26 identity) in gold, iris, and persian red at roughly 0.5 alpha flank a centered JetBrains Mono 10px uppercase label: "PITCHPULSE INVITATIONAL · WE ARE 26". The `Pennants` component renders this pattern. Content offset stays 92px (60 navbar + 32 ribbon).
+
+### Federation crest
+Generic rounded-square SVG badge: one star above a horizontal band, `--bg-raised` fill, accent stroke at 0.55 alpha. Two colorways only: gold (home) and red (away). Used in team selectors, stats bar labels, scoreboard, and fixture card. Never a national flag.
+
+### Scoreboard
+Appears above the pitch once both teams are selected. Home crest and name left in gold, trophy PNG over "VS" center in Archivo Black 700 flanked by laurel SVGs, away crest and name right in red. After simulation, win percentages render under each name and the favourite gets a 2px underline in its color with a soft shadow at 0.2 alpha.
+
+### Trophy moment
+The real World Cup trophy PNG (`src/assets/world-cup-trophy.png`, transparent background) rendered at 17px beside the leading win percentage in the stats bar, with a drop-shadow glow in the leading team's color. The same asset appears at 30px above "VS" in the scoreboard and at 44px in the About hero. Never shown when Draw leads. On new results, a one-time confetti burst plays over the stats bar: 48 particles in gold, slate, and red, roughly 1.5s. Both respect `prefers-reduced-motion` (global CSS kill switch in `index.css`, plus `useReducedMotion` in the component).
+
+### Floodlight backdrop
+`radial-gradient(ellipse 60% 45% at 50% 0%, rgba(212,181,106,0.04), transparent 70%)` on the pitch container. Barely visible by design; do not raise the alpha.
+
+### Fixture card
+Sidebar card above AI Coach when both teams are picked: "MATCH 01 · KNOCKOUT STAGE" eyebrow, crest + name rows (gold then red), "SIMULATED · 90 MIN + ET" footer. Static presentation, no logic.
+
+### About hero
+Laurel pair flanking the page title, one short pennant row (max-width 260px) under it.
+
+### Legal rule (revised 2026-07-12)
+The owner opted in to using the real World Cup trophy PNG and FWC26-inspired styling for this personal project. Still no FIFA wordmarks or official emblems, and no recognisable national flags. Fonts are free lookalikes (Archivo Black for FWC26), not the licensed typeface.
 
 ---
 
 ## Layout Grid
 
 ```
-Navbar:  full width, 44px tall
-Body:    CSS grid, 260px sidebar | 1fr main content
-Main:    flex column — pitch header / pitch area (flex:1) / stats bar
-```
-
----
-
-## Spacing System
-```
-Component internal gaps:  6px, 8px, 10px, 12px
-Section vertical rhythm:  14px, 16px, 20px, 24px
-Page padding:             24px horizontal, 20px vertical
+Navbar:  full width, 60px tall, fixed, blurred
+Ribbon:  full width, 32px tall, fixed below navbar (content offset 92px)
+Body:    CSS grid, 360px sidebar | 1fr main content
+Main:    flex column — scoreboard / pitch header (sticky, blurred) / pitch (flex:1) / stats bar
+Mobile:  single column at <768px, pitch wrapped in a 14px-radius bordered card
 ```
 
 ---
 
 ## What to Avoid
-- No purple. Not even close to purple.
-- No gradients anywhere — flat fills only.
-- No border-radius above 4px (use 2–3px for buttons, 0 for dividers).
-- No Inter, Roboto, or system-ui font stacks.
-- No bright white (`#ffffff`) — use `--text-primary` (`#f0ead6`) which is warm off-white.
-- No colored backgrounds on anything except the CTA button and pitch area.
-- No shadows or glow effects.
-- Don't make nav links into buttons — they're plain text with a color state only.
+- No neon. Gold is metallic trophy gold (`#d4af37`), never bright yellow or lemon.
+- Gold and red never swap meaning. Home is gold. Away is red. Always.
+- No pure white `#ffffff`; use `--text-primary` (`#edf2fa`).
+- Glows only on gold/red accents (CTA, brand dot, leading stat). Never on neutral surfaces.
+- No text below 10px in HTML (SVG pitch internals excepted).
+- Radius vocabulary is 8 / 10 / 12 / 14px. No sharp 0-2px corners.
 
 ---
 
@@ -187,10 +189,10 @@ Page padding:             24px horizontal, 20px vertical
 Paste this at the top of any prompt:
 
 ```
-Reference STYLE.md for all design decisions. This project uses the Noir Bloomberg aesthetic:
-jet black backgrounds (#080808), champagne gold accents (#c9a84c), Playfair Display for
-headers only, DM Mono for all UI text, 0.5px borders in warm dark tones (#1e1a12),
-no gradients, no shadows, border-radius max 3px. See STYLE.md for full token reference.
+Reference STYLE.md for all design decisions. This project uses the FWC 26 Broadcast aesthetic:
+near-black backgrounds (#060607), metallic trophy gold primary (#d4af37, home/CTA),
+Atlanta persian red secondary (#c8503f, away), iris blue tertiary (#7b80e0),
+Archivo Black for display headings, Noto Sans for UI text, JetBrains Mono for data,
+1px borders in #242428, 10-12px radii, subtle gold glows on accents only,
+real World Cup trophy PNG in src/assets. See STYLE.md for full token reference.
 ```
-
-Or with Claude Code's `/init` or memory feature, add it to `CLAUDE.md` so it's loaded automatically on every session.

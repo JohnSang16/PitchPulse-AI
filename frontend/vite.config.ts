@@ -13,4 +13,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      // Mirror the vercel.json rewrite so `npm run dev` talks to the live backend
+      '/api': {
+        target: 'http://pitchpulse-backend-env.eba-yhtgfwu8.us-east-1.elasticbeanstalk.com',
+        changeOrigin: true,
+      },
+    },
+  },
 })

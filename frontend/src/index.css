@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --bg-base:        #080808;
-  --bg-surface:     #0d0d0d;
-  --bg-raised:      #111111;
-  --border-dim:     #141210;
-  --border-default: #1e1a12;
-  --border-accent:  #c9a84c33;
-  --gold:           #c9a84c;
-  --gold-dim:       #8a7a52;
-  --gold-ghost:     #3d3520;
-  --gold-whisper:   #2e2814;
-  --text-primary:   #f0ead6;
-  --text-secondary: #8a7a52;
-  --text-muted:     #3d3520;
-  --pitch-bg:       #0a1a0a;
-  --pitch-line:     #1a2e1a;
+  --bg-base:        #060607;
+  --bg-surface:     #101013;
+  --bg-raised:      #1a1a1f;
+  --border-dim:     #161619;
+  --border-default: #242428;
+  --border-accent:  rgba(212, 181, 106, 0.35);
+  --gold:           #d4af37;
+  --gold-bright:    #e6c752;
+  --gold-dim:       rgba(212, 181, 106, 0.55);
+  --red:           #c8503f;
+  --red-dim:       rgba(205, 130, 114, 0.55);
+  --text-primary:   #edf2fa;
+  --text-secondary: #94a3bd;
+  --text-muted:     #566179;
+  --pitch-bg:       #08130c;
+  --pitch-stripe:   #0a170e;
+  --pitch-line:     #23402c;
 }
 
 *, *::before, *::after {
@@ -26,9 +28,14 @@ html, body, #root {
   margin: 0;
   padding: 0;
   background: var(--bg-base);
-  font-family: 'DM Mono', 'Courier New', monospace;
+  font-family: 'Noto Sans', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(212, 181, 106, 0.20);
+  color: var(--text-primary);
 }
 
 select {
@@ -38,14 +45,28 @@ select {
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-surface);
+  background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--gold-ghost);
+  background: var(--border-default);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-dim);
+  background: var(--text-muted);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
